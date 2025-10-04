@@ -1,0 +1,62 @@
+%!TEX root = ../thesis.tex
+%*******************************************************************************
+%****************************** Third Chapter **********************************
+%*******************************************************************************
+\chapter{Results and Discussion}
+
+% **************************** Define Graphics Path **************************
+\ifpdf
+    \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/Figs/PDF/}{Chapter3/Figs/}}
+\else
+    \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
+\fi
+
+\section{Review}
+The use of generative AI with RAG has improved clinical information extraction from free-text, manual or electronic notes, both of which include crucial information, but are often unstructured \cite{clinicalentityIE2025}. In order to be able to read both structured and unstructured data and retrieve information accurately, the AI agentic workflow was leveraged in this project beyond the RAG approach, so that the assistant would be imparted with some intelligence, autonomy, and decision-making ability on when to use its available tools .
+
+In this prototype, we saw how a voice assistant can be of help to practising nurses in psychiatric hospitals. In brief, such an assistant can enable the nurse to:
+\begin{enumerate}
+    \item obtain important information on any patient's medical and social background \textit{on-demand}, without the need to physically access the single hard copy every time this is necessary
+    \item interact with the assistant hands-free without the need to touch their phone or tablet
+\end{enumerate}
+
+It is important to note that the assistant is not designed to make a diagnosis or offer medical advice. Its goal is to be an accurate information-gathering tool that can save time from the process of information retrieval, and support nurses in their everyday decision-making.
+
+The following RQs were answered (see \ref{RQs}):
+\begin{itemize}
+    \item RQ1) Is it feasible to develop a CA that helps nurses to extract information about a patients' profiles on demand?
+    - Yes.
+    \item RQ2) If so, how effective is the CA in terms of faithfulness, answer relevancy and answer correctness, context precision and context recall? - The CA was evaluated via well-established RAGAS metrics and by human evaluators. The moderate scores from RAGAS were supplemented with the adequate human evaluation.
+    \item RQ3) Is it useful? Does the CA improve the daily experience and satisfaction for the job of the nurse? - This remains to be seen when the agent is tested \textit{in vivo}.
+\end{itemize}
+
+\subsection{Limitations}
+In general, even though the agentic AI's intelligent reasoning and relative freedom to interact with tools is very promising for future implementations, it cannot be used without a ``human-in-the-loop`` yet. The cost of error from such an autonomous agent that lacks human oversight can be extremely high in high-stakes domain like the medical domain. \footnote{``AI agents explained (for healthcare) - Manus AI, computer control, Agentic workflows, clinical agents``, Dev and Doc: AI for Healthcare, YouTube (video), Accessed July 13, 2025. \url{https://www.youtube.com/watch?v=hOlwMS0A-D0}}
+
+More specifically, the present project has a few limitations due to its scope and resources.  
+
+In general, using generative AI bots in psychiatry raises ethical and practical considerations. Ethically, concerns include privacy and security of data storage and transmission, especially regarding potential discrimination based on the patients' mental health status. Practically, concerns involve the risk of misinformation or inadequate information that impact its trustworthiness. Hence, access restrictions as well as human oversight and intervention are necessary.
+
+
+\section{Future Work}
+This prototype has been a proof of concept used to showcase an assistant that can help Greek nurses with the everyday task of retrieving patient data.
+
+Future improvements of the prototype could incorporate more advanced retriever architectures, such as retrievers fine-tuned on Greek medical texts. 
+
+Moreover, the agentic AI's capabilities can be extended by adding more tools, such as external APIs in order to retrieve information from other electronic sources (e.g. for their hospitalization dates, which have started to be reported electronically), or even APIs to update the patient files (e.g. with a new medication regime). This would enhance the assistant’s abilities beyond ``simple`` data recall.
+
+Regarding the current evaluation procedure, it uses both automated metrics and human evaluation by mainly lay people. However, future work can involve evaluation by healthcare professionals to better capture subjective aspects such as trustworthiness (e.g. how reliable will nurses perceive the responses when having actual, real-world data?), efficiency gains (e.g. how much time is really saved, or how many errors are avoided?), general practical utility (e.g. will it be easy-to-use, liked, and adopted by the nurse staff?), and satisfaction levels (for both nurses and patients) in clinical workflows.
+
+With regards to deployment, supporting voice input/output through real-time speech recognition would definitely make the assistant more accessible to nurses during shifts.
+
+Future development should also address critical ethical and privacy concerns, including data anonymization, access control, and compliance with Greek and European healthcare data regulations (GDPR).
+
+
+
+
+
+
+
+
+
+
