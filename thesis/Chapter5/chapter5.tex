@@ -1,0 +1,28 @@
+%!TEX root = ../thesis.tex
+%*******************************************************************************
+%****************************** Fifth Chapter **********************************
+%*******************************************************************************
+
+\chapter{Conclusions}\label{chap:conclusions}
+
+% **************************** Define Graphics Path **************************
+\ifpdf
+    \graphicspath{{Chapter5/Figs/Raster/}{Chapter5/Figs/PDF/}{Chapter5/Figs/}}
+\else
+    \graphicspath{{Chapter5/Figs/Vector/}{Chapter5/Figs/}}
+\fi
+
+\section{Summary of Key Findings}
+This thesis investigated the design and feasibility of a retrieval-augmented conversational assistant that supports psychiatric nurses in accessing patient information. Through interviews with practicing nurses and the creation of synthetic clinical notes, the study captured the core informational needs of the role. The prototype demonstrated strong performance across thirteen evaluation scenarios, accurately recalling medication regimes, appointments, and psychosocial data, while gracefully handling ambiguous or missing queries. These results indicate that agentic RAG workflows can provide timely, context-aware responses in Greek, extending prior work that has largely focused on English-language deployments.
+
+\section{Contributions}
+The research makes three primary contributions:
+\begin{itemize}
+    \item \textbf{Empirical validation of a nurse-facing assistant}: The evaluation confirmed that a conversational interface can reliably serve psychiatric nurses, answering RQ1 and RQ2 by showing faithful retrieval and grounded summarisation across representative tasks.
+    \item \textbf{Methodological blueprint}: The thesis details a repeatable pipeline that combines qualitative requirements gathering, synthetic data generation, and scenario-based evaluation, offering guidance for future implementations in privacy-constrained clinical environments.
+    \item \textbf{Design insights for responsible AI}: By integrating RAG, explicit memory handling, and decline-to-answer behaviour, the work provides practical safeguards against hallucinations and inappropriate disclosure, aligning with responsible AI principles discussed in Chapter~\ref{chap:lit-review}.
+\end{itemize}
+
+\section{Recommendations for Future Work}
+Further research should focus on validating the assistant with real clinical data under strict governance controls, enabling assessment of the system's behaviour with authentic documentation. Collaborations with hospitals would allow practicing nurses to evaluate usability, trustworthiness, and workflow fit, addressing RQ3 more comprehensively. Technical enhancements may include fine-tuning retrievers on Greek psychiatric corpora, integrating speech interfaces for hands-free use, and expanding toolkits to update records or query external services securely. Finally, longitudinal studies should measure the assistant's impact on nurse workload, burnout, and patient outcomes to quantify its broader benefits.
+

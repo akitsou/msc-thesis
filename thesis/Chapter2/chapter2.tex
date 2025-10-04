@@ -1,9 +1,9 @@
 %!TEX root = ../thesis.tex
 %*******************************************************************************
-%****************************** Second Chapter *********************************
+%*********************************** First Chapter *****************************
 %*******************************************************************************
 
-\chapter{Case Study}
+\chapter{Literature Review}\label{chap:lit-review}
 
 \ifpdf
     \graphicspath{{Chapter2/Figs/Raster/}{Chapter2/Figs/PDF/}{Chapter2/Figs/}}
@@ -11,770 +11,259 @@
     \graphicspath{{Chapter2/Figs/Vector/}{Chapter2/Figs/}}
 \fi
 
+\section{Overview of the Research Area}
 
-\section{Introduction to the project}
+\subsection{Clinicians with burnout}\label{Clinicians with burnout}
+A well-documented current problem in medical practice is healthcare staff work stress that leads to burnout, i.e. physical and mental exhaustion. Burnout is a psychological syndrome whose symptoms comprise feeling emotionally exhausted and ineffective, experiencing impaired memory and attentiveness, finding work no longer meaningful, wanting to quit, and tending to view patients and colleagues as objects \cite{physicianburnout2018}. Clinical burnout goes back to at least 2016, since the proliferation of electronic health records (EHRs). Even though EHRs were introduced with the aim to eliminate the drawbacks of an old, paper-based system, they led to increased documentation workload, due to the time and energy placed onto the administrative task of capturing patient information and filling out intricate (i.e. non-intuitive) forms to prove compliance with government rules \cite{nejm2016burnout, physicianburnout2018}. For instance, a 2016 study estimated that about 27\% of physicians' time is allocated to direct clinical care, with the rest 73\% dissipating in administrative work \cite{timeallocation2016}. Other causes of burnout include limited time with patients, shift overload, and taking work at home. The consequences regarding patient care are many: poor communication, non-adherence to guidelines, medical errors, high organizational costs related to absenteeism and turnover, and legal costs due to complaints of negligence \cite{burnoutcovid2021}.
 
-In this paper, I present the design, implementation, and preliminary testing of an AI–powered conversational assistant (CA) prototype, whose scope is to assist psychiatric nurses in their day-to-day treatments. The assistant built is nurse-facing (not patient-facing), and its role is to assist nurses in performing the concrete task of accessing on the spot and in natural language important pieces of information about a patient's profile (e.g. medications prescribed, etc.). This assistant is designed to interact with users, comprehend their queries, and provide on-demand, insightful information sourced from a medical database.
+Especially for nurse personnel, a 2023 study showed a high risk of burnout and subsequent mental health concerns (depression, anxiety, suicidality) due to problems with understaffing, immense patient volumes -- in particular after the COVID-19 pandemic -- and exposure to traumatic events \cite{nursesburnout2024}.
 
-For this prototype, hypothetical data were used, and protected health information (PHI) was not included.
+Turning to the focus of this project, we now shift our attention to the modern psychiatric nurse, whose tasks include caring for, motivating, and supporting individuals suffering from mental health conditions or behavioral problems. The nurse's aim is to assist them patients to adapt their behavior to fit into society, in comparison to the more traditional goal of reactively managing the patients' symptoms \cite{understandingnursing2019}. A nurse's typical day-to-day duties include observing patients and evaluating their condition, administering, adjusting, and monitoring medications, educating patients about their illness, assisting with self-care (e.g. bathing, grooming, etc.), daily routines, and general physical health \footnote{'Psychiatric Nurse: Duties, Pay, and How to Become One'. November 29, 2023. Coursera. Accessed on October 28, 2024. \url{https://www.coursera.org/articles/psychiatric-nurse}}. Psychiatric nurses collaborate with doctors (psychiatrists and psychotherapists) to develop care plans and promote mental healthcare case by case, e.g. they may work with children exposed to trauma, or soldiers returning from the battlefield, among other cases. Psychiatric nurses may work in any setting that provides mental health services, such as correctional and assisted living facilities, rehabilitation centers, hospitals, clinics, and private homes. As the profession of psychiatry by nature deals with the unique psychological and emotional needs of vulnerable individuals -- where personalization of the interaction, building a trusting relationship, and showing compassion and empathy \footnote{`` In client-centered therapy, therapists might convey empathy through techniques such as active listening, reflection, and adopting a nonjudgmental stance and warm tone. Conversational agents might be able to model similar behaviors, at least through speech.`` \cite{artificialempathy2018}} are necessary skills -- the job of a psychiatric nurse can be very stressful \cite{understandingnursing2019}.
 
-This work aims at answering the following research questions \label{RQs}:
-\begin{itemize}
-    \item RQ1) Is it feasible to develop a CA that helps nurses to extract information about a patients' profiles on demand?
-    \item RQ2) If so, how effective is the CA in terms of faithfulness, answer relevancy and answer correctness, context precision and context recall ?
-    \item RQ3) Is it effective? Does the CA improve the daily experience and satisfaction for the job of the nurse?
-\end{itemize}
+However, due to time pressures, the procedures are not always followed accurately, and information is not always immediately accessible. Of course, nurses have too little time to manually search for patient information on formal documents whenever necessary, and oftentimes they have to rely on their own memory for dozens of patients. As a result, the documentation part of their job diverts nurses' attention from the actual patient care part, leading to both poorer quality of care and increased mental burnout for the nurse staff. 
 
-\section{Requirements Gathering and Design}
-Usually, the design and development of dialog systems begins with the collection and analysis of sample dialogs between real people (e.g. between health providers and patients) \cite{BickmoreGiorgino2006}. The recordings are then transcribed and analyzed carefully to understand the range of topics, concepts, terms, and general structure typically used in patient–physician communication. However, for the particular project -- as well as for most industry-led ones -- there were no real template-dialogs to be followed, due to GDPR regulations, and the ethical principle of medical confidentiality, both of which prohibit the dissemination of medical conversations and data. The requirements gathering phase was implemented through interviews with professional psychiatric nurses.
-
-The design process, from project start to completion of the user studies, lasted three months (November 2024 to January 2025). During this period, I interviewed three nurses who worked in psychiatric clinics. Their experience and insights helped me learn about the stakeholders and the basic workflow requirements of the system.
-
-Three psychiatric nurses were interviewed for 2 hours each, over Zoom during the month of November, 2024. The interviewed nurses gave information voluntarily about what psychiatric care in Greek psychiatric clinics involves. They explained the different psychiatric facilities, the daily tasks of a nurse during a typical shift, what a nurse should pay attention to when dealing with patients, and how they collaborate with the rest of the medical team, i.e. doctors, psychologists, and social workers. From the discussions, certain ``pain points`` emerged. 
-
-First, the daily job of a psychiatric nurse is critical and very demanding, since nurses are responsible for the following tasks:
-\begin{enumerate}
-    \item observe the patients at all times, so they do not harm themselves or others
-    \item make sure the patients do not flee the clinic
-    \item get to know the patients well, mainly in order to understand who can pose a threat to themselves or others
-    \item administer medication and make sure the patients actually swallow it
-    \item convince the patients to follow their medication treatment, and set goals about their health 
-    \item monitor the patients and change their medication or their doses
-    \item liaise with other medical specialists (e.g. cardiologist, ophthalmologist, etc.) on behalf of the patients, and accompany them during visits
-\end{enumerate}
-Notably, there is no specific patient assigned to each nurse; rather, all nurses are responsible for all patients, and any nurse can observe and treat any patient.
-
-Second, there are no comprehensive electronic patient records.  A full record for each patient exists as hand-written notes from the relevant medical professionals, called ``Patient Record``, and includes information on the patient's demographic status (sex, age, etc.), social life (if they have a family, a social network, a job, etc.), medical history (their symptoms and diagnosis, hospitalization dates, other medical conditions, etc.), and psychological profile (their desires, dislikes, fears, etc.). Interestingly, there exists only one record for each patient (without extra copies), and it is updated manually in the event of a patient's readmission. There are, however, a few pieces of information that can also be retrieved electronically via the patient's Social Security Number (AMKA), that is the patient's medication regimen (i.e. dosage, schedule, duration pf treatment), the doctor who prescribed it, and their admission and discharge dates. 
-
-All three nurses expressed their excitement for a phone application that would aid them in their job. As a suggestion, they offered the following: having an assistant that knows pieces of information about each patient, which are personal to each nurse and customized by her/him. This customized patient record would help nurses in accessing important data about a specific patient on the spot, without the need to refer to the unique copy of the official, hand-written Patient Record, or rely on memory. 
-
-The resulting requirements and expectations were the following:
-\begin{enumerate}
-\item The assistant will not take the initiative to speak, but will answer questions asked by the nurse fast and reliably, in both voice and text format
-\item Voice-enabled for fast note recording and for hearing brief pieces of information on demand (e.g. - ``Who prescribed medication A? ``, -  ``Doctor X``)
-\item Text-enabled for reading longer notes (e.g. a summary of the medical history) and committing to memory
-\item Data that would be helpful are:
-\begin{itemize}
-    \item Medical Record Number (AMKA)
-    \item Cellphone of patient or of a contact
-    \item Diagnosis (name and date)
-    \item Admission and discharge dates, if any
-    \item Prescribed treatment plan (doses and schedule)
-    \item Past side-effects of drugs
-    \item Last injection and next injection
-    \item Past blood tests and next blood tests
-    \item Evaluation of patient's adherence to the medical plan
-    \item Evaluation of patient's mental and physical health
-    \item Brief social profile
-    \item Important advice or warning from the doctor
-\end{itemize}       
-Symptoms are well-known to the nurses, so they are not included in the data.
-\end{enumerate}
-
-\subsection{Objective}
-The objective of the AI assistant was to reduce the time and effort needed to retrieve relevant and accurate information about patients. This would also streamline their workflow, increase the speed and accuracy of the nurses' decisions for each patient, and would ultimately improve their quality of healthcare.
-
-\section{Scenarios of multi-turn interactions in Greek}
-\subsection{Happy Paths}
-\subsubsection{Scenario 1: Memory}
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5} 
-\begin{tabular}{|>{\bfseries}l|p{11cm}|}
-\hline
-Nurse & \textgreek{Η Μαρία Παπαδοπούλου τι αγωγή παίρνει στην παρούσα φάση?} \\
-\hline
-System - golden & \textgreek{Η Μαρία Παπαδοπούλου παίρνει αλπραζολάμη για τις κρίσεις πανικού με δοσολογία 0,5 mg και πρόγραμμα 2 φορές την ημέρα.} \\
-\hline
-System - actual & \textgreek{Η Μαρία Παπαδοπούλου λαμβάνει αλπραζολάμη (0.5 m}g) \textgreek{2 φορές την ημέρα για τις κρίσεις πανικού, σύμφωνα με συνταγή του ιατρού Γιάννη Γαστουνιώτη.} \\
-\hline
-Nurse & \textgreek{Και σε ποια ουσία έχει παρενέργειες?} \\
-\hline
-System - golden & \textgreek{Στο λίθιο.} \\
-\hline
-System - actual & \textgreek{Στα έγγραφα της Μαρίας Παπαδοπούλου αναφέρονται παρενέργειες για το λίθιο, το οποίο η ίδια διέκοψε την 1η Οκτωβρίου 2023. Οι παρενέργειες του λιθίου είναι αυξημένη ορμόνη} TSH  \textgreek{(υποθυρεοειδισμός), καταστολή και υπνηλία και τρέμουλο στα χέρια. Δεν αναφέρονται παρενέργειες για την αλπραζολάμη.} \\
-\hline
-\end{tabular}
-\caption{Scenario 1 (audios 1, 2): Memory - MARIA}
-\end{table}
-
-\subsubsection{Scenario 2: Memory and reference resolution}
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5} 
-\begin{tabular}{|>{\bfseries}l|p{11cm}|}
-\hline
-Nurse & \textgreek{Πότε έγιναν οι προηγούμενες αιματολογικές εξετάσεις του Κώστα Καρά?} \\
-\hline
-System - golden & \textgreek{Στις 24/11/2024.} \\
-\hline
-System - actual & \textgreek{Οι προηγούμενες αιματολογικές εξετάσεις του Κώστα Καρά έγιναν στις 10/02/2024 και 24/11/2024.} \\
-\hline
-Nurse & \textgreek{Και οι επόμενες εξετάσεις του?} \\
-\hline
-System - golden & \textgreek{Στις 15/5/2025.} \\
-\hline
-System - actual & \textgreek{Οι επόμενες αιματολογικές εξετάσεις του Κώστα Καρά είναι προγραμματισμένες για τις 15/5/2025.} \\
-\hline
-Nurse & \textgreek{Τι συστάσεις υπάρχουν?} \\
-\hline
-System - golden & \textgreek{Προώθηση ψυχοθεραπείας για διαχείριση άγχους και καθοδήγηση για ενίσχυση κοινωνικών δεξιοτήτων.} \\
-\hline
-System - actual & \textgreek{Οι τρέχουσες ιατρικές συστάσεις για τον Κώστα Καρά περιλαμβάνουν την προώθηση ψυχοθεραπείας για διαχείριση άγχους και καθοδήγηση για ενίσχυση κοινωνικών δεξιοτήτων.} \\
-\hline
-\end{tabular}
-\caption{Scenario 2 (audios 3, 4, 5): Memory and reference resolution - KOSTAS}
-\end{table}
-
-\subsubsection{Scenario 3: Abbreviations and Acronyms}
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5} 
-\begin{tabular}{|>{\bfseries}l|p{11cm}|}
-\hline
-Nurse & \textgreek{Η Δήμητρα Τσακίρη τι διάγνωση έχει?} \\
-\hline
-System - golden & \textgreek{ΓΑΔ (διάγνωση το 16/04/2004) και κρίσεις πανικού (διάγνωση το 23/01/2008)} \\
-\hline 
-System - actual & \textgreek{Η Δήμητρα Τσακίρη έχει διαγνωστεί με ΓΑΔ (Γενικευμένη Αγχώδης Διαταραχή) στις 16/04/2004 και με κρίσεις πανικού στις 23/01/2008.} \\
-\hline
-Nurse & \textgreek{Πες μου τη δοσολογία της αγωγής για την Ιωάννα Λυμπερίου.} \\
-\hline
-System - golden & \textgreek{Δραστική ουσία: κουετιαπίνη
-Δοσολογία: 300} mg, \textgreek{2 φ/ημ.} \\
-\hline
-System - actual & \textgreek{Η Ιωάννα Λυμπερίου λαμβάνει κουετιαπίνη σε δοσολογία 300} mg, \textgreek{2 φορές την ημέρα. Η έναρξη της αγωγής ήταν στις 30/08/2018 και συνταγογραφήθηκε από τον καρδιολόγο Ιωάννη Μακρή.} \\
-\hline
-Nurse & \textgreek{Δώσε μου το τηλέφωνο και το ΑΜΚΑ του Γιώργου Γεωργίου.} \\
-\hline
-System - golden & \textgreek{Τηλ.: 6974513248 (μητέρα, κα. Αθανασία) και ΑΜΚΑ: 67980831881} \\
-\hline
-System - actual & \textgreek{Το ΑΜΚΑ του Γιώργου Γεωργίου είναι 67980831881 και το τηλέφωνο είναι 6974513248 (της μητέρας του, κα. Αθανασίας).} \\
-\hline
-Nurse & \textgreek{Γιώργος Μακρής. Τι διαγνώσεις έχει?} \\
-\hline
-System - golden & \textgreek{- Κρίσεις πανικού (διάγνωση το 12/11/2002)
-- Διπολική διατ. (διάγνωση το 15/01/2021)
-- Ψύχωση (διάγνωση το 25/04/2012)} \\
-\hline
-System - actual & \textgreek{Ο Γιώργος Μακρής έχει διαγνωστεί με τα εξής: Κρίσεις πανικού (12/11/2002), Διπολική διαταραχή (15/01/2021) και Ψύχωση (25/04/2012).} \\
-\hline
-\end{tabular}
-\caption{Scenario 3 (audios 6, 7, 8, 9): Abbreviations and Acronyms - PATIENT 01 and PATIENT 03 and PATIENT 04 and PATIENT 05}
-\end{table}
-
- 
-\subsection{Error Scenarios}
-\subsubsection{Scenario 4: Non-existent patient}
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5} 
-\begin{tabular}{|>{\bfseries}l|p{11cm}|}
-\hline
-Nurse & \textgreek{Σε ποια ουσία έχει παρενέργειες η Δήμητρα Καρακίτσου?} \\
-\hline
-System - golden & \textgreek{Δεν ξέρω.} \\
-\hline
-System - actual & \textgreek{Δεν βρέθηκαν πληροφορίες σχετικά με το σε ποια ουσία έχει παρενέργειες η Δήμητρα Καρακίτσου.} \\
-\hline
-\end{tabular}
-\caption{Scenario 4 (audio 10): Non-existent patient}
-\end{table}
-
-\subsubsection{Scenario 5: Non-existent patient who shares the same last name with a known patient}
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5} 
-\begin{tabular}{|>{\bfseries}l|p{11cm}|}
-\hline
-Nurse & \textgreek{Πες μου τις συστάσεις για την ασθενή Θάλεια Παπαδοπούλου.} \\
-\hline
-System - golden & \textgreek{Δεν ξέρω.} \\
-\hline
-System - actual & \textgreek{Δεν βρέθηκαν πληροφορίες για την ασθενή Θάλεια Παπαδοπούλου.} \\
-\hline
-\end{tabular}
-\caption{Scenario 5 (audio 11): Non-existent patient who shares the same last name with a known patient}
-\end{table}
-
-\subsubsection{Scenario 6: Known patient with non-existent info}
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5} 
-\begin{tabular}{|>{\bfseries}l|p{11cm}|}
-\hline
-Nurse & \textgreek{Πότε είναι η επόμενη ενέσιμη αγωγή του Κώστα Καρά?} \\
-\hline
-System - golden & \textgreek{Δεν έχει ενέσιμη αγωγή.} \\
-\hline
-System - actual & \textgreek{Ο Κώστας Καράς δεν έχει ενέσιμη αγωγή. Έχει όμως προγραμματισμένες αιματολογικές εξετάσεις στις 15/5/2025.} \\
-\hline
-\end{tabular}
-\caption{Scenario 6 (audio 12): Known patient with non-existent info - KOSTAS}
-\end{table}
-
-\subsubsection{Scenario 7: Doctor's name}
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5} 
-\begin{tabular}{|>{\bfseries}l|p{11cm}|}
-\hline
-Nurse & \textgreek{Πες μου το ΑΜΚΑ της Κωνσταντίνας Λυμπερίου.} \\
-\hline
-System - golden & \textgreek{Δεν ξέρω.} \\
-\hline
-System - actual & \textgreek{Δεν βρέθηκαν δεδομένα για την Κωνσταντίνα Λυμπερίου. Δεν μπορώ να σου δώσω το ΑΜΚΑ της.} \\
-\hline
-\end{tabular}
-\caption{Scenario 7 (audio 13): Doctor's name - GEORGIA M}
-\end{table}
-
-\subsection{Disambiguation Scenarios}
-\subsubsection{Scenario 8: Disambiguation of identical patient name}
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5} 
-\begin{tabular}{|>{\bfseries}l|p{11cm}|}
-\hline
-Nurse & \textgreek{Θύμισέ μου το κοινωνικό ιστορικό της Ελένης Κανελλοπούλου.} \\
-\hline
-System & \textgreek{Έχω βρει πληροφορίες για δύο ασθενείς με το όνομα Ελένη Κανελλοπούλου. Η μία είναι 54 ετών (ΑΜΚΑ: 63681990357) και η άλλη είναι 41 ετών (ΑΜΚΑ: 65357602736). Για ποια από τις δύο Ελένες Κανελλοπούλου θέλετε το κοινωνικό ιστορικό?} \\
-\hline
-Nurse & \textgreek{Πες μου για τη μεγαλύτερη.} \\
-\hline
-System - golden & PATIENT 15.txt \\
-\hline
-System - actual & \textgreek{OK. Το κοινωνικό ιστορικό της Ελένης Κανελλοπούλου (ΑΜΚΑ: 63681990357) είναι:
-*   Μένει μόνη σε ενοικιαζόμενο διαμέρισμα
-*   Έχει ελάχιστη οικογενειακή υποστήριξη
-*   Δεν εργάζεται επί του παρόντος
-*   Πρώην υπάλληλος γραφείου, αποχώρησε λόγω επιδείνωσης της ψυχικής υγείας
-*   Διατηρεί περιορισμένη επαφή με μία εξαδέλφη. Όσον αφορά τις συνήθειες και την καθημερινότητά της:
-*   Καπνίζει περίπου 10 τσιγάρα την ημέρα
-*   Δεν καταναλώνει αλκοόλ
-*   Παρουσιάζει διαταραχές ύπνου (δυσκολία έναρξης και διατήρησης ύπνου, συχνές διακοπές για ούρηση)
-*   Βλέπει τηλεόραση και ράβει για να ηρεμεί.
-Οι συστάσεις για την Ελένη Κανελλοπούλου είναι:
-*   Συστηματική ψυχοθεραπεία και παρακολούθηση
-*   Ενίσχυση κοινωνικών δεξιοτήτων μέσω ομάδων υποστήριξης
-*   Εκπαίδευση στη διαχείριση στρες και τεχνικές αναπνοής
-*   Συμμετοχή σε πρόγραμμα επανένταξης στην εργασία (ΔΥΠΑ)
-*   Προγραμματισμός αξιολόγησης από Κοινωνική Υπηρεσία για πιθανή παροχή βοήθειας κατ’ οίκον.} \\
-\hline
-\end{tabular}
-\caption{Scenario 8 (audio 14, 15): Disambiguation of identical patient name - PATIENT 13 and PATIENT 15}
-\end{table}
-
-\subsubsection{Scenario 9: Disambiguation of identical patient name and double intent}
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5} 
-\begin{tabular}{|>{\bfseries}l|p{11cm}|}
-\hline
-Nurse & \textgreek{Πότε νοσηλεύτηκε τελευταία φορά η Δήμητρα Μακρή και τι αγωγή παίρνει?} \\
-\hline
-System & \textgreek{Υπάρχουν δύο ασθενείς με το όνομα Δήμητρα Μακρή. Για να σας δώσω τις σωστές πληροφορίες, θα μπορούσατε να επιβεβαιώσετε τον ΑΜΚΑ ή την ηλικία της ασθενούς για την οποία ενδιαφέρεστε?} \\
-\hline
-Nurse & \textgreek{Δε θυμάμαι το ΑΜΚΑ της. Πες μου για την πιο μικρή.} \\
-\hline
-System - golden &  \textgreek{Στις 20/03/2013: Επιθετικό-μανιακό πεισόδιο με παραμονή 2 ημέρες, και στις 27/09/2017: Επεισόδιο σχιζοφρένειας με παραμονή 1 ημέρες. Παίρνει ρισπεριδόνη, 3 mg, 2 φορές την ημέρα, και ζιπραζιδόνη, 40 mg, 2 φορές την ημέρα μαζί με φαγητό.} \\
-\hline
-System - actual & \textgreek{Η Δήμητρα Μακρή, 32 ετών (ΑΜΚΑ 41661927592), νοσηλεύτηκε τελευταία φορά στις 27/09/2017 και λαμβάνει ρισπεριδόνη (3 mg, 2 φ. την ημέρα) και ζιπραζιδόνη (40 mg, 2 φ. την ημέρα μαζί με φαγητό).} \\
-\hline
-\end{tabular}
-\caption{Scenario 9 (audio 16, 17): Disambiguation of identical patient name and double intent - PATIENT 10 and PATIENT 16}
-\end{table}
-
-\subsubsection{Scenario 10: Free-form text}
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5} 
-\begin{tabular}{|>{\bfseries}l|p{11cm}|}
-\hline
-Nurse & \textgreek{Θύμισέ μου αν ακολουθεί τη θεραπεία της η Βασιλική Αντωνίου.} \\
-\hline
-System - golden & \textgreek{Λαμβάνει τα φάρμακά της με σχετική συνέπεια, αν και παρατηρούνται περιστασιακές παραλείψεις, κυρίως κατά τις περιόδους ύφεσης. 
-Παρουσιάζει μειωμένη αυτογνωσία σχετικά με την ανάγκη για συνεχή θεραπεία, γεγονός που αποδίδεται εν μέρει σε μερική ανοσογνωσία.} \\
-\hline
-System - actual & \textgreek{Η Βασιλική Αντωνίου λαμβάνει τα φάρμακά της με σχετική συνέπεια, αν και παρατηρούνται περιστασιακές παραλείψεις, κυρίως κατά τις περιόδους ύφεσης. Παρουσιάζει μειωμένη αυτογνωσία σχετικά με την ανάγκη για συνεχή θεραπεία, γεγονός που αποδίδεται εν μέρει σε μερική ανοσογνωσία.} \\
-\hline
-Nurse & \textgreek{Έχει κάποιες συστάσεις στο φάκελό της?} \\
-\hline
-System - golden & \textgreek{Οι θεραπευτικές κατευθύνσεις περιλαμβάνουν τη συνέχιση της φαρμακευτικής αγωγής υπό τακτική παρακολούθηση, την επανένταξή της σε ομάδα υποστηρικτικής ψυχοθεραπείας σε εβδομαδιαία βάση, την καθιέρωση ενός σταθερού προγράμματος δραστηριοτήτων που να περιλαμβάνει βόλτες και ελαφριές οικιακές εργασίες, καθώς και τη συμμετοχή σε πρόγραμμα κοινωνικοποίησης στο κέντρο ημέρας. 
-Επιπλέον, προτείνεται παραπομπή σε ψυχολόγο για γνωσιακή-συμπεριφορική θεραπεία, παροχή συμβουλευτικής υποστήριξης προς την οικογένειά της, ενίσχυση της αίσθησης αυτοαποτελεσματικότητας και ενδυνάμωσης, και μηνιαία παρακολούθηση από κοινωνικό λειτουργό.} \\
-\hline
-System - actual & \textgreek{Ναι, υπάρχουν κάποιες συστάσεις στο φάκελο της Βασιλικής Αντωνίου. Προτείνεται παραπομπή σε ψυχολόγο για γνωσιακή-συμπεριφορική θεραπεία, παροχή συμβουλευτικής υποστήριξης προς την οικογένειά της, ενίσχυση της αίσθησης αυτοαποτελεσματικότητας και ενδυνάμωσης, και μηνιαία παρακολούθηση από κοινωνικό λειτουργό. Επιπλέον, οι θεραπευτικές κατευθύνσεις περιλαμβάνουν τη συνέχιση της φαρμακευτικής αγωγής υπό τακτική παρακολούθηση, την επανένταξή της σε ομάδα υποστηρικτικής ψυχοθεραπείας σε εβδομαδιαία βάση, την καθιέρωση ενός σταθερού προγράμματος δραστηριοτήτων που να περιλαμβάνει βόλτες και ελαφριές οικιακές εργασίες, καθώς και τη συμμετοχή σε πρόγραμμα κοινωνικοποίησης στο κέντρο ημέρας.} \\
-\hline
-\end{tabular}
-\caption{Scenario 10 (audio 18, 19): Free-form text - PATIENT 40}
-\end{table}
-
-\subsubsection{Scenario 11: Free-form text}
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5} 
-\begin{tabular}{|>{\bfseries}l|p{11cm}|}
-\hline
-Nurse & \textgreek{Ποια είναι η τρέχουσα ψυχολογική κατάσταση του Νίκου Τρανού?} \\
-\hline
-System - golden & \textgreek{Κατά την τελευταία ψυχολογική εκτίμηση, αναφέρθηκαν εναλλαγές διάθεσης με περιόδους απογοήτευσης και μειωμένο ενδιαφέρον για δραστηριότητες, χωρίς ωστόσο ενδείξεις ενεργού αυτοκτονικού ιδεασμού.} \\
-\hline
-System - actual & \textgreek{Η τρέχουσα ψυχολογική κατάσταση του Νίκου Τρανού (ΑΜΚΑ: 71462734135), σύμφωνα με την ψυχολογική αξιολόγηση, παρουσιάζει εναλλαγές στη διάθεση και περιστασιακή απογοήτευση. Η ενέργειά του είναι μέτρια, με μειωμένη όρεξη για δραστηριότητες, ενώ η κοινωνική του συμπεριφορά είναι περιορισμένη. Δεν έχουν αναφερθεί ενδείξεις αυτοκτονικού ιδεασμού.} \\
-\hline
-Nurse & \textgreek{Ακολουθεί την αγωγή του?} \\
-\hline
-System - golden & \textgreek{Η συμμόρφωση του ασθενούς στη θεραπεία είναι μέτρια. Ο ίδιος αναφέρει ότι λαμβάνει τα φάρμακά του με συνέπεια, ωστόσο παραδέχεται πως τα παραλείπει περιστασιακά, ιδίως όταν αισθάνεται πως «είναι καλά» — φαινόμενο συχνό σε χρόνιους ψυχιατρικούς ασθενείς.} \\
-\hline
-System - actual & \textgreek{Ο Νίκος Τρανός (ΑΜΚΑ: 71462734135) παίρνει τα φάρμακά του με σχετική συνέπεια, αλλά αναφέρει περιστασιακές παραλείψεις όταν νιώθει καλά.} \\
-\hline
-\end{tabular}
-\caption{Scenario 11 (audio 20, 21): Free-form text - PATIENT 38}
-\end{table}
-
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5} 
-\begin{tabular}{|>{\bfseries}l|p{11cm}|}
-\hline
-Nurse & \textgreek{Δείχνει επιθυμία για απομόνωση? Πώς είναι κοινωνικά?} \\
-\hline
-System - golden & \textgreek{Η κοινωνική του αλληλεπίδραση παραμένει περιορισμένη, ενώ φαίνεται να βιώνει συναισθήματα απομόνωσης, κάτι που επιτείνεται από την ελλιπή οικογενειακή στήριξη. Διαμένει μόνος του σε διαμέρισμα που του παραχωρήθηκε από την κοινότητα, ενώ η επικοινωνία με την οικογένειά του είναι περιορισμένη — διατηρεί επαφή μόνο με έναν αδερφό του, τον οποίο βλέπει περιστασιακά. Δεν έχει δημιουργήσει σταθερό οικογενειακό κύκλο ή στενές φιλίες, αν και τον τελευταίο χρόνο συμμετέχει σποραδικά σε δραστηριότητες Κέντρου Ημέρας για άτομα με ψυχικές διαταραχές, όπου φαίνεται να δείχνει διστακτικό αλλά θετικό ενδιαφέρον για κοινωνική αλληλεπίδραση. Ανέφερε επίσης ότι κάποιες Κυριακές πηγαίνει σε καφενείο της γειτονιάς, κυρίως για να «παρακολουθεί τους άλλους» και όχι για να συμμετάσχει ενεργά στη συζήτηση.} \\
-\hline
-System - actual & \textgreek{Ο Νίκος Τρανός έχει περιορισμένη κοινωνική αλληλεπίδραση, γεγονός που υποδηλώνει επιθυμία για απομόνωση.} \\
-\hline
-Nurse & \textgreek{Απαιτείται ενημέρωση ιατρού ή παρέμβαση ψυχολόγου ή ψυχιάτρου?} \\
-\hline
-System - golden & \textgreek{Ο συνολικός ψυχιατρικός του φάκελος υποδεικνύει την ανάγκη για πιο στενή ψυχιατρική παρακολούθηση, ενίσχυση της ψυχοκοινωνικής υποστήριξης, και πιθανή ένταξή του σε προγράμματα ψυχοεκπαίδευσης και ενδυνάμωσης, ώστε να βελτιωθεί η ποιότητα ζωής και να περιοριστούν οι υποτροπές.} \\
-\hline
-System - actual & \textgreek{Με βάση τα έγγραφα του ασθενούς Νίκου Τρανού, λαμβάνοντας υπόψη τις διαγνώσεις του (ψύχωση, μανιοκατάθλιψη), το ιστορικό επεισοδίων, την τρέχουσα φαρμακευτική αγωγή (ολανζαπίνη), τις παρενέργειες που είχε από προηγούμενη φαρμακευτική αγωγή (φλουοξετίνη), την περιορισμένη κοινωνική συμπεριφορά και τις εναλλαγές στη διάθεση, είναι απαραίτητη η ενημέρωση του θεράποντος ιατρού του, Ιωάννη Μακρή, καθώς και η ψυχολογική υποστήριξη από ψυχολόγο ή ψυχίατρο.} \\
-\hline
-\end{tabular}
-\caption{Scenario 11 (audio 22, 23): Free-form text - PATIENT 38}
-\end{table}
-
-\subsection{Summarization Scenarios}
-\subsubsection{Scenario 12: Summary of a patient's record from structured text}
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5} 
-\begin{tabular}{|>{\bfseries}l|p{11cm}|}
-\hline
-Nurse & \textgreek{Δώσε μου τη γενική εικόνα για τον Θανάση Πράσινο.} \\
-\hline
-System - golden & PATIENT 29.txt \\
-\hline
-System - actual & \textgreek{Η γενική εικόνα για τον Θανάση Πράσινο είναι η εξής: Ο Θανάσης Πράσινος, 24 ετών, με ΑΜΚΑ 54565609013, έχει διαγνωστεί με μανιοκατάθλιψη (από 30/04/2014) και σχιζοφρένεια (από 11/01/2005). Είχε ένα επεισόδιο στις 25/03/2024 που χρειάστηκε νοσηλεία για 1 ημέρα.
-Αυτή τη στιγμή λαμβάνει κουετιαπίνη 300mg, δύο φορές την ημέρα, για την αντιμετώπιση των συμπτωμάτων του, με συνταγογράφο τον ψυχολόγο Δημήτριο Κατσαρό (έναρξη 25/03/2024). Στο παρελθόν είχε παρενέργειες (ναυτία και μείωση λίμπιντο) από την ολανζαπίνη, η οποία διακόπηκε στις 23/05/2024.
-Η διάθεσή του παρουσιάζει απότομες εναλλαγές και έχει μέτρια ενέργεια, με μειωμένη όρεξη για δραστηριότητες. Έχει παρατηρηθεί περίεργη/βίαιη συμπεριφορά στα} social media (TikTok, Facebook) \textgreek{σε περιόδους έξαρσης της ασθένειας. Δεν έχουν αναφερθεί ενδείξεις αυτοκτονικού ιδεασμού.
-Η οικογένειά του αποφεύγει να συζητάει για το πρόβλημά του. Εργάζεται ως γυμναστής στα} Alter Life.
-\textgreek{Συνιστάται η συνέχιση της συστηματικής ψυχοθεραπείας και παρακολούθησης. Παίρνει τα φάρμακά του με σχετική συνέπεια, αλλά αναφέρει περιστασιακές παραλείψεις όταν νιώθει καλά. Έχει κάνει αιματολογικές εξετάσεις στις 31/05/2024 και 23/11/2024, και οι επόμενες είναι προγραμματισμένες για τις 06/10/2025.} \\
-\hline
-\end{tabular}
-\caption{Scenario 12 (audio 24): Summary of a patient's record from structured text - PATIENT 29}
-\end{table}
-
-\subsubsection{Scenario 13: Summary of a patient's record from free-form text}
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.5} 
-\begin{tabular}{|>{\bfseries}l|p{11cm}|}
-\hline
-Nurse & \textgreek{Πες μου κάποια σημαντικά πράγματα που πρέπει να ξέρω για τη Χριστίνα Παγούτση.} \\
-\hline
-System - golden & PATIENT 41.txt \\
-\hline
-System - actual & \textgreek{Εδώ είναι μερικά σημαντικά πράγματα που πρέπει να γνωρίζετε για την Χριστίνα Παγούτση:
-**Ιστορικό:**
-*   Διαγνώστηκε με ιδεοψυχαναγκαστική διαταραχή (από 11 Ιουνίου 2010), μείζονα καταθλιπτική διαταραχή (από 25 Ιανουαρίου 2006), παραληρητική ψύχωση (από 1 Δεκεμβρίου 2005) και αϋπνία σχετιζόμενη με αγχώδη διαταραχή (από το 2021).
-*   Νοσηλεύτηκε στις 4 Οκτωβρίου 2008 για τέσσερις ημέρες λόγω έντονων εμμονικών σκέψεων με αυτοτραυματικές τάσεις.
-*   Στις 12 Σεπτεμβρίου 2020 υπήρξε παρέμβαση κινητής μονάδας, εξαιτίας επιδείνωσης των συμπτωμάτων.
-*   Είχε ένα ψυχωσικό επεισόδιο στις 21 Απριλίου 2013, που οδήγησε σε νοσηλεία δύο ημερών.
-*   **Φαρμακευτική αγωγή:**
-*   Λαμβάνει σερτραλίνη 100 mg ημερησίως, ρισπεριδόνη 2 mg ημερησίως, τραζοδόνη 50 mg πριν τον ύπνο και λοραζεπάμη 1 mg κατά περίπτωση.
-*   Στο παρελθόν λάμβανε αλπραζολάμη, η οποία διακόπηκε στις 6 Μαρτίου 2023.
-*   Έχει μέτρια συμμόρφωση στη φαρμακευτική αγωγή και ιστορικό διακοπής της αγωγής χωρίς συνεννόηση με το θεραπευτικό προσωπικό.
-*   **Εργαστηριακές εξετάσεις:**
-*   Πρόσφατες αιματολογικές εξετάσεις (17 Αυγούστου 2024) έδειξαν μέτρια αυξημένα τριγλυκερίδια.
-*   Στις 8 Ιουλίου 2023 είχε εμφανίσει ελαφρά αναιμία και χαμηλή φερριτίνη. Η επόμενη εξέταση έχει προγραμματιστεί για τις 29 Δεκεμβρίου 2025.
-*   **Κοινωνικό προφίλ:**
-*   Διαμένει μόνη της σε ενοικιαζόμενο διαμέρισμα με περιορισμένους οικονομικούς πόρους.
-*   **Δημογραφικά στοιχεία:**
-*   Είναι 59 ετών. ΑΜΚΑ 93599718720.} \\
-\hline
-\end{tabular}
-\caption{Scenario 13 (audio 25): Summary of a patient's record from free-form text - PATIENT 41}
-\end{table}
+The solution to this may be the automation of information retrieval via an AI assistant.  The purpose of a conversational assistant would be to assist nurses to retrieve essential patient information with accuracy and timeliness. This should improve the staff’s well-being and job satisfaction, and free up their time to devote to patient care.
 
 
-\section{Experimentation}
-For my experiments, I used the RAG approach, a hybrid technique of combining an external and up-to-date database for information retrieval, and an LLM for the answer generation part. The RAG technique is suitable for knowledge-intensive tasks (tasks that humans cannot be expected to execute without accessing an external knowledge source), and it is also well-known for the control and interpretability it offers during answer generation \cite{raglewisetal2021}. In summary, RAG architecture offers traceability and transparency, as it can surface the answers' sources, while also mitigating the notorious LLM hallucinations (see Section \ref{hallucsLLM}). 
+\subsection{Automation through AI}
+In general, the main goal of leveraging AI in the healthcare domain is to improve the quality of care. In this particular case, this goal could be achieved by reducing the burden of documentation for nurses, thus reducing their cognitive load, de-stressing them, and redirecting their time and energy to focus on interactions with their patients. Language models could assist nurses by simplifying or even replacing everyday tasks that require text synthesis or analysis, such as drafting medical notes, reports, and administrative emails or letters, and summarizing dense patient medical records \cite{llmsmodernmedicine2023}. Ultimately, the goal is to help nurses focus on the outcomes, and not the procedures and protocols. The way this can be achieved is by leveraging the power of LLMs, which can read, summarize, and generate natural text.
+
+Health professionals have already started using such solutions. As we can see from the image below, around two thirds of American doctors reported to have used Augmented Intelligence in their practice in 2024 for various tasks.
+
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.90\textwidth]{images/Screenshot 2025-04-02 214315.png}
-    \caption{Productizing Healthcare ChatBots with John Snow Labs' Medical LLM-as-a-Judge, Healthcare NLP Summit 2025, John Snow Labs. \url{https://app.swapcard.com/event/healthcare-nlp-summit-2025/planning/UGxhbm5pbmdfMjU3Njg5Ng==}}
-    \label{fig:RAG}
+    \includegraphics[width=0.90\textwidth]{images/Screenshot 2025-03-28 235854.png}
+    \caption{AI in Healthcare Series: From Decision Support to Drug Prescriptions, Stanford Online, YouTube (video), Accessed on March 29, 2025. \url{https://www.youtube.com/watch?v=TC64U_rzEuI}}
+    \label{fig:AIinHealthcare}
 \end{figure}
 
-\subsubsection{RAG Pipeline}
-A RAG pipeline retrieves patient note chunks that are relevant to the input query, and then appends them to the query. The retriever uses an encoder model to represent both the query and contextual information in the embedding space, and its goal is to retrieve the specific information whose embeddings are close to that of the query. A challenge in RAG-based methods is to ensure that the retrieved information is relevant to the query, and does not contain information that will disrupt LLM reasoning and/or delay inference \cite{clinicalentityIE2025}. The same great challenge was present in the initial stages of this project, as it was very difficult to retrieve chunks of a certain patient. What used to happen was that retrieved chunks used to involve various patients, most probably because all of the patient files had very similar information structure. The problem was solved by experimenting with the chunk content as seen below.
-
-\subsubsection{Mock Data / Data Curation}
-For the retrieval part, a database of clinical notes was required. In this project, actual, proprietary data from a real-world clinic were not made available due to privacy concerns, this is why mock data were used. The fifty clinical notes that were created were based on the three interviews, e.g. regarding the structure (lists), the topics covered (basic information, diagnoses, treatment, etc.), the language (note-taking style). In addition, some patient notes were enriched with a different structure (free-form text) and more or fewer topics, in order to represent other forms of patient notes as well. The first ten were created manually with great care to mimic actual patient records, while the rest were generated by \textit{ChatGPT} synthetically, and based on the first ten.
-
-All experimentation occurred on Kaggle notebooks with an accelerator of 2 (two) Tesla T4 GPUs of 15 GB each.
-
-\subsection{First experiment with LLM: Gemma\_trained\_for\_Greek}
-I first started experimenting with “Gemma\_trained\_for\_Greek” of 2 B parameters, which I downloaded from Kaggle \footnote{Gemma\_trained\_for\_Greek, Accessed May 2025. \url{https://www.kaggle.com/models/soloupis/gemma\_trained\_for\_greek}}, the sentence transformer embedding model "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2", as it is multilingual and includes Greek, and the FAISS vector database. 
-
-To add a memory component during inference, I used two custom functions: one to extract the current patient’s name from the query, and the second to resolve personal pronouns such as \textgreek{του, της, αυτήν}, etc. and replace the pronoun with the latest patient’s name. Only later did I learn the LangChain had a built-in memory module, so I used it in my next experiment (see Section \ref{krikri}).
-
-The constraints of this approach were not unimportant: first, the query had to have a pronoun in order for the custom memory to work, and second, the system crashed after 3 queries due to the available Kaggle GPU (VRAM) memory threshold of 30 GB. I experimented with one (1), and then with two (2) patients. As it is obvious from the examples below, the results with one patient were mostly fine, but with two patients they were disappointing, as the answers were either incorrect or mixed-up, or contained English words.
-
-\subsubsection{One patient (MARIA.txt)}
-
-Experimental Query 1: \textgreek{Η Μαρία Παπαδοπούλου τι αγωγή παίρνει στην παρούσα φάση?} \\
-System - golden: \textgreek{Η Μαρία Παπαδοπούλου παίρνει αλπραζολάμη για τις κρίσεις πανικού με δοσολογία 0,5 mg και πρόγραμμα 2 φορές την ημέρα.} \\
-System - actual: \textgreek{Η Μαρία Παπαδοπούλου παίρνει αλπραζολάμη με δοσολογία (0.5 m}g) \textgreek{και πρόγραμμα 2 φορές την ημέρα.} \\
-\\
-Experimental Query 2: \textgreek{Και σε ποια δραστική ουσία έχει παρενέργειες αυτή?} \\
-Resolved Query 2: \textgreek{Και σε ποια δραστική ουσία έχει παρενέργειες Μαρία Παπαδοπούλου?}
-System - golden: \textgreek{Στο λίθιο.} \\
-System - actual: \textgreek{Η Μαρία Παπαδοπούλου έχει παρενέργειες από το λίθιο.}\\
-\\
-Experimental Query 3: \textgreek{Πότε είναι οι επόμενες αιματολογικές της εξετάσεις?} \\
-Resolved Query 3: \textgreek{Πότε είναι οι επόμενες αιματολογικές Μαρία Παπαδοπούλου εξετάσεις?} \\
-System - golden: \textgreek{Στις 15 Μαΐου 2025.} \\
-System - actual: \textgreek{Οι επόμενες αιματολογικές εξετάσεις της Μαρίας Παπαδοπούλου είναι στις 15 Μαΐου 2025.}\\
-\\
-Experimental Query 4: \textgreek{Πες μου την αγωγή του Κώστα Καρά.} \\
-Resolved Query 4: \textgreek{Πες μου Κώστα Καρά αγωγή Κώστα Καρά Κώστα Καρά.} \\
-System - golden: \textgreek{Παίρνει σερτραλίνη των 50} mg, 1 \textgreek{φορά το πρωί και ραμιπρίλη των 5} mg 1 \textgreek{φορά το πρωί.} \\
-System - actual: \textgreek{Δεν έχω αρκετές πληροφορίες για να απαντήσω στην ερώτηση.Θα μπορούσατε να παρέχετε περισσότερα πλαίσια ή πληροφορίες για να μπορέσω να απαντήσω στην ερώτηση?}\\
-
-\subsubsection{Two patients (MARIA.txt, KOSTAS.txt)}
-
-Experimental Query 1: \textgreek{Η Μαρία Παπαδοπούλου τι αγωγή παίρνει στην παρούσα φάση?} \\
-System - golden: \textgreek{Η Μαρία Παπαδοπούλου παίρνει αλπραζολάμη για τις κρίσεις πανικού με δοσολογία 0,5 mg και πρόγραμμα 2 φορές την ημέρα.} \\
-System - actual: \textgreek{Δεδομένων των απαντημένων πληροφοριών, δεν είναι γνωστό ποια φάρμακα παίρνει η Μαρία Παπαδοπούλου. Θα μπορούσατε να παρέχετε περισσότερα στοιχεία ή πληροφορίες για να μπορέσετε να απαντήσετε στην ερώτηση?} \\
-\\
-Experimental Query 2: \textgreek{Και σε ποια δραστική ουσία έχει παρενέργειες αυτή?} \\
-Resolved Query 2: \textgreek{Και σε ποια δραστική ουσία έχει παρενέργειες Μαρία Παπαδοπούλου?}
-System - golden: \textgreek{Στο λίθιο.} \\
-System - actual: \textgreek{Η Μαρία Παπαδοπούλου έχει παρενέργειες από τη δραστική ουσία ολανζαπίνη.}\\
-\\
-Experimental Query 3: \textgreek{Πότε είναι οι επόμενες αιματολογικές της εξετάσεις?} \\
-Resolved Query 3: \textgreek{Πότε είναι οι επόμενες αιματολογικές Μαρία Παπαδοπούλου εξετάσεις?} \\
-System - golden: \textgreek{Στις 15 Μαΐου 2025.} \\
-System - actual: \textgreek{Οι επόμενες αιματολογικές εξετάσεις της Μαρίας Παπαδοπούλου είναι} scheduled \textgreek{για την 15/5/2025}\\
-\\
-Experimental Query 4: \textgreek{Πες μου την αγωγή του Κώστα Καρά.} \\
-Resolved Query 4: \textgreek{Πες μου Κώστα Καρά αγωγή Κώστα Καρά Κώστα Καρά.} \\
-System - golden: \textgreek{Παίρνει σερτραλίνη των 50} mg, 1 \textgreek{φορά το πρωί και ραμιπρίλη των 5} mg 1 \textgreek{φορά το πρωί.} \\
-System - actual: \textgreek{Δεν υπάρχουν αρκετές πληροφορίες για να καθοριστεί η αγωγή για τον Κώστα Καρά. Θα μπορούσατε να παρέχετε περισσότερα δεδομένα ή συγκεκριμένες παραγγελίες για να μπορέσετε να καθορίσετε την αγωγή του Κώστα Καρά?}\\
 
 
-\subsection{Second experiment with LLM: KriKri} \label{krikri}
-Then, I experimented with the quantized version of the LLM "ilsp/Llama-Krikri-8B-Instruct", because it was one of the newest models at that time (in May 2025) promising advanced language capabilities in both Greek and English - my two languages of interest - and an expanded context window of 128k tokens \footnote{Llama-Krikri-8B, 9 Feb 2025, \url{https://www.ilsp.gr/en/news/krikri/}} . For this instruction-focused LLM I added the following custom template to minimize hallucinations: \textgreek{Είσαι το Κρικρί, ένα εξειδικευμένο μοντέλο Τεχνητής Νοημοσύνης για ιατρικά δεδομένα. Απάντησε μόνο με βάση τα έγγραφα και την ιατρική πληροφόρηση που έχεις πρόσβαση. Αν δεν ξέρεις την απάντηση, πες ότι δεν ξέρεις.}. Αs an improvement from the previous custom memory, I added LangChain’s ``ConversationBufferMemory``. I also used LangChain’s``ConversationalRetrievalChain`` to connect the memory to the LLM’s prompt as ``chat history`` together with the query and the context from the FAISS database. Despite the memory boost, due to the available Kaggle GPU (VRAM) memory threshold of 30 GB, the system was still crashing after the third query, as the LLM model occupied almost half of the available memory (16 GB). I started experimenting with 2 patients reaching up to 8 patients, past which the results deteriorated, and the answers were mixed-up or plainly wrong, e.g.:
-
-\subsubsection{Eight patients}
-
-Experimental Query 1: \textgreek{Η Μαρία Παπαδοπούλου τι αγωγή παίρνει στην παρούσα φάση?} \\
-System - golden: \textgreek{Η Μαρία Παπαδοπούλου παίρνει αλπραζολάμη για τις κρίσεις πανικού με δοσολογία 0,5 mg και πρόγραμμα 2 φορές την ημέρα.} \\
-System - actual: \textgreek{Η πληροφορία που παρέχεται δεν περιέχει δεδομένα για ασθενή με όνομα Μαρία Παπαδοπούλου. Οι περιπτώσεις αφορούν τις ασθενείς Γεωργία Αναστασιάδη, Γεωργία Μαντά και Κώστα Καρά.} \\
-\\
-Resolved Query 2: \textgreek{Και σε ποια δραστική ουσία έχει παρενέργειες Μαρία Παπαδοπούλου?}
-System - golden: \textgreek{Στο λίθιο.} \\
-System - actual: \textgreek{Η δραστική ουσία που προκαλεί παρενέργειες στην παρούσα φάση για τη Γεωργία Αναστασιάδη είναι η βουπροπιόνη, με αναφερόμενες παρενέργειες την ταχυκαρδία και την αϋπνία.}\\
-\\
-Experimental Query 3: \textgreek{Πότε είναι οι επόμενες αιματολογικές της εξετάσεις?} \\
-System - golden: \textgreek{Στις 15 Μαΐου 2025.} \\
-System - actual: \textgreek{Δεν υπάρχουν πληροφορίες για ασθενή με όνομα Μαρία Παπαδοπούλου στο παρεχόμενο ιατρικό ιστορικό.}\\
-\\
-Experimental Query 4: \textgreek{Πες μου την αγωγή του Κώστα Καρά.} \\
-System - golden: \textgreek{Παίρνει σερτραλίνη των 50} mg, 1 \textgreek{φορά το πρωί και ραμιπρίλη των 5} mg 1 \textgreek{φορά το πρωί.} \\
-System - actual: \textgreek{Δεν υπάρχουν πληροφορίες για ασθενή με όνομα Κώστας Καρά στο παρεχόμενο ιατρικό ιστορικό.}\\
 
 
-\section{Technical implementation of the Baseline system}
-After experimenting with the two LLMs described above, I moved on to a less memory-intensive solution using Gemini Flash via an API call, as it allowed for more sequential queries. This evolved into my baseline system.
+\section{Critical Analysis of Key Prior Studies}
 
-\subsection{Chunking}
-In the baseline system, each patient’s text file was first loaded and annotated with the patient’s name as metadata. To enable efficient retrieval, the documents were then segmented into smaller, overlapping chunks using the ``Recursive Character Text Splitter``. This splitter was chosen as it maintains semantic coherence while respecting character boundaries and hierarchical structures (i.e. first sentences, then paragraphs, and then words) within a document \footnote{"How to Use RecursiveCharacterTextSplitter in LangChain". Gary Svenson. Medium (blog), Last accessed July 6, 2025.  \url{https://medium.com/towards-agi/how-to-use-recursivecharactertextsplitter-in-langchain-23bcb0448fca}}. Each chunk was limited to 800 characters with an overlap of 100 characters, ensuring continuity of context between adjacent segments while avoiding excessive fragmentation. 
+\subsection{Challenges and mitigation strategies}\label{section1.3}
 
-\subsection{Embedding Model}
-The chunks were then converted into numerical representations. The embedding model that was used was the multilingual ``sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`` because Greek language was included in its training data and because of its suitability in semantic search \footnote{HuggingFace, ModelCard for sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2, Accessed July 5, 2025. \url{https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2}}. 
+\subsubsection{Real-world healthcare data is unstructured}
+In many healthcare settings, healthcare information is written fast, carelessly, and in an unstructured manner due to time pressures. Often this information is written with poor handwriting (if written manually), or typed without punctuation, and containing spelling errors. To address this challenge, AI-based solutions have emerged. Technologies such as Optical Character Recognition (OCR), e.g. \textit{Amazon Textract} \footnote{``Amazon Textract``, AWS (website), Accessed July 17, 2024.\url{https://aws.amazon.com/textract/}}, can digitize handwritten medical notes with increased accuracy. These technologies are then combined with natural language processing (NLP) models fine-tuned in the medical domain to correct spelling and punctuation errors, normalize abbreviations, and extract structured information from free-form text. Such systems can transform poorly typed (or written) input into usable, structured digital records, improving data usability.
 
-\subsection{Vectorstore}
-The resulting embeddings of the chunks, enriched with metadata, were later stored in a \textit{Faiss} vector index for similarity-based retrieval. For retrieval, the system was configured with k = 3, meaning that the three most semantically similar chunks were returned for each query. This relatively small value of k was chosen to reduce noise and ensure that only the most relevant context was passed to the LLM, thereby improving answer precision.
+\subsubsection{Hallucinations from LLMs}\label{hallucsLLM}
+The unpredictability and non-deterministic nature of LLMs’ output is a major red flag for their use in medical practice, where even seemingly small mistakes may prove catastrophic, since they can put patient lives in danger. According to \citeauthor{opportunitiesrisks2024} ``these models can occasionally produce factually incorrect answers, make errors in simple arithmetic or logical problems, or generate responses that are seemingly obvious yet erroneous``. Specifically in healthcare, the use of the Automatic Speech Recognition (ASR) system \textit{Whisper} that powers \textit{Nabla} -- an assistant for automated medical documentation used for millions of visits in the US, and by 30,000 clinicans -- has been recently reported to have introduced fabricated information into medical transcriptions, with even higher error rates for multilingual transcription and speech by aphasia patients \footnote{``RWS and BLEND Appoint New CEOs, Microsoft and Amazon Speech AI``, Slator (video), December 6, 2024. Accessed on December 7, 2024. \url{https://www.youtube.com/watch?v=Gvhf1rVZNGo}}.
 
-\subsection{LLM}
-The baseline system was based on Google's LLM ``gemini-2.0-flash`` model, which was integrated through the \textit{LangChain} framework. This model was chosen because of its very good performance and instruction-following capability, support of the Greek language, and generally better results than other Gemini models, even ``gemini-2.5-flash`` \footnote{Google Cloud (blog). Gemini 2.0 Flash. Accessed on July 5, 2025. \url{https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-0-flash}}. The model was configured with a low temperature (set to 0.2) for consistent and deterministic responses, which is especially important in the clinical domain. A customized system prompt written in Greek defined the model's behavior: \textgreek{Είσαι ένας πρόθυμος και φιλικός βοηθός νοσηλευτών σε ελληνική ψυχιατρική κλινική. Πρέπει να απαντάς σε κάθε ερώτηση. Οι ερωτήσεις αφορούν συγκεκριμένα ιατρικά και προσωπικά δεδομένα ή περιλήψεις όλων των δεδομένων ενός ασθενή. Οι ερωτήσεις και τα ονόματα των ασθενών είναι στα ελληνικά. Χρησιμοποίησε τόσο την ερώτηση όσο και το ιστορικό συνομιλίας όταν αποφασίζεις ποιο εργαλείο να καλέσεις ή πώς να απαντήσεις. Αν δεν είσαι σίγουρος για το όνομα του ασθενούς ή αν έχεις δύο ασθενείς με το ίδιο όνομα, ρώτα για ποιον να ψάξεις. Πρέπει να είσαι σίγουρος ότι η απάντηση που δίνεις αφορά τον ασθενή της ερώτησης. Απάντα στα ελληνικά και αποκλειστικά με βάση τα παρεχόμενα δεδομένα. Αν δεν βρίσκεις την απάντηση στα δεδομένα, πες ότι δεν υπάρχει.}. In addition, a structured RAG prompt template was added to inject the necessary context into each query. This template incorporated the conversation history, the retrieved document chunks, and the user’s query, ensuring that the model grounded its responses in the available patient data rather than hallucinating unsupported information.
+To ensure AI safety, a solution is to employ professionals for AI red-teaming efforts, where the vulnerabilities of the system are challenged and exposed, with the aim of improving its weakest spots \cite{opportunitiesrisks2024}. 
 
-\subsection{Memory}
-To support conversational continuity, the system employed ``ConversationBufferWindowMemory`` from \textit{LangChain}. This component maintained a history of the most recent dialogue turns, storing both user inputs and model outputs. The window size was set to 3, as the expected interactions by the nurses are supposed to be brief and straightforward. In this way, the memory preserved the three latest conversations without overwhelming the LLM model with the entire dialogue history. This enabled the system to correctly interpret follow-up questions, resolve references to previous queries, and sustain natural multi-turn interactions.
+Another solution is to use retrieval augmented generation (RAG), which is a method to take advantage of the parametric (embedded) memory and generative capabilities of an already trained LLM, while also greatly reducing its notorious hallucinations. The RAG architecture works by augmenting -- and also ``grounding`` -- the LLM via connecting it to an external corpus of information, i.e. a non-parametric (separate) memory storage. This corpus may be any type of data (PDF, spreadsheet, etc.), even proprietary or confidential. The way RAG works is that the LLM combines the user input (query) together with relevant documents, passages or facts retrieved from the corpus, in order to generate an accurate answer to the query \cite{raglewisetal2021}. In this way, the generated responses are based on factual context, bypassing the need to fine-tune and retrain the whole language model on numerous extra examples of domain-specific knowledge in order to achieve similar informed and current responses.
 
-\subsection{Chain}
-The language model, the retriever, the custom prompt, and the memory component were integrated into a ``ConversationalRetrievalChain``. At each query, the chain retrieved the most relevant document chunks from the vector store, combined them with the current conversation history stored in memory, and passed them into the custom RAG prompt template. The Gemini 2.0 Flash model, then, generated a response conditioned on both the retrieved knowledge and the conversational flow. The chain was further configured to return the source documents used in each response, ensuring transparency and enabling later evaluation of grounding accuracy.
+\subsubsection{Privacy of data and patient confidentiality}
+Any information that can be used to trace an individual’s identity is called ``personally identifiable information`` (PII). The type of such information can be virtually anything, such as one's name, date of birth, passport number, driver’s license number, physical address, email address, photos, etc. Protected health information (PHI) is a subset of PII, but it specifically refers to health information acquired or generated during a health service, for example medical records, lab reports, discharge notes, and hospital bills. 
 
-\section{Technical implementation of System 1}
+Various problems have arisen concerning medical data use for LLM training or deployment. For instance, the kind of patient data that will be uploaded and made available to an external LLM server to train an AI model, or the fact that many of the health data that might be used to adapt LLMs to medical contexts may fall under formal privacy protections (e.g. the Health Insurance Portability and Accountability Act, or HIPAA). Another open question is what part of that training data would probably leak into the model's responses \cite{opportunitiesrisks2024}. Apart from the ethical and social aspect of disclosing confidential data about patients' mental and physical health (i.e. the individual may feel emotionally distressed and embarrassed, or they may face discrimination or harassment after their private records have been exposed publicly), security violations of private and sensitive patient records can be detrimental for both individuals and organizations from an economic and legal perspective, too. At the individual level, the damage may include identity theft, loss of money, extortion, or even physical harm. At the organizational level, the damage may include a loss of public trust, deteriorating reputation, criminal or civil penalties, or remediation costs to compensate the compromised individuals \cite{nist}.
 
-In addition to the RAG/LLM setup, I added two helpful functions (tools) and an reasoning agent. I used the \textit{LangChain} open-source framework to connect the four components (data source, LLM, tool calling, and agent) into a chatbot application. All components will be analyzed below.
-
-\subsection{Chunking}
-The data documents were split based on 550-character chunks with a 50-character overlap via the ``RecursiveCharacterTextSplitter``. Since all patient data contain similar information, it was originally difficult for the retriever to pinpoint the chunk for the correct patient, as mentioned above. The above experimentation showed that prefixing each chunk with the patient name and their Social Security Number (AMKA) was ideal for identifying the correct chunk.
-
-Moreover, appending the patient name as metadata created the basis for tool calling at a later stage, which further ensured accurate retrievals.
-
-\subsection{Embedding Model}
-The chunks were then converted into numerical representations. The embedding model that was used was the multilingual ``sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`` as described above. Also, this model was preferred over others in general due to its better performance in semantic similarity scoring compared to others, even Greek Bert models \footnote{HuggingFace, Model Card for nlpaueb/bert-base-greek-uncased-v1 \url{https://huggingface.co/nlpaueb/bert-base-greek-uncased-v1} and Model Card for https://huggingface.co/nlpaueb/legal-bert-base-uncased \url{nlpaueb/legal-bert-base-uncased}, Accessed July 5, 2025.}.
-
-\subsection{Vectorstore}
-After gathering the embeddings of all the split chunks, these were put into the vector database \textit{Chroma}. \textit{Chroma} was ultimately selected over \textit{Faiss} because of its native support of metadata. This means that the former can filter by a piece of metadata -- in this project, the patient's name -- during its retrieval, whereas the latter cannot.
-
-\subsection{LLM}
-The LLM used was again ``gemini-2.0-flash`` for the reasons described in the Baseline system above, as well as because of its suitability for function (tool) calling, and its use with agents. Especially important was the model's ample context window of 1 million tokens, since the length of patient notes together with the memory (chat history) can easily surpass an LLM’s context window. The model was configured with a very low temperature (set to 0.2) for consistent and deterministic responses, which is especially important in the clinical domain. I kept the same customized system prompt as described in the Baseline system above to define the model's behavior as a friendly assistant for Greek-speaking psychiatric nurses. The prompt ensured the responses are always in Greek, are patient-specific, and grounded strictly in the provided data as well as the chat history. Also, the prompt encouraged tool use and enforced responsible handling of ambiguous queries, such as those involving duplicate patient names.
-
-\subsection{Memory}
-To maintain conversational continuity and  help the assistant disambiguate patient references across multiple queries, a memory component was added via ``LangChain's ConversationBufferMemory``. This component preserves the dialogue history throughout the interaction, allowing the agent to reference earlier parts of the conversation when formulating responses. This functionality is particularly important in a clinical environment where users often ask follow-up questions based on earlier responses.
-
-\subsection{Tools} \label{tools}
-To enhance the agent's reasoning capabilities and modularity, the system incorporated a tool-based architecture using LangChain’s ``@tool`` decorator. Tools are basically callable functions that the language model can invoke when specific types of reasoning or external data access is required. Two custom tools were implemented: one to extract the patient name, and the other to get the relevant patient documents. 
-The first tool is responsible for identifying the patient’s full name in Greek, either directly from the current user query or from the conversation history. This disambiguation step is critical for keeping document retrieval patient-specific, especially when users omit or reference names indirectly (e.g. by using personal pronouns). 
-The second tool, performs a filtered retrieval from the \textit{Chroma} vector store using the patient's name as a metadata piece, returning only relevant chunks. This filtered retrieval ensures that only pertinent information is passed to the LLM.
-
-\subsection{Agent}
-Recently, AI agents (or ``agentic AI``) have become more and more popular, with a focus on logistics support, and assistive roles in long-term care \footnote{``AI Use-Case Compass — Healthcare: Intelligent Care, Delivered``, Adnan Masood, PhD., Medium (blog), Accessed June 28, 2025. \url{https://medium.com/@adnanmasood/ai-use-case-compass-healthcare-intelligent-care-delivered-ab27d8f8f610}}. Agents can achieve specific goals autonomously, by interpreting information, making decisions, and taking actions without needing step-by-step human instruction, but by leveraging certain tools at its disposal (see Section \ref{tools}). They are designed to handle more complex problems that require planning, adaptation, and coordination across different types of data and tasks \footnote{``The age of AI agents - Reasoning, autonomy, workflows, and LEGO blocks?``, Dr Josh Au Yeung, LinkedIn (blog), Accessed July 10, 2025. \url{https://www.linkedin.com/pulse/age-ai-agents-reasoning-autonomy-workflows-lego-blocks-au-yeung-qm3ke/}}.
-
-The dialog management was managed by a \textit{LangChain} agent, which served as the orchestrator among the language model, the tools, and the memory. The agent was initialized using an architecture that was designed to enable the model to reason step-by-step about which tool to invoke based on the conversation. This agent type (``AgentType.STRUCTURED\_CHAT\_ZERO\_SHOT\_REACT\_DESCRIPTION``) is particularly effective in scenarios that require interpretable decision-making, as it encourages the model to ``think aloud`` and choose actions in a structured manner. The agent was configured with access to custom tools and long-term memory, allowing it to retrieve patient-specific data and handle follow-up questions spanning multiple conversational turns. The extra parameter ``handle\_parsing\_errors=True`` ensured well formatted LLM outputs, while ``return\_intermediate\_steps=True`` allowed access to the retrieved documents and also helped in debugging of the reasoning process.
-
-\section{Technical implementation of System 2}
-To improve the naturalness of the system’s answers I did some LLM hyperparameter tuning and edited the prompt slightly adding the sentence \textgreek{"Να απαντάς με φυσικό και καθησυχαστικό τόνο, σαν να μιλάς σε συνάδελφο."}. To improve the scores from RAGAS evaluation, I made some changes as well. System 2 is identical to System 1 except for the LLM tuning, and the text to speech component.
-
-Regarding hyperparamter tuning, I tried to make the dialog more natural, but still safe and accurate. Temperature was raised to 0.6 from 0.2 in System 1 for reducing the ``robotic`` feel, and for adding a bit of variability and ``naturalness`` in the responses, but still avoiding hallucinations. Then, top\_p was set to 0.9 in comparison to the default 1 value of System 1 for a little more coherent text and less diverse (fewer rare words) wording \footnote{`How to generate text: using different decoding methods for language generation with Transformers`. Edited July 2023. Accessed on September 14 2025. \url{https://huggingface.co/blog/how-to-generate}}. Moreover, I added the following instruction to the prompt: ``\textgreek{Να απαντάς με φυσικό και καθησυχαστικό τόνο, σαν να μιλάς σε συνάδελφο.}`` to enhance text naturalness.
-
-Regarding the speech component, I decided ton Coqui's TTS, as the best choice among the rest few free-of-charge TTS systems for Greek (e.g. Meta's MMS-TTS Greek model \footnote{facebook/mms-tts-ell. \url{"facebook/mms-tts-ell"}}). The Greek model `tts\_models/el/cv/vits` was selected, in combination with a dates normalization and miligram function for a more natural Greek pronunciation.
-
-\section{Evaluation}
-Evaluation is essential to verify the benefits and effectiveness of this question-answering assistant. Evaluating LLMs presents certain challenges due to their generative nature and lack of precise ground truth data. Traditional evaluation metrics used for discriminative models are often insufficient for assessing the quality, coherence, diversity, and usefulness of LLM-generated text. Below are the traditional evaluation metrics: WER (how many insertions, deletions, and substitutions required to transform the candidate into the reference string), Exact Match (measures accuracy), BLEU (how many n-grams in the generated text appear in the reference text), ROUGE (measures recall). Other metrics relevant to LLMs include precision (correctness), recall (completeness, i.e. reliability) of patient progress notes, and inference time (latency). However, these cannot evaluate semantics and context, as they are only focusing on word counts. Evaluating RAG systems is not straightforward either. As explained by \citeauthor{ragas2025} (2025), the RAGAs framework inventors, ``While the usefulness of retrieval-augmented strategies is clear, their implementation requires a significant amount of tuning, as the overall performance will be affected by the retrieval model, the considered corpus, the LM, or the prompt formulation, among others.`` It becomes obvious that all the above factors need to be measured and evaluated.
-
-\subsubsection{Quantitative Analysis}
-The RAGAs (Retrieval-Augmented Generation Assessment) framework is very popular for evaluating RAG applications. RAGAs uses LLMs under the hood to conduct the evaluation under various metrics. 
-The metrics that were used in this project were the following \footnote{rag-langchain-ragas (git repository), Accessed July 8, 2025.\url{https://github.com/benitomartin/rag-langchain-ragas}}:
-
+To protect sensitive health information, the U.S. Department of Health and Human Services has enacted the Health Insurance Portability and Accountability Act Privacy Rule, which is a document that sets standards for the proper use and disclosure of PHI, how to store such information securely, and what to do if there is a breach. The Rule defines 18 items that mark health information as PHI \footnote{``HIPAA Administrative Simplification Regulation Text``, March 26, 2013, p. 97, Accessed January 28, 2024. \url{https://www.hhs.gov/sites/default/files/hipaa-simplification-201303.pdf}}:
 \begin{enumerate}
-\item Faithfulness (context Vs answer) \footnote{Ragas (website). Accessed July 1, 2025. \url{https://docs.ragas.io/en/latest/howtos/integrations/langchain/##evaluate}}: It measures generated hallucinations by assessing whether all claims in the generated answer can be inferred directly from the provided context. It is calculated from the answer and the retrieved context. The answer is scaled to a (0,1) range, and the higher score is the better. It answers to the question: ``Is the generated answer grounded to the context? ``
-\item Answer Relevancy (question Vs answer): It evaluates answer quality by assessing how relevant the generated answer is to the question. A lower score is assigned to answers that are incomplete or contain redundant information. This metric is computed using the question and the answer, with values ranging between 0 and 1, where higher scores indicate better relevancy. It answers to the question: ``Is the generated answer appropriate to the question? ``
-\item Answer Correctness (ground truth Vs answer): Assesses the accuracy of the generated answer when compared to the ground truth. This evaluation relies on the ground truth and the answer, with scores ranging from 0 to 1. A higher score indicates a closer alignment between the generated answer and the ground truth, signifying better correctness. It answers to the question: ``How close is the generated answer to the ground truth? ``
-\item Context Precision (retrieved context Vs question): It checks if the retriever gave relevant, i.e. non-redundant, content by assessing whether all golden chunks that are present in the retrieved contexts are ranked high, as they should ideally. This metric is computed using the question and the contexts, with values ranging between 0 and 1, with higher scores indicating better precision. It answers to the question: ``How useful the retrieved context is to answering the question? ``
-\item Context Recall (retrieved context Vs ground truth): It checks if all golden facts were present by measuring the extent to which the retrieved context aligns with the golden answer. It is computed based on the ground truth and the retrieved context, and the values range between 0 and 1, with higher values indicating better performance. It answers to the question: ``Did the retriever retrieve all the golden chunks? ``
+    \item Names
+    \item Physical addresses (street address, city, county, zip code)
+    \item Dates (including birth date, admission date, discharge date, and date of death)
+    \item Phone numbers
+    \item Fax numbers
+    \item Email addresses
+    \item Social Security numbers
+    \item Medical record numbers
+    \item Health plan beneficiary numbers
+    \item Account numbers
+    \item Certificate/license numbers
+    \item Vehicle identification numbers (including license plate numbers)
+    \item Device identifiers and serial numbers
+    \item Web Universal Resource Locators (URLs)
+    \item Internet Protocol (IP) address numbers
+    \item Biometric identifiers (including fingerprints and voice)
+    \item Full face photographic images and any comparable images
+    \item Any other unique identifying number, characteristic, or code
 \end{enumerate}
 
-\section{Discussion} 
-This study utilized a variety of simulated patients for the specialty of psychiatry. For its evaluation both quantitative and qualitative methods were used. First, the evaluation results from the RAGAs frameowrk will be presented, and second the results from the questionnaire.
+In order to align with ethical standards and societal norms, the solution is to follow specific guidelines and principles from the emerging field of Responsible AI for an ethical use of AI systems, including significant human oversight and impact assessments \cite{opportunitiesrisks2024}. Regarding training data specifically, a more practical approach is to de-identify, i.e. anonymize, PHI in order to prevent any potential linking of that data with any particular person. De-identification can be done via performing named entity recognition (NER) on clinical notes, in order to locate and then obscure the actual PHI information, e.g. names, dates, etc., by replacing it with a generic label, e.g. <NAME>, <DATE>, etc. An alternative for obscuring real PHI data is by replacing it with pseudo-random data, e.g. pseudonyms.
 
-\subsection{Results from RAGAs framework for Baseline}
-\subsection*{Summary Table - Average Metrics}
-The following table provides a high-level summary of how well the Baseline system performs in general.
+\subsubsection{(Mis)trust in AI and `alert fatigue`}\label{Mistrust}
+There is still a substantial number of people who are more or less skeptical about the use of AI in healthcare. For example, there were relatively few applications of AI directly used in widespread clinical care as of the beginning of 2023, with some rare exceptions, even in medical imaging \cite{chaGPTpassesUSMLE2023}. ``One of the major challenges for technology in healthcare is that it needs to work well enough to drive widespread end-user adoption, demonstrate measurable time savings, and create a clear financial return on investment.`` \footnote{``Ambience Healthcare Raises \$70M to Scale the Most Comprehensive AI Operating System for Healthcare Organizations``, PR Newswire (press release), Accessed January 29, 2025. \url{https://www.prnewswire.com/news-releases/ambience-healthcare-raises-70m-to-scale-the-most-comprehensive-ai-operating-system-for-healthcare-organizations-302054056.html}}. Therefore, facing resistance from some nurse staff to full-fledged AI adoption in their work pipeline is to be expected. However, even tech-savvy nurses who otherwise trust AI in general, may resist the adoption of a conversational chatbot in their work. The reason may be attributed to the fact that healthcare employees are overworked already (see Section \ref{Clinicians with burnout}), and incorporating new ideas into existing workflows can be daunting and stress-inducing. A solution could be to make the use of the AI tool optional, and not mandatory, allowing nurses themselves to have agency on its use. With time, confidence in its use will grow, as with any other new tool. 
 
-\begin{table}[ht]
+\subsection{Conversational AI applications in healthcare}
+Conversational assistants based on generative AI are being used in healthcare as goal-oriented dialogue systems with a wide range of functionalities. As will be explained below, their aim is to assist professionals in the delivery of care by supporting them in their diagnoses, treatment, administrative and communication duties, by freeing up time and energy. Patients benefit, too, as the access to expert care becomes immediate, consistent, as well as location- and time-independent. There are at least eight areas where such assistants have proven useful through research or launched products:
+
+\begin{table}
+\begin{center}
+\caption{Functionalities of voice assistants in healthcare}
 \centering
-\begin{tabular}{l c}
-\toprule
-\textbf{Evaluation Metric} & \textbf{Average Score} \\
-\midrule
-Faithfulness          & 0.802 \\
-Answer Relevancy      & 0.347 \\
-Answer Correctness    & 0.316 \\
-Context Precision     & 0.548 \\
-Context Recall        & 0.399 \\
-\bottomrule
-\end{tabular}
-\caption{Baseline - Average scores for RAGAs metrics}
-\label{tab:ragas_avg_metrics_baseline}
-\end{table}
+\label{table:bad_table}
+\begin{tabular}{ | m{6cm} | m{8cm} | }
+\hline 
 
-\subsection*{Summary Plot}
-The following is a bar plot that compares the average score for each metric across the 25 queries.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=1\textwidth]{Chapter2/ragas_avg_plot-baseline.pdf}
-  \caption{Average scores for RAGAs metrics across 25 queries}
-  \label{fig:ragas_avg_metrics} 
-\end{figure}
-
-The metric of \textit{faithfulness} showed a high average score (0.802), indicating that the model’s responses were very close to the retrieved content, without hallucinations of extra facts.
-
-The metric of \textit{answer relevancy} is quite low (0.35), which indicates that many answers are not directly aligned with the user query. The reason may be that the retriever returned chunks that are related but not very specific, hence the generated answers were incomplete or contain redundant information.
-
-\textit{Answer correctness} has the lowest score (0.32), meaning that the actual information in the responses does not match the ground truth. This indicates that either the context coming from the retriever is not the right one or that the LLM does not choose the right facts from the retrieved chunks to generate its answer.
-
-\textit{Context precision} is almost random at 0.55, indicating that only about half of the retrieved context is really relevant to the query. This means that the other half is redundant information, which can explain the low scores for \textit{answer relevancy} and \textit{answer correctness} described above.
-
-Finally, the metric of \textit{context recall} is quite low (0.39), indicating that the retriever frequently fails to capture all of the necessary context. This score, like the score for \textit{context precision},  can also explain low \textit{answer relevancy} and \textit{answer correctness}.
-
-The overall picture is that the baseline system is faithful (0.80), i.e. it does not hallucinate much, which shows that the system prompt and LLM choice manage to constrain the model to retrieved context. The problem, though, lies in the retrieval quality, because the retriever mostly misses relevant passages (context recall = 0.39) and adds irrelevant information (context precision = 0.55). This is why for System 1 I focused in improving the chunking process, changed the vector database from \textit{Faiss} to \textit{Chroma}, and added the tools and the agent.
-
-
-\subsection{Results from RAGAs framework for System 1}
-\subsection*{Summary Table - Average Metrics}
-The following table provides a high-level summary of how well System 1 performs in general.
-
-\begin{table}[ht]
-\centering
-\begin{tabular}{l c}
-\toprule
-\textbf{Evaluation Metric} & \textbf{Average Score} \\
-\midrule
-Faithfulness          & 0.739 \\
-Answer Relevancy      & 0.520 \\
-Answer Correctness    & 0.634 \\
-Context Precision     & 0.740 \\
-Context Recall        & 0.781 \\
-\bottomrule
-\end{tabular}
-\caption{System 1 - Average scores for RAGAs metrics}
-\label{tab:ragas_avg_metrics_system1}
-\end{table}
-
-\subsection*{Summary Plot}
-The following is a bar plot that compares the average score for each metric across the 25 queries.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=1\textwidth]{Chapter2/ragas_avg_plot-1.pdf}
-  \caption{System 1: Average scores for RAGAs metrics across 25 queries}
-  \label{fig:sys1_ragas_avg_metrics} 
-\end{figure}
-
-The metric of \textit{faithfulness} showed a relatively high average score (0.739), indicating that the model’s responses were generally consistent with the retrieved content.
-
-\textit{Context recall} (0.781) and \textit{context precision} (0.740) were aslo both relatively high, showing that the retrieval component of the assistant effectively selected relevant passages, and that the LLM component has used them efficiently when generating responses. 
-
-\textit{Answer correctness} scored 0.634, showing that there still is room for improvement for the LLM model to produce accurate answers consistently. This low score may be attributed to the fact that the golden answers were in some cases more or less detailed than the generated response, even though both were correct. Notably, \textit{answer relevancy} was the lowest among the metrics (0.520), which implies that while answers were often correct and grounded to the patient data, they did not always fully address the user’s intent or align closely with the query focus.
-
-Overall, the system shows a solid performance in faithfulness and context handling, but would benefit from further enhancements in answer generation.
-
-\subsection*{Individual Plot}
-The assistant struggled with the disambiguation of patients with the same name. Specifically, for query nr. 17 (``\textgreek{Δε θυμάμαι το ΑΜΚΑ της. Πες μου για την πιο μικρή.}``) the generated response was ``\textgreek{Δυστυχώς, δεν έχω πληροφορίες για την ηλικία των ασθενών για να προσδιορίσω ποια είναι η πιο μικρή. Παρακαλώ, διευκρινίστε για ποια Δήμητρα Μακρή ενδιαφέρεστε αναφέροντας το ΑΜΚΑ της: 44350232398 ή 41661927592.}``, whereas the golden response is actually the date of the youngest Dimitra Makri's latest hospitalization and her current treatment. The assistant could have retrieved the ages of both patients from the patient data and could have continued the conversation, but failed to do so. This is why almost all the RAGAs metrics for this query equal zero.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=1\textwidth]{Chapter2/metrics_plot_17.pdf}
-    \caption{Plot for query nr. 17}
-    \label{fig:sys1_ragas_17_metrics}
-\end{figure}
-
-
-\subsection{Results from RAGAs framework for System 2}
-\subsection*{Summary Table - Average Metrics}
-The following table provides a high-level summary of how well System 1 performs in general.
-
-\begin{table}[ht]
-\centering
-\begin{tabular}{l c}
-\toprule
-\textbf{Evaluation Metric} & \textbf{Average Score} \\
-\midrule
-Faithfulness          & 0.768 \\
-Answer Relevancy      & 0.690 \\
-Answer Correctness    & 0.700 \\
-Context Precision     & 0.840 \\
-Context Recall        & 0.790 \\
-\bottomrule
-\end{tabular}
-\caption{System 1 - Average scores for RAGAs metrics}
-\label{tab:ragas_avg_metrics_system1}
-\end{table}
-
-
-\subsection*{Summary Plot}
-The following is a bar plot that compares the average score for each metric across the 25 queries.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=1\textwidth]{Chapter2/SYS2ragas_avg_plot-2.pdf}
-  \caption{System 2: Average scores for RAGAs metrics across 25 queries}
-  \label{fig:sys2_ragas_avg_metrics} 
-\end{figure}
-
-\subsection{Explanation of low scores}
-After reviewing the results carefully, it was strikingly apparent that certain test cases had erratic metrics. 
-
-For example, the metric of \textit{faithfulness} was mostly near 1, but in some cases extremely low, or 0 (zero) or even non existent (NaN), because of retrieval gaps in the agent's workflow. The reason is that the agent avoided retrieving the same context twice for follow-up questions of a previous patient name. This resulted in the generated answer being considered as ``unfaithful``.
-
-Linked to retrieval's success or fail are the metrics of \textit{context precision and recall}, whose scores are very high (1) or very low (Nan/0). This extreme scoring exaggerates the gap between partial and complete retrieval failures.
-
-\textit{Answer relevancy} sometimes has NaN value because the LLM judge used by RAGAS judged the answer as failed or as a default (fallback) answer, even though for this case it was not. For example, all answers that correctly state that no information has been found in the retrieved documents or ask for patient disambiguation, got a NaN or a zero value.
-
-About \textit{answer correctness}, this metric has low values because even though the ground truth is precise (exact date, diagnosis, etc.), the response is somewhat vague, incomplete, or a little different (e.g. missing a date or a diagnosis). For example, the generated answer \textgreek{Δεν βρέθηκαν δεδομένα για την Κωνσταντίνα Λυμπερίου} judged against the reference \textgreek{Δεν υπάρχει αυτή η ασθενής} gets a score of only 0.456 in System 2, because the wording is different. Also, even though all rows have their golden answers, RAGAS sometimes doesn’t assign scores (NaN) when the system output is too indirect for a meaningful comparison.
-
-RAGAS's metrics are, of course, designed to be strict and highlight weaknesses in retrieval and generation, like in the systems described above. The relatively low and inconsistent RAGAS scores are partly explained by retrieval gaps in the two systems, but also partly by the strictness of the metrics themselves. The strictness leads to low and erratic scores, which do not always reflect the practical usefulness of the system in a clinical workplace. The NaN and zero values show that RAGAS sometimes totally refuses to evaluate an answer, rather than give a score for the correct part of it. This shows that RAGAS penalizes clinically useful yet incomplete answers much more harshly than a human evaluator would. It can be argued that RAGAS systematically underestimates the systems' performance in a clinical setting, where partial, or approximate answers can still be informative and useful. In short, while the low metrics highlight areas for technical improvement, they should be interpreted with caution and supplemented with human-centered evaluation to better capture the true effectiveness of the voicebot in clinical practice.
-
-\subsection{Results from Questionnaire}
-\subsubsection{Qualitative Analysis}
-User feedback is essential to understand how real-world users will react to the assistant, as well as identify shortcomings and areas of improvement. Unfortunately, getting direct user feedback from psychiatric nurses was not possible for this project.
-
-Twenty five question-answer pairs were compiled in the form of a questionnaire, and were sent to ten human evaluators. The evaluators were instructed to rank the answers in regards to naturalness and preference by giving a score from 1 (lower/worse) to 5 (higher/better). Two out of ten evaluators were medical professionals (one GP, one gynecologist). Questionnaire results can be found in Appendix~\ref{sec:qresults} and their analysis can be seen in Table~\ref{tab:preferences}.
-
-\subsubsection{Naturalness}
-Both System A and System B received very similar average ratings:
-
-A: $2.34  (\sigma = 0.96)$
-
-B: $2.34  (\sigma = 1.09)$
-
-The mode was 2 for both systems, meaning that the score “2” was the most commonly given naturalness score indicating that overall perceived naturalness was fairly low to moderate.
-
- Scores spanned the full 1–5 range. Distribution is very wide, with some strong positive ratings (up to 5), but most clustered around the lower end.
-
-There is no clear winner in naturalness, as average scores are nearly the same, implying that participants didn’t strongly perceive one system as more natural in isolation.
-
-\subsubsection{Preference}
-When asked to choose between the two systems, System A received the majority of the preference vote. Specifically:
-
-64\% preferred A with 160 votes, with human\_9 preferring A 80\% of the times
-
-36\% preferred B with 90 votes, with human\_4 preferring B 52\% of the times 
-
-\begin{table}[H]
-\centering
-\begin{tabular}{@{}llrr@{}}
-\toprule
-\textbf{humanEvaluator} & \textbf{Προτίμηση} & \textbf{Count} & \textbf{Percentage (\%)} \\
 \hline
-human\_1  & A & 16 & 64.0 \\
-          & B &  9 & 36.0 \\
-human\_10 & A & 13 & 52.0 \\
-          & B & 12 & 48.0 \\
-human\_2  & A & 14 & 56.0 \\
-          & B & 11 & 44.0 \\
-human\_3  & A & 18 & 72.0 \\
-          & B &  7 & 28.0 \\
-human\_4  & A & 12 & 48.0 \\
-          & B & 13 & 52.0 \\
-human\_5  & A & 17 & 68.0 \\
-          & B &  8 & 32.0 \\
-human\_6  & A & 17 & 68.0 \\
-          & B &  8 & 32.0 \\
-human\_7  & A & 18 & 72.0 \\
-          & B &  7 & 28.0 \\
-human\_8  & A & 15 & 60.0 \\
-          & B & 10 & 40.0 \\
-human\_9  & A & 20 & 80.0 \\
-          & B &  5 & 20.0 \\
+\textbf{Functionalities of AI Assistants in Healthcare} & \textbf{Example Sources}  \\ \hline
 \hline
-\textbf{Total} & A & 160 & 64.0 \\
-               & B &  60 & 36.0 \\
-\bottomrule
+Informational chatbots: Informing patients about their condition and developing medical literacy & Study on the performance of ChatGPT on US Medical Licensing Examination \cite{chaGPTpassesUSMLE2023} \\ 
+\hline
+Health coach chatbots: Promoting public health and behavior change & Physical activity intervention \cite{FitTrack2003, walkingincentives2020} | education on responsible alcohol use \cite{alcoholism2016} | asthma education \cite{max2021} | cancer education \cite{vik2020} | sexual health \cite{shihbot2017} | sleep hygiene \cite{sleepcoach2021} | eating disorders \cite{Tessa2022} \\
+\hline 
+Diagnostic chatbots: Checking personalized symptoms and offering a diagnosis & Google's \textit{AMIE} \cite{AMIE2024} | excessive daytime sleepiness \cite{eds2014} | depression and occupational burnout \cite{mdddiagnosis2017, vickybot2023} | Post-Traumatic Stress Disorder (PTSD) and mental distress \cite{SimCoach2016, mentalhealthbarriers2017} | alcoholism \cite{alcoholism2016} | diagnostic assistant for cancer referrals \cite{decisioncancer2006} \\
+\hline 
+Medical Research Assistant chatbots: Empowering medical students & Study on the performance of ChatGPT on US Medical Licensing Examination \cite{chaGPTpassesUSMLE2023}  \\
+\hline 
+Treatment assistant chatbots: Monitoring post-treatment plans and supporting self-management for chronic diseases & Diabetes \cite{GoogleHomediabetes2018, mydiabetescoach2020} | cancer \cite{vik2020} | asthma \cite{asthma2014, max2021} | chronic pain \cite{selma2020} | chronic stress \cite{hudlicka2013} \\
+\hline 
+Mental health chatbots: Managing mental health conditions and providing behavioral counselling & Depression \cite{woebot2017, depressioncoach2023, wysa2023} | panic disorder \cite{panicbot2020} | Attention Deficit Disorder (ADD) \cite{adhd2021} | schizophrenia \cite{schizophrenia2010} | Post-Traumatic Stress Disorder (PTSD) \cite{SimCoach2016, mentalhealthbarriers2017} | Substance Use Disorder (SUD) \cite{alcoholism2016, smokingcessation2017, smokingcessation2019, smokecessation2018, noblesetal2020addiction} \\
+\hline 
+Patient engagement chatbots: Providing communication therapy & Parkinson's and dementia \cite{harlie2016, dementiatherapy2020, dementiatherapy2019} | Autism Spectrum Disorders (ASD) \cite{ecaforautism2017} \\ 
+\hline 
+Administrative task chatbots: Automating communication and documentation tasks for medical staff & Study on the use of AI assistants for patient questions \cite{ayersetall2023redditempathy} | virtual nurse for discharge education \cite{bickmoreetalrealtionalfordepression2010} | support for non-professional caregivers on diet management for patients with dementia \cite{dietforAD2020} | support for clinicians on local guidelines and recommendations for treatment options \cite{korom2024} | documenting patients' progress (e.g. \textit{Suki, Nursebrain, Rover, Know My Patient, ChatEHR})\\
+\hline
+
 \end{tabular}
-\caption{Preferences (Προτίμηση) for each human evaluator between System A and System B, reported as counts and percentages.}
-\label{tab:preferences}
+\end{center}
 \end{table}
- 
-This suggests that although the naturalness ratings were almost identical, participants clearly preferred System A when making an explicit choice.
 
-Preference noticeably stands out compared to the ratings. The preference question ``forced`` a choice, and revealed a bias toward System A, even if its naturalness rating was not higher than System B.
+%%%%%%%%%%%%%%%%%%%%%%%------------------------------------
 
-\clearpage
+\subsubsection{Informing patients about their condition and developing medical literacy}\label{SafetyRisks}
+Comprehension of their condition has been found to empower patients, boost their satisfaction in regards to the medical care they are given, and cultivate a collaborative and trusting patient-clinician relationship \cite{simplifiedmednotes2020, patientsreaddocnotes2012}. Communicating the patient's health condition to them and to their family in a clear, understandable, non-jargon manner can help enhance the delivery of individualized and compassionate medical care \cite{chaGPTpassesUSMLE2023}. Clear communication has also been reported to improve compliance with medication regimens and treatment therapies, lessen patient anxiety, and improve clinical outcomes and quality of life, while decreasing treatment times and hospitalization costs \cite{patienteducation2006, educatepatientsandfam2014}. However, due to administrative and other time-consuming demands, physicians lack the time, the concentration or the willpower to engage in a genuine, detailed, and terminology-free conversation during a face-to-face patient visit \cite{educatepatientsandfam2014}. So, due to the clinical setting's pressures, physicians tend to intentionally refrain from explaining medical tests, results, or the pros and cons of a therapy, and even patients themselves hesitate to ask for information to be repeated \cite{BickmoreGiorgino2006}. There have been attempts to bridge this gap, for example via the well-known and successful \textit{OpenNotes} initiative, through which clinicians share medical notes with their patients \footnote{A 2020 study enhanced this process with external AI software that converted medical notes into plain language of 8th grade reading level \cite{simplifiedmednotes2020}. With this tool, clinicians did not need to change their note-taking style -- filled with abbreviations and medical jargon -- nor spend extra time to manually simplify or clarify their notes. Ultimately, patients judged the simplified notes to be desirable, useful, and empowering.}.
+
+Nowadays patients have the means to know more about their condition, without being dependent on their physician's availability. It is now possible to simply input their doctors' notes or medical tests into any commercial, general-purpose AI chatbot and begin a conversation by ``Explain this to me in plain English``, or any other language \cite{llmsmodernmedicine2023}. The assistant can provide medical summarization, explanation of terminology, procedures, and medications, as well as general (i.e. not personalized) information on medical conditions, symptoms, causes, and treatments, based on publicly available reputable sources, such as MayoClinic or WebMD. For instance, some popular voice assistants are Google Assistant, Amazon Alexa, Apple Siri, and Samsung Bixby, and a common text-based assistant is ChatGPT. Such conversational AI systems, having absorbed a great amount of medical knowledge during their training, can perform tasks such as clinical reasoning, and answering medical questions quite accurately, even without fine-tuning \cite{chaGPTpassesUSMLE2023, gpt4israeli2024}. Since the early 2022 it has been established that language-based AI systems (e.g. ChatGPT running on GPT-3) can perform at such a level that they reach or exceed the 60\% passing grade for the US Medical Licensing Examination (i.e. the standardized exam used to license doctors), even with no specialized training input or prompting \cite{chaGPTpassesUSMLE2023}. Later in the same year it was found that GPT-4's performance had matured and was comparable to the median physician in all core medical disciplines of the Israeli board medical examinations (i.e. internal medicine, general surgery, pediatrics, psychiatry, and obstetrics and gynecology), with the exception of psychiatry, where it ranked \textit{higher} than the majority of physicians \cite{gpt4israeli2024}. GPT-4's performance reached or exceeded the passing rate levels in all five core medical domains, a fact which gives confidence in using the technology for clinical matters.
+
+However, recent studies show that commercial, general-purpose, voice-based agents are neither always complete, safe nor communicatively suitable in their advice. In 2018, 30 health and lifestyle prompts were posed to \textit{Siri}, \textit{Google Assistant}, \textit{Alexa}, \textit{Bixby}, and \textit{Cortana}, which collectively reached only 41.0\% of appropriate responses to safety-critical prompts that needed a referral to a professional (e.g. depression,, heart attack), and 39\% to non-safety critical ones (i.e. physical health symptoms and lifestyle questions) \cite{healthprompts2020}. In this study, there were cases where the agents provided differing responses to the same prompts, or cases where they exhibited no sensitivity or empathy in their responses. Moreover, \citeauthor{mouth2019} have examined the speech recognition and comprehension performance of the top 50 US -- most of them complex -- medication names by popular conversational agents \textit{Siri}, \textit{Google Assistant}, and \textit{Alexa}, also from users with foreign accents of English. Comprehension accuracy for \textit{Google Assistant} was 91.8\%, for \textit{Siri} 58.5\%, and for \textit{Alexa} just 54.6\%, and notably the last 2 agents' performance deteriorated by around 10\% with a non-native English accent. The study raises concerns about the trustworthiness of responses based on misrecognized medication names. Further worrying results were reported by another 2018 study, which concluded that to rely on the aforementioned speech-based conversational assistants for actionable medical information, such as medication recommendations or emergency tasks, poses a safety risk for patients \cite{safetyrisks2018}. The study advises users to always consult health care professionals before following an AI response on any medical question. It is remarkable that, as mentioned before, the study participants were chosen to be only native users of English, because conversations with non-native users in a earlier pilot resulted in extremely high misrecognition rates.
+
+\subsubsection{Promoting public health and behavior change}\label{PublicHealth}
+Targeted conversational agents can play a decisive part in improving health literacy, health behaviors, and decision-making in the general population. They can be used as tools to encourage adults to increase and maintain their physical activity \cite{FitTrack2003, walkingincentives2020, exerciseandsun2018}, follow sun protection guidelines \cite{exerciseandsun2018}, manage eating disorders \cite{Tessa2022}, and improve contraceptive knowledge and behavior \cite{contraceptionreview2024}, or inform young people about alcohol, sex, and drug use \cite{youngedu2011}, and teach them healthy lifestyle strategies to ultimately build resilient minds \cite{healthylifestyleadolescents2024}. Even though they cannot replace human medical practitioners, they can act as a useful first point of contact, e.g. by doing initial screening and referring to a professional \cite{alcoholism2016} or as a virtual companion for positive behavior change \cite{FitTrack2003}. The upsides include confidentiality \cite{mentalhealthbarriers2017}, a wide range of trusted medical information, and the delivery of care irrespective of the user's location or time availability \cite{FitTrack2003, exerciseandsun2018, alcoholism2016}. Typically, they feature a friendly, mentor-style personality that establishes a close relation with the user \cite{FitTrack2003, alcoholism2016}.
+
+On physical activity interventions for public health, \textit{Ally (Assistant to Lift your Level of activitY)} is a chat-based smartphone app used during a 2017 1.5-month study that promotes walking through delivering personalized planning and self-monitoring prompts \cite{walkingincentives2020}. The app tracks the user's steps and provides daily and weekly overviews of steps, distance, and energy consumed, offers a weekly planning of date, time and location of upcoming walks, and also sends reminders on the planned dates via the chatbot interface initiating a conversation with the user; the reminders include the daily step goal, the difference between the user’s current step count and the goal, an estimation of minutes needed to reach the goal, and an actionable tip on how to increase daily steps. The way \textit{Ally} sets the daily personalized step goal is based on the user’s past activity data and current average step count. Interestingly, the component that was linked with an 8.1\% greater probability of reaching daily step goals was the financial incentive, i.e. earning US\$ 1 per day for reaching the personalized step goal. A similar agent, \textit{FitTrack}, was designed in a 2003 study as an exercise advisor to help users achieve the recommended minimum level of daily physical activity of 10,000 steps or 30 minutes of activity while maintaining a social relationship with them \cite{FitTrack2003}. The embodied \footnote{ ``Embodied conversational agents are animated humanoid computer-based characters that use speech, eye gaze, hand gesture, facial expression, and other nonverbal modalities to emulate the experience of human face-to-face conversation with their user``. \cite{cassell2001embodied}} computer-based agent used synthesized speech and synchronized nonverbal behavior (hand gestures, body posture shifts, gazing at and away from the user, raising and lowering eyebrows, head nods, and walking on and off the screen) to build emotional connection. Users interacted in a constrained manner, i.e. by selecting items from multiple-choice menus of text phrases, which were dynamically updated based on the conversational context. They received standard behavioral interventions, such as self-monitoring (progress charts showing their activity levels over time), and educational content on the topic of walking for exercise. They also held a daily conversation with the agent about their progress and any obstacles they had regarding exercising, and were offered tips to overcome them. A similarly informative, interactive, and engaging agent was developed in 2012 for a 12-month clinical trial to promote and maintain positive behavior change regarding physical activity and ultraviolet light exposure protection, in order to preempt certain types of cancer, e.g. skin cancer \cite{exerciseandsun2018}. While conversing with the participants, the agent provided answers, support, and encouragement, and appeared empathetic and attentive to them thanks to its non-verbal (intonation, human-like mannerisms, etc.), and social dialogue skills (humor, storytelling, small talk, etc.). The agent also emailed periodic reminders to motivate consistent physical exercise and sun protection behaviors, and it eventually achieved an 88\% user satisfaction, and a 77\% behavior change.
+
+A few text-based assistants have also been developed to manage distorted weight and shape concerns of people who suffer from or are at high risk of eating disorders (EDs) \cite{Tessa2022}. One of them, called \textit{Tessa}, was designed in 2022 to target young adult women at risk of developing EDs by delivering ``Body Positive``, an EDs prevention program. The program comprised the following sessions: challenging the thin-body ideal, media literacy, healthy eating, critical comments, exercise, bingeing, and maintenance, all through synchronous free-form conversation.
+
+Chatbots have also been developed to aid family planning by providing fertility as well as contraceptive information, and linkages to products and services to adults of reproductive age \cite{contraceptionreview2024}. However, there are conflicting results on their impact, i.e. on the increase in contraceptive knowledge and on the intention of users to actually use contraception.
+
+As we will see in a subsequent Section (\ref{Chronic disease}), there exist conversational agents that promote understanding of asthma \cite{max2021}, and various types of cancer \cite{vik2020}, which is fundamental to self-management and better disease control.
+
+On alcohol abuse, a 2016 study on young adults examined a text-based chatbot intervention that provided education on responsible alcohol use, and  performed a standardized risk assessment of the user's drinking habits \cite{alcoholism2016}. The chatbot gave relevant feedback, advice, and links to government agencies and private organizations for more information on how to seek medical assistance, if necessary.
+
+On sexual education, many young people refrain from getting medical advice, and therefore a diagnosis and medication, for fear of stigma, discrimination and homophobic attitudes, thus remaining unaware of their status and endangering their partners' health \cite{shihbot2017}. \textit{SHIHbot} was developed to educate on HIV and AIDS disseminating reliable, accurate information. An earlier chatbot was developed in 2011 by \cite{youngedu2011} to give answers to questions about sex, alcohol, and drug use to high school students, who do not often get adequate information from their parents or school. The goal was to help adolescents make informed decisions before experiencing these risky behaviors themselves. The chatbot was used extensively, and was perceived to be faster, more concise, and more anonymous than typical search engines.
+
+Keeping to young people, a recent 2020-2021 intervention of 12 weeks was designed to decrease sedentary behaviors, and increase physical activity, sleep quality, and breakfast frequency for 12-15 y.o. school students with the aim of promoting general well-being and mental resilience \cite{healthylifestyleadolescents2024}. The mobile-based health app, called \textit{\#LIFEGOALS}, had several components, as it comprised an activity and sleep tracker, self-regulation techniques (goal-setting, coping strategies, self-monitoring, etc.), gamification elements (earning virtual coins after completing goals to personalize the app's  avatar), weekly health-related narrative video episodes, and a chatbot for answering questions on lifestyle behaviors, and sending encouraging messages and timely reminders for engaging with the app. The intervention had positive outcomes on learning about and adopting good lifestyle habits; however, the COVID-19 pandemic ``shelter-at-home`` restriction measures moderated some of these.
+
+On sleep, a 2021 research study developed a dialogue system that acts as a sleep coach, aiming to provide relevant information, and make a diagnosis on all potential behavioral causes of sleep issues. Finally, the system recommends possible next steps, directing users to helpful lifestyle changes, such as limiting caffeine and alcohol consumption before bedtime.
+
+
+\subsubsection{Checking personalized symptoms and offering a diagnosis}\label{Diagnosis}
+Diagnosing patients means classifying them into the most fitting class of disease, via examining their clinical status. This is why for a proper diagnosis a clinician needs to gather accurate symptoms. In order to so, face-to-face, meaningful, and lengthy clinical interviews are very important for communicating empathy and eliciting patient trust. However, problems such as the limited visit time, the patient's geographical location, their hesitancy to share intimate information with another human \cite{mdddiagnosis2017, willingtodisclose2014, machinesinmentalhealth2017, mentalhealthbarriers2017}, their fear of stigmatization \cite{mentalhealthbarriers2017}, or diverging from the standardized procedure on the side of the physician can harm a diagnosis, especially of mental health disorders \cite{mdddiagnosis2017}. Therefore, the benefits of safe, ethical, and robust diagnostic conversational agents can be many: access to primary care even to under-served populations \cite{eds2014}, fewer misdiagnoses as well as earlier diagnoses that lead to better treatment of diseases and recovery rates \cite{mdddiagnosis2017}, ``humanized`` anonymity and higher patient satisfaction \cite{mdddiagnosis2017, mentalhealthbarriers2017, vickybot2023}, and cost reduction \cite{mdddiagnosis2017, AMIE2024}. Such agents could act as a decision aid to both patients and physicians: ``AI systems capable of such diagnostic dialogues could increase availability, accessibility, quality and consistency of care by being useful conversational partners to clinicians and patients alike.`` \footnote{Alan Karthikesalingam and Vivek Natarajan, 'AMIE: A research AI system for diagnostic medical reasoning and conversations', Google Research (blog), January 12, 2024. Accessed on September 3, 2024, https://research.google/blog/amie-a-research-ai-system-for-diagnostic-medical-reasoning-and-conversations/}
+
+Google's \textit{AMIE (Articulate Medical Intelligent Explorer)} is an AI agent based on a medical LLM that enables natural, synchronous, and text-based conversation with patients with the aim of offering an accurate diagnosis. AMIE is an impressive tool for the field of clinical reasoning, not only because it can maintain fluent and empathetic conversations, but also because it actively elicits missing information through the conversation.
+Its training is novel: through self-play in the roles of doctor and patient, chain-of-reasoning, and automated feedback mechanisms it has learnt to evaluate medical history and symptoms with high precision. \textit{AMIE} has been trained on datasets of real-world medical reasoning, summaries, and clinical conversations, but also on simulated conversations.
+\textit{AMIE} was tested on text-based dialogue by simulating consultations with trained actors, and was evaluated on areas of consultation quality, such as history-taking completeness, diagnostic accuracy, management plan, and communication skills. The system was rated superior to human primary care physicians in 28 out of 32 areas from the perspective of specialist physicians, and in 24 out of 26 areas from the perspective of patient actors \cite{AMIE2024}. As for its conversational performance, \textit{AMIE} scored higher than human physicians in communication and empathy, and was reported to have longer and more structured replies. This conclusion is consistent with a prior study where chatbot (ChatGPT) responses to health questions posted by patients on a social media forum (cf. Section above) were rated as more preferable, and significantly more empathetic, more detailed, and of higher quality than the responses from actual, verified clinicians \cite{ayersetall2023redditempathy}.
+
+Older initiatives include ``virtual humans`` programmed to follow standardized diagnostic procedures to help the professional clinician with automating the diagnosis procedure. For sleep disorders, and especially the common condition of excessive daytime sleepiness, a voice-based, embodied conversational agent was developed for a 2014 study to screen patients and offer an accurate diagnosis, with the aim of helping physicians. Indeed, very few are trained to adequately differentiate sleeping disorders from fatigue or even psychiatric conditions, resulting in prescribing the wrong treatment \cite{eds2014}. The agent was programmed to conduct a simple interview based on the widely used Epworth Sleepiness Scale, which is a self-administered, standardized questionnaire. After scoring a 80\% for diagnosing alert patients, and 98\% on diagnosing the sleepiest ones, it showed that a virtual physician can assist real ones in diagnosing patients with sleeping disorders; it was also well received by patients.
+
+Similarly, an embodied conversational agent was developed in 2015 to identify specific symptoms and diagnose major depressive disorder in the general population via a face-to-face interview, following a list of criteria of a highly structured, reliable, and validated procedure \cite{mdddiagnosis2017}. Patients rated the agent as trustworthy, commended on its ability to communicate empathy, and also noted the agent helped reduce their feeling of being judged by a human interviewer. The agent efficiently identified patients without depression and also those with severe depression. Another chatbot, named \textit{Vickybot}, was developed in a 2022 study to self-assess, monitor, and deliver psychological treatment modules according to severity (e.g. mindfulness) for depression, anxiety, and work-related burnout, and for detecting suicidal risk. The smartphone-based app was useful in diagnosing and significantly reducing occupational burnout (but not depressive and anxiety symptoms) and in intervening in emergency situations (e.g. suicidal thoughts and behaviors) by immediately providing emergency resources and alerting the research team \cite{vickybot2023}.
+
+On PTSD screening, two interventions have been studied specifically for military service members, who are much more likely to have such disorder compared to civilians. First, \citeauthor{mentalhealthbarriers2017} developed a 2017 virtual human interviewer that establishes an anonymous as well as rapport-building interaction via verbal and non-verbal channels, e.g. utterances of agreements, head nods, etc. The virtual interviewer was highly accepted, and was found to increase accurate disclosure of PTSD and mental distress symptoms, compared to a traditional assessment. Also, \textit{SimCoach}, another virtual human that uses conversational speech and gestures, was designed in 2015 to encourage military service members, especially those with signs or symptoms of PTSD or depression, to seek help to improve their psychological health \cite{SimCoach2016}. The intervention offered voice-based screening for assessing psychological health through a symptom checklist, and conversational dialogue through which users' entries signifying distress would trigger personalized recommendations, e.g. direction to web pages that mention treatment or help-seeking services. However, there was no benefit regarding the participants' intent to seek help, according to the study's evaluation. 
+
+On alcoholism, as described in Section \ref{PublicHealth}, \citeauthor{alcoholism2016} have studied a text-based chatbot intervention that performed a screening of risky drinking habits, and gave relevant advice and links to government agencies and private organizations for more information on how to seek medical assistance, if necessary.
+
+A much earlier mixed-initiative and voice-based conversational agent, \textit{ERA}, was used in a 2006 study for decision support to general practitioners and nurse practitioners to help determine whether a patient should be referred urgently to a cancer specialist for suspected cancer \cite{decisioncancer2006}. The system was designed to be used over the phone to acquire data regarding the patient’s signs and symptoms, while also re-phrasing and elaborating a question, asking clarification questions on the user's responses, and explaining its reasoning; the final decision is made by the user.
+
+In the domain of clinical decision support, treatment selection after a diagnosis is also a field that has been examined for conversational agents. A preliminary study of 2023 examined medication recommendations by ChatGPT-plus (GPT-4 model) regarding prescriptions of anti-depressant drugs for major depression after initial antidepressant nonresponse \cite{Perlis2023}. The model identified optimal treatment for 76\% of test cases, but also advised less optimal or contraindicated approaches (e.g. prescribing medication associated with weight gain to obese patients) for almost half of them. Interestingly, the model provided as rationale for treatment selection a number of simple heuristics commonly applied by human physicians in psychopharmacologic decision-making to better match patients with optimal treatments, such as avoidance of prior non-responsive medications and avoidance of medications with adverse effects based on medical comorbidities. A follow-up study of 2024 examined next-step treatment options for bipolar disorder, where the GPT-4 model was augmented with recent bipolar treatment guidelines within each prompt \cite{perlisetal2024}. The model was asked to identify 5 optimal next-step pharmacotherapies and 5 poor or contraindicated choices, and explain its rationale. For 94.9\% of test cases the optimal treatment was among the top 5 selected by the model, and for 84.4\% the optimal treatment was among the top 3. Only for 12\% of cases did the model select a medication considered by the experts to be a poor choice or contraindicated. Both studies are encouraging observations for future applications of such models as interpretable tools for guiding prescriptions in other clinical domains, too.
+
+An important, recent study from October 2024 by \citeauthor{DiagnosticReasoningLLM2024} indicated that a commercially available chatbot (ChatGPT Plus, GPT-4) could outperform generalist physicians with a range of experience levels in making accurate clinical diagnoses. Interestingly, the chatbot alone was found to perform significantly better in diagnosing the given -- albeit curated and summarized -- patient cases in comparison to the two human groups: physicians with access to the same LLM, and physicians with access to conventional resources. The study demonstrates that, for human physicians, access to generative LLMs will not automatically improve diagnostic reasoning; they will need targeted training to integrate these resources appropriately into their workflow (e.g. in prompt engineering techniques).
+
+\subsubsection{Empowering medical students}
+Using generative AI in healthcare can have a lot of advantages in regards to the clinical, but also the educational setting, especially the domain of medical education. AI-generated answers have been found to bring along significant and novel insights, coupled with a deductive reasoning process \cite{chaGPTpassesUSMLE2023}. What is more, conversational agents like \textit{AMIE} can act as an an educational tool for medical students, and embodied conversational agents can be used as virtual patients for training in detecting certain conditions, e.g. suicidal behavior \cite{ecaforsuicide2017}.
+
+
+\subsubsection{Monitoring post-treatment plans and supporting self-management for chronic diseases}\label{Chronic disease}
+People with chronic diseases, like cancer, hypertension, diabetes, chronic pain, etc., can benefit from AI companions in keeping track of their ongoing medication routines and monitoring their symptoms \cite{CAsinhealthsurvey2019, vik2020, asthma2014, machinesinmentalhealth2017, max2021, GoogleHomediabetes2018}, gaining more knowledge and self-confidence in managing their disease \cite{asthma2014, stress2017}, and even getting personalized feedback from their physicians \cite{max2021}. Specifically, self-management of a condition comprises adherence to a certain medication, activity and diet plan, as well as lifestyle changes to eliminate long-held dysfunctional behaviors and prevent relapses \cite{hudlicka2013, stress2017, selma2020}. Also, using AI agents instead of paper records to check with chronic patients can promote more accurate and complete recordings, while saving time for health care providers \cite{17thIEEESymposium2004, childhoodobesity2017, tensiobot2021} and reducing the health systems burden in general \cite{mydiabetescoach2020}. Scheduling and managing medical appointments is another feature of medical agents that helps towards reducing missed appointments, and prevents patients from forgetting to bring their record sheets to their health centre, as they are carried within the app \cite{tensiobot2021}. From a social perspective, conversational agents can coordinate the communication among health care professionals, family members, and patients, and achieve a holistic support network, while saving patients from visiting hospitals for on-site consultations \cite{childhoodobesity2017, max2021}. Specifically for chronic pain (e.g. back pain due to accident, surgery, physical decline, etc.), where cognitive behavioral therapy (CBT) is the standard therapy, there exist significant barriers to its management, e.g. a lack of adequately qualified providers, an inconvenient distance regarding the location of the few qualified ones, and a lack of time and money for on-site proper consultations \cite{selma2020}; there are similar challenges connected to chronic stress management \cite{hudlicka2013, stress2017}. For all the above, interventions via conversational agents can be a cost-effective, accessible and flexible solution.
+
+A 2019 study demonstrated that conversational agents can improve medication adherence rates of patients with breast cancer as well as their quality of life in general \cite{vik2019}. \textit{Vik}, a text-based chatbot, was designed to empower patients with breast cancer and their relatives, by responding to their queries and concerns with quality-checked medical information, and reminding them of their prescription. The study analyzed the usage data of patients conversing with \textit{Vik} for a year, showing that the more the patients used the chatbot, the more adherent they were. Further, \textit{Vik}'s answers to common questions asked by breast cancer patients about their therapy management were found to be non-inferior and as satisfactory as information by a multidisciplinary committee (medical, radiation, and surgical oncologists) \cite{vik2019b}. Actually, there exist many \textit{Viks}, each designed to provide quality-checked information about the treatment, side-effects, quality of life, reimbursement and patients rights for other cancers and chronic diseases, such as headaches, asthma, etc. \cite{vik2020}. 
+
+Turning to hypertension, however, two clinical trials have shown no improvement in home management compared to a purely blood pressure tracking app \cite{rcthypertension2020} or compared to pen-and-paper \cite{tensiobot2021}. Specifically, the text-based smartphone app \textit{HPCP} (Hypertension Personal Control Program) app was developed to support users on hypertension self-management and coach them on healthy behaviors including medication adherence, blood pressure (BP) measurement, diet, physical activity, sleep, and stress management. For example, to promote home monitoring \textit{HPCP} encouraged, reminded, and tracked blood pressure measurements regularly, and recommended retaking readings or contacting a medical professional in case of outlier or extreme values. Similarly, the text-based \textit{TensioBot} was a chatbot operating on Telegram and designed for assisting patients and physicians with blood pressure home measurements. Its features include alerts for measurements, notifications of data recording errors, video- and text-based advice on good BP measurement practices, reminders and rescheduling of upcoming medical appointments. The trial confirmed that chatbot reminders do not affect treatment adherence (i.e. BP check at a fixed schedule) or number of BP checkings. However, it is important to note that chatbot users scored higher in knowledge and skills regarding home BP measurement technique, and that the bot assisted doctors and nurses by informing them accurately about BP values, thanks to a downloadable report sheet.
+
+Turning to asthma, improved self-management and treatment adherence was reported in two studies targeting adolescent patients \cite{asthma2014, max2021}, where parents greatly appreciated the deeper understanding and empathy towards the previously unknown degree of afflictions their children were facing. Despite being one of the earliest chatbots (2014), the text-based \textit{mASMAA} (mobile phone-based Asthma Self-Management Aid for Adolescents) was used to interact with teenagers in free-form text and facilitate symptom monitoring, increase awareness of symptoms and triggers, support treatment adherence, give a sense of control over the disease, and promote adolescent–parent partnership via emailing daily reports to parents. Conversations between patients and \textit{mASMAA} included questions and answers about asthma and its triggers, interpretation of the patients' medical records, system-initiated messages to help them monitor symptoms (through automated daily asthma-monitoring inquiries) as well as activity levels, and reminders to take medications according to the patients' individual schedule. A similar study of 2021 showed improved cognitive and behavioral skills after the agentic intervention of \textit{MAX}, a text-based conversational agent aiming to help asthmatic young patients to adopt healthy behaviors (i.e., inhalation technique) as well as gain knowledge about their condition \cite{max2021}. \textit{MAX} took the concept of virtual asthma coach one step further by engaging the complete triangle of stakeholders: health care professionals (via email), patients (via the app), and family members (via SMS text messaging), thereby establishing a robust working alliance acting as a mediator. For instance, parents would record a video of their children's inhalation procedure, upload it on a secure server, and then \textit{MAX} would notify the physician for review and feedback, which would then be sent to the child through the app. What is more, it also introduced gamification for patients, so as to increase their perceived enjoyment and understanding, by introducing the point system after successful asthma quizzes, and for each finished coaching session.
+
+About monitoring chronic pain, the Pain Monitoring Voice Diary was implemented in 2006 for real-time assessment of experience and behavior in the patient’s natural environment \cite{painmonitoring2006}. This electronic data collection technique allowed for real-time data collection of information from patients over the phone, as they were responding to spoken dialogue system prompts using unconstrained speech. A more recent implementation is \textit{SELMA}, a text-based smartphone chatbot designed and implemented in a 2018 clinical trial to deliver psychoeducation (via cognitive behavior therapy) for pain management \cite{selma2020}. Psychoeducation enhances peoples’ understanding of their disease and their self-help motivation, while reducing their insecurity. The pain self-management coach guides patients through CBT modules that addresses dysfunctional cognitions and emotions, and teaches coping strategies with the aim to control pain. What is more, it provides relevant exercises, such as on stress release and mindfulness, and follow-up questions for the participants. Nevertheless, comparison of the intervention and control groups showed similar effects in therms of pain-related impairment, general well-being, and pain intensity.
+
+On chronic stress management, a 2017 clinical trial showed that a conversational agent in combination with medical group visits was able to reduce long-term stress -- the primary symptom for patients with chronic pain, depression, and anxiety -- by motivating adherence to positive behaviors and providing personalized guidance \cite{stress2017}. \textit{Gabby}, the voice-based animated conversational agent, was designed for patients to use at home for reviewing the educational material covered in more detail, as well as for practising self-care skills, such as meditation, self-massage, and yoga based on the widely-used training program 'Mindfulness Based Stress Reduction' (MBSR). \textit{Gabby} could express herself with eyebrow movements, hand gestures, and gaze and posture shifts, apart from having a natural, calming speech, and received user input via multiple choice selection of utterances on the screen. An earlier intervention, the embodied \textit{Virtual Mindfulness Coach} prototype, was developed in 2013 to provide meditation coaching via mixed initiative, text-based, free-form conversation enhanced with multiple-choice based input for reduction of stress, pain, and anxiety disorder's symptoms as well as for prevention of relapse into depression \cite{hudlicka2013}. The coach, a female character named \textit{Chris}, showed a variety of facial expressions, gestures, and gazes, which she adjusted reacting with empathy to the user's input and emotional state. \textit{Chris} offered customized guidance on the lesson materials of MBSR curriculum, prviding encouragement, advice and additional information, correcting misconceptions, and asking follow-up questions on specific content based on the previous dialog and the user's concerns (e.g., “Is mindfulness good for stress?” “Will meditating help me feel less stressed?”). She was demonstrated to help users establish a more frequent and longer mindfulness practice, compared to a self-administered program via written and audio materials.
+
+On diabetes self-management, the current state of the art mostly assists patients via mobile applications, like \textit{Care4Life Diabetes} \footnote{Care4Life, Southern Nevada Health District, YouTube (video), Accessed on September 25, 2024. \url{https://www.youtube.com/watch?v=y1VxFZkajGg}} or \textit{MyDiabetesConnect} \footnote{Diabetes Connect LTD, Google Play, YouTube (video), Accessed on September 25, 2024. \url{https://play.google.com/store/apps/details?id=com.mydiabetesconnect&hl=en}}. These applications offer a dashboard for diabetic-related data points, recipes for diabetics, exercise and weight monitoring, customizable reminders for checking glucose levels as well as for taking medications and not missing doctor appointments, blood glucose and blood pressure tracking and summary reports, and educational messages \cite{care4life2021}. Some apps include encouraging messages \footnote{BEAT Diabetes, Accessed on September 25, 2024. \url{https://www.beatdiabetes.org/}}, a comprehensive diabetes management education plan \footnote{Glucose Buddy, Accessed on September 25, 2024. \url{https://www.glucosebuddy.com/}}, the ability to connect the glucose meter with the app for error-free logging \footnote{mySugr, Accessed on September 25, 2024. \url{https://www.mysugr.com/en-us}}, downloadable statistics and charts  \footnote{Diabetes:M, Accessed on September 25, 2024. \url{https://diabetes-m.com/features/}}, the ability to upload photos of meals to log nutrition information \footnote{Undermyfork, Accessed on September 25, 2024. \url{https://www.undermyfork.com/}}, pairing with a smartwatch to display glucose levels \footnote{Gluroo, Accessed on September 25, 2024. \url{https://gluroo.com/}}, sharing real-time data to the whole family's smartphones, and also a synced web platform for healthcare professionals to view their patients' logs \footnote{Health 2 Sync, Accessed on September 25, 2024. \url{https://www.health2sync.com/careproviders}}. However, inputting information on a screen can be difficult and even frustrating for elderly patients. \textit{Healthy Coping} is a voice-based application that assists the older generation with self-management of type 2 diabetes by combining the Google Home's device voice interface for hosting the conversational agent, and a paired web interface for a visual display of the patient's monitoring results, intended for both the patients themselves and their physicians. It focuses on monitoring blood glucose levels, taking medication, being active, eating a healthy diabetic diet, and mental health coping (via offering a depression screening survey). It also offers personalized advice for maintaining target glucose levels, and reminders for taking medication, all through intuitive voice commands or questions expressed in natural language (e.g. “I want to take the coping survey.”, “I want to monitor my health”, “What should I eat?”) \cite{GoogleHomediabetes2018}. It is notable that this dialogue system design is not innovative compared to much earlier telemedicine and phone monitoring solutions, such as \textit{DI@L-log} from 2005 \cite{18thIEEESymposium2005}. These solutions were used for data collection and for offering encouraging feedback and advice to patients through a voice user interface, and also supplied physicians with progress charts of weight, blood glucose values, etc. as well as alerts for deviant readings through a graphical user interface \cite{17thIEEESymposium2004}.
+
+On childhood obesity, a 2017 5-month study implemented a text-based smartphone app that monitored and supported young patients during their treatment, and assisted their health carers too \cite{childhoodobesity2017}. For rapport building there were a female or male persona to select, use of the teenager's first name, use of informal language and emoticons, engaging in small-talk, and expressing empathy. This assistant was programmed to offer a challenge a day, e.g. a relaxation technique for stress management, a step counter for physical activity, photographing meals for diet adherence, and answering entertaining quiz questions for promoting health literacy. The results of the challenges were reviewed in the next consultation hour.
+
+Interestingly, attitudes of long-term patients on healthcare chatbots vary. A survey study conducted between January and March 2023 reported AI hesitancy among such population: they were skeptical about the use of AI chatbots for health care purposes, and less than 30\% were likely to use a health chatbot in the following 12 months due to mistrust in its accuracy \cite{aihesitancy2024}. In the survey, chronic patients seemed more receptive to using voice-based chatbots for nutrition, sleep, and mental well-being, i.e. stress and emotional state \cite{aihesitancy2024}. Contrary results have been reported for the cancer agent \textit{Vik}, whose users expressed an overall satisfaction at a 94\% and even recommended the chatbot to their friends \cite{vik2019}. Also, a large majority of experiment participants have commended on the chatbot's ease of use and usefulness for the asthma agents \textit{mASMAA}  and \textit{MAX}, and the hypertension agent \textit{TensioBot} \cite{asthma2014, max2021, selma2020}. Specifically for \textit{TensioBot}, most patients indicated they prefer to register their BP at home using \textit{TensioBot} instead of manually; additionally, 85\% continued its use even after the experiment was over. 
+
+
+\subsubsection{Managing mental health conditions and providing behavioral counseling}\label{MentalHealthRisks}
+Mental illnesses are very common: it has been estimated that 46\% Europeans experienced an emotional or psychosocial problem during 2022 \footnote{European Commission. Mental health. Accessed on October 8, 2024. \url{https://health.ec.europa.eu/non-communicable-diseases/mental-health_en}}. Also 1 in 5 adults in the U.S. live with mental health \cite{nami_mental_health_numbers}, and 1 in 8 people worldwide \footnote{Mental health worldwide - Statistics \& Facts. Statista. Accessed on October 8, 2024. \url{https://www.statista.com/topics/8066/mental-health-worldwide/}}. Some mental health issues are chronic, non-curable, and can only be managed by medication, therapy, and lifestyle changes throughout the patient's life, in the same way other chronic health conditions described in Section \ref{Chronic disease} are managed. Such mental illnesses include schizophrenia, bipolar disorder, certain types of depression, Post-Traumatic Stress Disorder (PTSD), and Substance Use Disorders (SUDs). Some others are non-chronic and treatable with medication and therapy, e.g. mild-to-moderate depression, Acute Stress Disorder (ASD), panic disorder (in some cases), and phobias. Unfortunately, less than 1 in 3 people get mental health care worldwide \footnote{WHO’s Science in 5: Mental Health - 1 July 2022, Accessed on October 8, 2024. \url{https://www.youtube.com/watch?v=lOEXhd6c5k0}}. Untreated mental health conditions lead to high healthcare costs, impaired functioning and loss of autonomy of the patient in everyday life and in the professional domain, and social isolation \cite{schizophrenia2010, dementiatherapy2019, panicbot2020}. Access to therapies that can manage or even cure a mental health disorder is often hindered by shortages in mental healthcare professionals \cite{dementiatherapy2019, aipsychotherapy2019, depressioncoach2023, wysa2023, stade2024}, high costs for the individual \cite{depressioncoach2023, machinesinmentalhealth2017} and lack of time for frequent on-site consultations on the patients' side \cite{bickmoreetalrealtionalfordepression2010, dementiatherapy2019}, as well as avoidance of seeking support in-person through formal mental health services, or of giving an honest reporting of symptoms during official screenings, due to a variety of reasons: fear of social stigma \cite{schizophrenia2010, onlinementalhealth2015, alcoholism2016, woebot2017, mentalhealthbarriers2017, bickmoreetalrealtionalfordepression2010, mentalhealthandviolence2016, noblesetal2020addiction}, judgment and discrimination \cite{mentalhealthbarriers2017}, risk of blocking career advancement \cite{SimCoach2016}, reluctance to disclose intense or negative emotions and behaviors to other humans \cite{bickmoreetalrealtionalfordepression2010, willingtodisclose2014, machinesinmentalhealth2017, mdddiagnosis2017}, and impairments in emotions and communication due the illness itself \cite{schizophrenia2010}. 
+Thankfully, conversational agents can be an affordable, accessible, acceptable by users, and reliable solution in providing 24/7 remote psychoeducation \footnote{   
+``Psychoeducation, the goal of which is to help people better understand (and become accustomed to living with) mental health conditions, is considered to be an essential aspect of all therapy programs. It is generally known that those who have a thorough understanding of the challenges they are facing as well as knowledge of personal coping ability, internal and external resources, and their own areas of strength are often better able to address difficulties, feel more in control of the condition(s), and have a greater internal capacity to work toward mental and emotional well-being.``, GoodTherapy (blog). Accessed on October 19, 2024. \url{https://www.goodtherapy.org/blog/psychpedia/psychoeducation}} \cite{schizophrenia2010, panicbot2020, adhd2021}, therapy \cite{dementiatherapy2019, woebot2017, machinesinmentalhealth2017, depressioncoach2023, panicbot2020, adhd2021} and mental health assessment to those who need it \cite{SimCoach2016, mentalhealthbarriers2017, mdddiagnosis2017}, while simulating the interpersonal relationship of a mental health care provider \cite{schizophrenia2010, mentalhealthbarriers2017}, securing anonymity \cite{mentalhealthbarriers2017, wysa2023}, and providing unbiased recommendations \cite{alcoholism2016} as well as psychological support and information immediately, anytime, and anywhere \cite{schizophrenia2010, reviewmental2017, woebot2017, machinesinmentalhealth2017, noblesetal2020addiction, depressioncoach2023, smokingcessation2017, smokingcessation2019}. In this way, medication and exercise adherence can be increased, and hospital re-admissions as well as symptoms can be reduced \cite{schizophrenia2010}. A systematic review on the feasibility and effectiveness of interventions based on one-on-one, synchronous, written conversations has shown significant and sustained improvements in mental health outcomes, which are even equivalent (not superior, though) to face-to-face therapy and telephone counseling \cite{reviewmental2017}. Last, let us not forget that the first well-known conversational chatbot, \textit{ELIZA}, was programmed back in 1966 to simulate a text-based conversation with a psychotherapist \cite{eliza1966}.
+
+On depression and anxiety, the use of generative AI chatbots has recently increased, and research has indicated promising results in their use for meaningful mental health support. Two recent 2024 pilot studies used ChatGPT as a support tool in psychiatric care, albeit with a small sample size (12 and 19 patients, respectively) \cite{melo2024chatgpt, siddals2024}. The chatbot offered effective and accessible mental health care in the form of self-help advice, relationship coaching, psychoeducation, and emotional support, and scored high in both patient engagement and satisfaction. It also showed a substantial improvement in self-perceived quality of life, such as better interpersonal relationships and mood, and healing from trauma and loss. However, despite the overall positive feedback, a few participants complained about the irrelevant or overly long responses, and the restrictive safety guardrails that often urged users to contact a human professional, discontinuing the conversation. Moving to rule-based bots, in a 2023 pilot trial a virtual, voice-based coach, \textit{Lumen}, offered problem-solving treatment (PST) therapy to adults with mild-to-moderate depression and/or anxiety \cite{depressioncoach2023}. The PST coach acts as a guide to identify a problem, set a goal, brainstorm solutions, choose a solution, develop an action plan, and to implement and evaluate the plan. After 4 months with \textit{Lumen}, self-reported rational problem-solving, impulsivity scores as well as total psychological distress showed meaningful improvements. Six years earlier, a text-based conversational agent, named \textit{Woebot}, was developed in study to deliver a 2-week self-help CBT program for young adults with symptoms of anxiety and depression with great success in reducing these symptoms and in keeping the users engaged nearly every day \cite{woebot2017}. The reasons for its success were attributed to \textit{Woebot's} interactional skills: use of emojis to express affect, showing empathy on users' responses, checking in and following up on users' mood, and sending a personalized message every day to initiate a conversation. The bot also offered weekly charts depicting each participant’s mood over time, accompanied by a brief summary to facilitate reflection. Another text-based intervention was implemented in 2015 with \textit{TeenChat}, designed to listen, comfort, and encourage stressed out young adults to practise coping strategies, as a ``virtual friend`` would, with the aim of releasing stress and avoiding deterioration inside the young and immature minds (e.g. depression, suicide) \cite{TeenChat2015}. Turning to launched products, a popular mental health app is \textit{Wysa} \footnote{Wysa (website). Accessed on October 13, 2024. \url{https://www.wysa.com/}}, which is a text-based coach designed to help its users deal with anxiety, worry, and low mood by teaching skills to manage their emotional resilience, while ensuring their anonymity. \textit{Wysa} uses CBT, meditation, breathing, yoga, and motivational interviewing to help build mental skills in a self-help context; it also offers direct access to one-on-one sessions with mental health professionals. Also, a 2020-2021 study on users' engagement with \textit{Wysa} during the COVID-19 pandemic confirmed that conversing with the app can result in a significant reduction in symptoms of anxiety and depression, further suggesting that digital health interventions can provide large populations with efficient support for mental health care \cite{wysa2023}. A similar, text-based conversational assistant that offers mental health assessment and one-on-one counseling on a wide range of mental health and well-being issues, such as depression, anxiety, work stress, grief, eating disorders, bullying, addiction, etc., is \textit{Noni} \footnote{7cups (website). Accessed on October 19, 2024. \url{https://www.7cups.com/}}. \textit{Noni} also offers the opportunity to chat live with a volunteer listener, take part in guided chat-based group therapy with other users, and connect with human therapists via videocalls.
+
+Panic disorder, which falls under anxiety disorders, is characterized by recurrent and unexpected panic attacks, i.e. sudden surges of intense fear or discomfort. A 2020 clinical trial developed a mobile, text-based app, named \textit{Todaki}, to relieve panic symptoms, such as social anxiety, rapid heart rate, sweating, trembling, shortness of breath, or a feeling of losing control \cite{panicbot2020}. \textit{Todaki} offers CBT training to correct distorted thinking, as well as reliable information on the disorder which it tests with quizzes in every conversation, it describes the effects and side-effects of medication, it shows videos of psychiatrists for breathing and muscle relaxation training, it suggests coping skills for real-time symptom management, and last provides a ``daily panic report`` for the users to record and assess their panic episodes, depressive moods, and dysfunctional thoughts, which it then displays as a graph. The results of the one-month trial showed that the severity of panic disorder symptoms were significantly decreased, and that interactive CBT using the chatbot is both feasible and effective for patients with panic disorder. \textit{Todaki} was later repurposed for Attention Deficit Disorder (ADD) -- also known as Attention Deficit Hyperactivity Disorder (ADHD) -- which is very common to depression and anxiety patients. Similarly, psychoeducation sessions and CBT were used to mitigate associated psychiatric symptoms, such as inattention, impulsivity, and hyperactivity through behavioral change (time, space, and work management), emotional control, and daily conversation checks on concentration and anxiety \cite{adhd2021}. \textit{Todaki}'s addition was the use of social dialogue skills, such as empathy and reflection, to create a therapeutic bond with the users. The study's results showed a decrease in inattention/memory problems, and hyperactivity/restlessness, and verified the effective use of interactive CBT via a chatbot.
+
+On schizophrenia management, an early 2010 voice-based relational agent named \textit{Laura} was used in a month-long pilot study to promote long-term anti-psychotic medication adherence and walking as a physical activity. Medication non-adherence in schizophrenia approaches 50\% the first year, and 75\% the second year with ensuing relapse estimated at an annual rate of 46\%. Interestingly, \textit{Laura} was designed to establish a warm interpersonal relationship with the patient by projecting emotions and using supporting language, also known as ``therapeutic alliance`` \cite{schizophrenia2010}. According to \citeauthor{bickmoreetalrealtionalfordepression2010} relational agents are ``animated conversational agents designed to establish trust and therapeutic alliance with users over time [...] through displays of empathy, close proximity, more frequent eye gaze and attentiveness, social dialogue and humor``. This empathetic relationship has been shown to improve symptoms during psychotherapy \cite{aipsychotherapy2019}. \textit{Laura} interacted with patients once a day to check and remind adherence to their medication and exercise regimen, set new exercise goals for the patient to work towards before the next conversation, displayed the self-reported adherence charts, and also offered tips and education, e.g. on managing medication side effects, strategies for preempting forgetting, or overcoming common barriers to physical activity. \textit{Laura} kept track of medication refills and reminded patients of pharmacy visits, and also prompted the patient to call their nurse in critical circumstances, e.g. when the patient had reported self-harming thoughts. Towards the end of the intervention she taught techniques for self monitoring. Laura exhibited empathy and trust through verbal (calling user by name, using first person plural grammar types, empathetic exchanges, social chat, humor, and reciprocal self-disclosure) and non-verbal behavior (hand gestures, head nods, eye gaze movements, eye brow raises, posture shifts, proxemics, and facial displays of emotion), but without the stigma and anxiety of a face-to-face human encounter. Interaction with users was simplified: they responded not with free-form speech, but by selecting an utterance from a dynamically-updated multiple-choice input menu. This design choice was made to accommodate individuals with a wide range of computer literacy levels and voice qualities, and also to safeguard against potentially dangerous effects of misunderstanding ambiguous utterances about medical topics. \textit{Laura} scored high on acceptance, usability, and self-reported adherence. 
+
+On PTSD, as mentioned earlier in Section \ref{Diagnosis}, two voice-based interventions for user self-assessment have been studied so far for military service members. Both included embodied virtual human interviewers that used anonymity as well as rapport-building behaviors, and have resulted in higher and more accurate disclosure of symptoms of PTSD \cite{SimCoach2016, mentalhealthbarriers2017}.
+
+Substance Use Disorders (SUDs) are considered a common form of mental health disorder \cite{alcoholism2016}. On alcohol abuse, as already mentioned in Section \ref{PublicHealth}, a text-based chatbot was studied in 2016 that provides education on drinking responsibly, performs a standardized screening, and offers expert advice and links to organizations for seeking medical assistance \cite{alcoholism2016}. On smoking addiction, an intervention was studied in 2016, in which a text-based prototype chatbot was developed to divert smokers from smoke cravings during the critical first three weeks of a cessation program \cite{smokingcessation2017}. The bot offered immediate motivating comments, multimedia content, games, and connection with the other participants, thus helping to keep the around 7,000 participants from relapsing. In a subsequent edition of the program, the chatbot's successor tracked the users' smoking behavior (location, time, mood, desire intensity, etc.), and offered the statistics to raise the patients' awareness on their smoking patterns; then, it provided more personalized support with possible substitution and avoidance strategies \cite{smokingcessation2019}. 
+
+However, even though clinical AI has shown great potential in performing tasks related to psychotherapy (i.e. assessment and delivery of therapy), launched products and prototypes are not yet sophisticated enough to fully replace psychotherapists \footnote{'Toward Responsible Development and Evaluation of LLMs in Psychotherapy' (Policy Brief). Human-Centered Artificial Intelligence (HAI), Stanford University. June 13, 2024. Accessed on October 30, 2024. \url{https://hai.stanford.edu/toward-responsible-development-and-evaluation-llms-psychotherapy}}. Moreover, concerns about patient safety have already been raised. Major voice-based conversational agents have been shown to provide no information on SUD treatment according to a 2019 study \cite{noblesetal2020addiction}. The study examined responses to people seeking help to quit an addiction (alcohol, opioids, marijuana, tobacco) by 5 popular virtual assistants: Amazon’s \textit{Alexa}, Apple’s \textit{Siri}, \textit{Google Assistant}, Microsoft’s \textit{Cortana}, and Samsung’s \textit{Bixby}. Almost no agent gave a singular and coherent response (with the exception of \textit{Google Assistant} that directed to a mobile smoking cessation app), and their responses often led to confusion or even promoted substance retailers! A similar study conducted in October 2017 concluded that there is still ``room for improvement`` for smartphone digital assistants on the topic of smoking cessation advice \cite{smokecessation2018}. The researchers compared \textit{Google Assistant} and \textit{Siri} on quality of information, that is information taken from health agencies with medical expertise, such as hospitals, specialist clinics, and universities, versus low-quality sources, such as magazines or individual blogs. \textit{Google Assistant} returned expert content only about half the time, whereas \textit{Siri} just one in four times. A 2015-2016 research examined the responses on mental health issues and interpersonal violence of 4 commercial, general-purpose conversational assistants: Apple's \textit{Siri}, Google's \textit{Google Now}, Samsung's \textit{S Voice}, and Microsoft's \textit{Cortana}. Victims hesitate to report such sensitive problems for fear of stigmatization and retaliation, and this is why effective interventions are sometimes implemented too late or not at all. The agents were evaluated on their ability to flag a human utterance as concerning (e.g. “I want to commit suicide.”, “I was beaten up by my husband.”) and refer them to the appropriate helpline, for instance for suicide prevention, depression, domestic violence, or sexual abuse. The responses, though, were assessed as inconsistent and incomplete regarding recognition of a personal crisis, referrals to resources, or even showing respect \cite{mentalhealthandviolence2016}. Last, the PTSD agent was found to be lacking in recognizing trigger-worthy user responses, therefore missing cases that need referral to emergency services \cite{SimCoach2016}. Therefore, for conversational agents to be able to offer guidance during personal crises, more collaboration among software developers and health authorities is necessary.
+
+
+\subsubsection{Providing communication therapy}\label{communication}
+Neurological conditions, such as autism, Parkinson's and Alzheimer's disease, stroke, and dementia, lead to difficulties in cognitive and motor skills, social interaction, speech, and behavior. Conversational agents can help these patients to increase their socialization skills by providing cognitive stimulation and repetitive practise in social dialogue.
+
+\textit{Harlie (Human And Robot Language Interaction Experiment)} was a 2016 smartphone voice- and text-based application designed to hold a large variety of conversations with people suffering from neurological conditions, such as Parkinson's disease and dementia \cite{harlie2016}. These populations have difficulty initiating and managing a conversation, which leads to distress and gradual social exclusion. \textit{Harlie's} job is to place a random call daily to monitor for challenges these people may be facing while analyzing their language articulation, vocabulary range, and the length of mid-sentence pauses. The system logs this information and then passes it, with consent, to health and research teams to aid further research and provide more targeted therapy \cite{csiro_chatbots}. Ultimately, \textit{Harlie} provides conversational practise, feedback as well as non-judging companionship.
+
+For Alzheimer’s disease (AD) -- the most common form of dementia -- the standard form of therapy is regular (even daily) reminiscence therapy, which involves conversations between patient and caregiver that evoke the patient's old past experiences. The goal is to focus on the patient’s long-term memory, which is easily accessible during the moderate AD phase compared to their short-term memory, in order to stabilize the patient's psychological state, stimulate their memory and cognitive functions, and increase their self-confidence and sociability \cite{dementiatherapy2019}. To this end, a voice-based conversational agent has been proposed to provide daily, personalized dialogs for each patient based on their life history and lifestyle information \cite{dementiatherapy2020}. Also, as recently as in 2025 a purely voice-based chatbot was presented, \textit{Remi}, which combined a continuously growing memory context through summarizing past sessions, as well as empathetic engagement and emotional support \footnote{ Chatbot: Empowering Medical Communication using AI, NLP Healthcare Summit 2025, Accessed on April 6, 2025. \url{https://app.swapcard.com/event/healthcare-nlp-summit-2025/planning/UGxhbm5pbmdfMjU3Njg5Mg==}}. However, concerns have been raised since 2009 regarding the interaction behavior of older users, who typically treat spoken dialog systems like real humans \cite{oldsocialstyle2009}. Thus, they become very sociable and chatty, putting a strain onto the speech recognition and natural language understanding components of a voice companion.
+
+For patients of Autism Spectrum Disorders (ASD), who lack communication skills, social interaction difficulties and even isolation are common problems \cite{ecaforautism2017}. Social skills training (SST), which is the recommended treatment, is typically carried out by a therapist, but it can be automated by a virtual agent. The benefits of using such agents include the augmentation of social interactions, through the establishment of a relationship between the user and the infinitely patient SST coach \cite{FitTrack2003}. In a 2017 study, a voice-based embodied agent was developed to coach the narrative skill, explaining its goals and demonstrating it for the patients to imitate afterwards in a role-play \cite{ecaforautism2017}. Interestingly, the system recorded an audiovisual video of the patient and could then analyze the speech (i.e. F0 variation, amplitude, voice quality, pauses, words per minute, words over six letters, and fillers) and facial expressions (i.e. horizontal and vertical head pose, smiling ratio) to provide feedback on strengths and weaknesses. Also, the agent set minor homework challenges for users to finish over the week, and report on the experience in the following session. The results showed improvement and maintenance of narrative skills, and demonstrate that virtual SST coaches can be used either as an automated social skills trainer or as a supplement to human-based SST.
+
+\subsubsection{Automating communication and documentation tasks for medical staff}
+Dialogue systems can assist clinical staff by saving them time and energy from executing certain repetitive and monotonous tasks in the inpatient setting, such as answering common patient questions, remembering and following lengthy protocols, and documenting the patients' health status, among other standardized tasks of the clinical and nursing workflow. By digitally supporting these tasks via a mobile device (e.g. a smartphone), medical staff can save time, increase their productivity, reduce the risk for errors, and ultimately focus on physically interacting with their patients. Also, doctors' and nurses' job satisfaction can be enhanced, and the so-called ``clinician burnout`` , already mentioned in Section \ref{Clinicians with burnout}, can be mitigated. Since patient satisfaction and treatment outcomes are connected to the medical staff's workplace contentment \cite{delgadillo2018}, improving the latter should improve the former, too. 
+
+On patient question answering, generative AI chatbots, like ChatGPT, are already being used by doctors for drafting medical reports or sending letters and emails \footnote{Stermer C., 'AI ChatGPT for Medicine', TikTok (video), December 12, 2022. Accessed on September 7, 2024. https://www.tiktok.com/@tiktokrheumdok/video/7176340747170467114}, thus saving time and effort. Also, since conversational agents can empower patients, as explained earlier, less strain and fewer demands are placed on physicians. AI-powered patient portals may soon become the “primary contact point” for health information, as AI-curated answers of patients' medical questions can save doctors time, provide quick and accurate answers, and free up resources, eliminating unnecessary clinical visits \cite{ayersetall2023redditempathy, llmsmodernmedicine2023}. Specifically, the commercial ChatGPT chatbot (version GPT-3.5) was used in a 2023 study to produce answers to patients' health questions publicly posted in a social media forum \cite{ayersetall2023redditempathy}. Its responses were afterwards compared with the actual responses given by verified health care professionals on that forum. The evaluators -- who were themselves licensed health care professionals -- rated both the quality of information and the empathy provided to be considerably higher in chatbot responses than physician responses, and ultimately preferred the AI-generated responses 4 to 1. This study suggests that AI chatbots could help physicians in messaging patients by providing a first draft that a professional or even a support member of staff would then proofread and edit (\cite{ayersetall2023redditempathy}). A practical example is Mayo Clinic's nurse staff who have been using generative AI-drafted responses to patient messages since early 2023. This initiative saves the staff around 30 seconds of time spent per message (1 min. and 20 sec. compared to 1 min. and 50 sec. when writing from scratch) with the added advantage that the final messages receive the patients' appreciation, as they are more conversational, friendly, and detailed than the ones that nurses used to write on their own \footnote{``Gen AI Saves Nurses Time by Drafting Responses to Patient Messages``, Epic (blog), 04 March 2024, Accessed July 29, 2025. \url{https://www.epicshare.org/share-and-learn/mayo-ai-message-responses}}. However, a 2024 study conducted by Nigam Shah, Professor of Medicine, Stanford School of Medicine, and UC San Diego, examining LLMs answering patients' questions in text format, showed that the time spent by doctors reviewing and editing the AI-drafted responses has remained the same (i.e. there were no productivity gains), and only their cognitive load has reduced (i.e. only efficiency has increased) \footnote{AI Transforms Health Care | Artificial Intelligence: The Future of Medicine \& Health Care Is Here, Stanford Health Care, YouTube (video), Accessed on September 30, 2024. \url{https://www.youtube.com/watch?v=wD1qn2i3Wb4}}. What is more, another 2024 study published by the medical schools at Harvard, Yale, and Wisconsin indicated an alarming 7\% possibility of significant patient safety risks when AI-generated responses were left unedited or not reviewed critically by clinicians \footnote{``Patients Not Told AI Drafted Messages From Their Doctors``, Douglas Mark, April 07 2025, Accessed July 29, 2025.\url{https://www.mhaonline.com/blog/ai-messages-from-doctors}}.
+
+On memorizing and following lengthy protocols, regarding the care of patients with major depression, a relational embodied nurse agent, \textit{Elizabeth}, was developed in a 2010 study to orally provide information and counseling in an empathetic fashion to hospitalized patients about their discharge plan, following a standardized hospital discharge protocol designed to reduce readmissions \cite{bickmoreetalrealtionalfordepression2010}. The protocol involves a human nurse spending half an hour with each patient, ensuring they understand their post-discharge self-care regimen: medications, follow-up appointments, exercise and diet regimens, and pending lab tests. While this protocol is effective, the additional nursing time required makes it impractical to implement, motivating the development of the relational nurse agent to perform this task. The nurse agent produces a personalized ``After Hospital Care Plan`` and reviews it linearly with the patient, while also engaging in social dialogue and giving comprehension tests. Interaction with the patient was chosen to take place through selecting options on a touch screen, due to the noisy environment of the hospital room, as well as non-English accents. At the end of the interaction, any unresolved patient questions are displayed for a human nurse to follow up with the patient. All participants rated the agent very high on satisfaction and ease of use and, notably, most preferred receiving their discharge information from the agent compared to the hospital doctors or nurses. It can be concluded that agents with relational behavior could provide an effective medium for delivering discharge education as well as comfort to patients with depression. 
+
+On following guidelines, a recent example is the project by ``Penda Health`` company in Kenya in February 2024, where an application was introduced to offer advice on diagnosis and treatment to nurses as well as doctors handling a wide range of primary care cases \cite{korom2024}. The way it works is that clinicians enter the patient's diagnosis, and then receive some local guidelines and recommendations for treatment as options to either accept or reject. Notably, the people responsible for implementing the solution kept in mind the 'alert fatigue' described in the Subsection \ref{Mistrust}, and made the tool completely optional. By not forcing its use for every patient visit, ultimately clinicians' rating for the AI consultant was 99.6\% positive.
+On AD and related dementias (ADRD), apart from therapy already mentioned in Section \ref{communication}, having proper eating behavior and nutrition can also slow the illness's progression and cognitive decline \cite{dietforAD2020}. In 2020 the \textit{ADRD-DietAssistant} was developed to educate caregivers -- who are typically non-professionals, e.g. spouses, family members or friends of the patient -- on healthy diet (i.e. which food items it should include and how to cook meals), guidelines, and constraints for people with ADRD, interacting in free-form, natural language. The assistant provided personalized answers and recommendations based on the caregiver's and patient's profile, such as on the caregiver's time limitations, financial ability, and education level as well as on the patient's age, stage, food preferences and allergies.
+
+On documenting patients' progress either in real-time or post-hoc, a variety of products that assist with note-taking and entering structured information directly onto Electronic Health Records (EHRs) by voice alone are already in use by clinicians to streamline administrative processes. All of them promise to decrease the ``documentation burden``, as discussed earlier in Section \ref{Clinicians with burnout}. For instance, \textit{Suki} is an AI-powered voice assistant that allows physicians to dictate clinical notes in free-form speech, suggesting notes after a patient visit, and recommending ICD codes (International Classification of Diseases) for diagnoses. \textit{Suki} achieves high accuracy, is available for 99 medical specialties and 80 languages, and is HIPAA compliant \footnote{Suki (website). Accessed on November 5, 2024. \url{https://www.suki.ai/}}. Specifically for nurses, the \textit{NurseBrain} smartphone and web app assists nurses with real-time documentation and note generation, AI suggestions for patient management during bedside care (i.e. actions to take and observations to make), general organization of the nursing workflow, and facilitation of handover communication. The app features voice dictation for recording information about patients on the fly, which it then shows in one place (e.g. name, age, sex, room, current situation, background, assessment, recommendation, etc.). \textit{Nursebrain} keeps the nurse organized with to-do checklists and customized reminders of tasks, their priority, due dates and times, and also provides mood check-ins for nurses. Last, it easily hands off the patients' information to the next nurse in shift by a simple QR scan \footnote{Nursebrain (website). Accessed on November 7, 2024. \url{https://nursebrain.com/}}. Another popular mobile app for nurses is \textit{Rover}, which assists with secure barcoded medication administration (BCMA), that is the right dosages, dates, and times for the right patient. The app features the interesting functionality of taking advantage of the in-built scanner and camera of the device, with which the nurse can scan the barcode on the patient's bracelet for verification and for pulling up patient lists and charts, or scan the barcode of the medication for confirmation, or photograph a wound for documentation \footnote{'How Can the Epic Rover App Transform Your Clinical Workflows?'. SuretySystems. February 2, 2023. Accessed on November 7, 2024. \url{https://www.suretysystems.com/insights/how-can-epic-rover-app-transform-clinical-workflows/}}. \textit{Know My Patient} is another nurse-facing mobile app used for gathering and accessing clinical (i.e. physiological and psychosocial status) and personal (e.g. the patient’s behaviors and responses to treatments, schedules at home, preferences for care during hospitalization) information about multiple patients, thus providing instant, and consistent, individualized care \footnote{Know My Patient, Nightingale Apps (website). Accessed on November 7, 2024. \url{https://nightingaleapps.com/know-my-patient/}}. More recently, \textit{ChatEHR} was released in 2025 by Stanford Medicine to allow clinicians to interact with their patients' actual medical records, boasting accurate and secure responses \footnote{"Clinicians can ‘chat’ with medical records through new AI software, ChatEHR", June 05, 2025, Stanford Medicine News Center (blog). Accessed on June 15, 2025. \url{https://med.stanford.edu/news/all-news/2025/06/chatehr.html}}. Even though still in pilot stage, the chatbot assists 33 Stanford Hospital clinicians in their medical practice by answering questions about a patient’s medical history as well as summarizing patient's charts. 
+
+
+\subsubsection{Limitations of CAs in healthcare}
+Using AI technology in healthcare -- a domain with very high stakes -- brings forth a range of concerns about its design and deployment, mainly falling into two categories: safety and effectiveness, and privacy. Especially the use of AI in mental healthcare, must balance not only these, but also sensitivity to patients' psychology, cultural adaptability, and avoidance of reinforcement of stigmas \cite{opportunitiesrisks2024}.
+
+The safety and effectiveness category comprises two subcategories: being safe as well as effective. Being safe means that the technology should work to prevent, and should not actively promote, dangerous or unhealthy human behaviors, e.g. self-harm or substance abuse. Being effective means that is should decrease the symptoms of the disorder or the clinical issue being targeted, and increase well-being and quality of life \cite{READI2024}. Human supervision of AI-generated content is necessary to ensure accuracy, and avoid false, biased, or harmful information \cite{ethicallimitations_2020, aipsychotherapy2019}. A systematic literature review carried out in February 2018 on general-purpose conversational agents that accept any unconstrained natural language input (i.e. spoken and typed) for health-related issues, concluded that the studies screened lacked adequate evidence of patient safety and effectiveness \cite{CAhealthcarereview2018}. Regarding the same assistants, as analyzed in Section \ref{SafetyRisks}, other studies have reported inappropriate responses to both critical and non-critical medical questions \cite{healthprompts2020}, as well as significant NLU misrecognitions of drug names and even of whole health-related queries due to non-native English accents \cite{mouth2019, safetyrisks2018}. Specifically for mental health, as mentioned in Section \ref{MentalHealthRisks}, these commercial agents have been found to offer no coherent or helpful advice to patients with SUDs \cite{noblesetal2020addiction} and to patients seeking smoking cessation guidance \cite{smokecessation2018}. They have also been found to respond incompletely and disrespectfully to mental health as well as physical health emergencies \cite{mentalhealthandviolence2016, SimCoach2016}. As expressed concisely by \citeauthor{aipsychotherapy2019}: ``If conversational AI isn’t safe it should not be used, and if it isn’t trusted, it won’t be.`` 
+
+Regarding privacy, the blurring of the laws, norms, and ethics of confidentiality and data sharing is a great challenge \cite{aipsychotherapy2019}. We know that it is forbidden for human clinicians to disclose identifiable patient information as well as a patient's sensitive -- and potentially stigmatizing -- information, e.g. sexual history, trauma, substance abuse, suicidal ideation, etc., otherwise the clinician will face legal consequences. Therefore, similar accountability must be applied to clinical AI agents involved in interactions with patients, and other related third-parties, especially since such agents have an almost infinite capacity to remember and share conversations. 
+
+As a last note, it is crucial to responsibly develop and continuously evaluate clinical conversational agents to ensure that their large-scale deployment is guided by the principles of clinical effectiveness, safety, and explainability \cite{chaGPTpassesUSMLE2023, stade2024}.
+
+\section{Identification of Gaps or Unresolved Issues}
+Existing work demonstrates the breadth of conversational assistants deployed across public health, chronic disease management, and mental healthcare, yet few studies focus on tools that serve clinical staff directly. Nurse-facing systems are typically limited to discharge education or administrative reminders, with little emphasis on psychiatric settings where documentation is still handwritten and fragmented \cite{bickmoreetalrealtionalfordepression2010}. Moreover, most evaluations concentrate on patient outcomes, leaving questions about workflow integration, data provenance, and sustained adoption among nurses unresolved. Finally, very limited literature addresses Greek-language assistants or solutions designed around local regulatory constraints, despite the documented burnout and workload pressures experienced by Greek psychiatric nurses.
+
+\section{Theoretical and Conceptual Framework}
+This thesis is grounded in the intersection of responsible AI, retrieval-augmented generation (RAG), and agentic workflows. RAG offers a principled mechanism for grounding generative models in curated document stores, reducing hallucinations while preserving the expressive power of LLMs \cite{raglewisetal2021}. Agentic orchestration layers provide decision-making heuristics for when and how to invoke tools, enabling the assistant to blend search, summarisation, and dialog generation \cite{clinicalentityIE2025}. These capabilities are aligned with responsible AI practices that emphasise privacy protection, transparency, and human oversight in high-stakes environments \cite{opportunitiesrisks2024}. Together, they form the conceptual scaffolding for a system that can supply accurate, contextual responses without compromising patient confidentiality.
+
+\section{Positioning of the Present Research}
+Building on the identified gaps and theoretical grounding, this research positions itself as a bridge between nurse workflow needs and recent advances in conversational AI. The prototype concentrates on psychiatric nurses operating in Greek clinics, addressing language localisation, privacy-preserving data curation, and the requirement for rapid, hands-free information retrieval. By focusing on faithfulness, relevance, and context precision, the work contributes empirical evidence about the feasibility of deploying agentic, RAG-enabled assistants in frontline mental healthcare. It also complements the existing literature by articulating design considerations, evaluation protocols, and human feedback loops that are specific to nurse-facing applications.
+
+
+\nomenclature[z-NER]{NER}{Named Entity Recognition}
+\nomenclature[z-LLM]{LLM}{Large Language Model}
+\nomenclature[z-PII]{PII}{Personally Identifiable Information}
+\nomenclature[z-EHR]{EHR}{Electronic Health Records}
+\nomenclature[z-PHI]{PHI}{Protected Health Information, i.e. data obtained or generated as part of a healthcare service (treatment, payment, operations, medical records)}
+\nomenclature[z-HIPAA]{HIPAA}{Health Insurance Portability and Accountability Act}
+\nomenclature[z-RAG]{RAG}{Retrieval Augmented Generation}
+\nomenclature[z-CAPD]{CAPD}{Computer Assisted Physician Documentation}
+\nomenclature[z-CDI]{CDI}{Clinical Documentation Integrity}
+\nomenclature[z-ASR]{ASR}{Automatic Speech Recognition}
+\nomenclature[z-NLU]{NLU}{Natural Language Understanding}
