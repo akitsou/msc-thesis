@@ -1,0 +1,681 @@
+\begin{thebibliography}{}
+
+\bibitem[Anmella et~al., 2023]{vickybot2023}
+Anmella, G., Sanabra, M., Prim{\'e}-Tous, M., Seg{\'u}, X., Cavero, M.,
+  Morilla, I., Grande, I., Ruiz, V., Mas, A., Mart{\'i}n-Villalba, I., Caballo,
+  A., Esteva, J.-P., Rodr{\'i}guez-Rey, A., Piazza, F., Valdesoiro, F.~J.,
+  Rodriguez-Torrella, C., Espinosa, M., Virgili, G., Sorroche, C., Ruiz, A.,
+  Solanes, A., Radua, J., Also, M.~A., Sant, E., Murgui, S., Sans-Corrales, M.,
+  H~Young, A., Vicens, V., Blanch, J., Caballeria, E., L{\'o}pez-Pelayo, H.,
+  L{\'o}pez, C., Oliv{\'e}, V., Pujol, L., Quesada, S., Sol{\'e}, B., Torrent,
+  C., Mart{\'i}nez-Aran, A., Guarch, J., Navin{\'e}s, R., Murru, A., Fico, G.,
+  de~Prisco, M., Oliva, V., Amoretti, S., Pio-Carrino, C.,
+  Fern{\'a}ndez-Canseco, M., Villegas, M., Vieta, E., and Hidalgo-Mazzei, D.
+  (2023).
+\newblock {Vickybot, a Chatbot for Anxiety-Depressive Symptoms and Work-Related
+  Burnout in Primary Care and Health Care Professionals: Development,
+  Feasibility, and Potential Effectiveness Studies}.
+\newblock {\em J Med Internet Res}, 25:e43293.
+
+\bibitem[Ayers et~al., 2023]{ayersetall2023redditempathy}
+Ayers, J., Poliak, A., Dredze, M., Leas, E., Zhu, Z., Kelley, J., Faix, D.,
+  Goodman, A., Longhurst, C., Hogarth, M., and Smith, D. (2023).
+\newblock {Comparing Physician and Artificial Intelligence Chatbot Responses to
+  Patient Questions Posted to a Public Social Media Forum}.
+\newblock {\em JAMA Internal Medicine}, 183.
+
+\bibitem[Bala et~al., 2020]{simplifiedmednotes2020}
+Bala, S., Keniston, A., and Burden, M. (2020).
+\newblock {Patient Perception of Plain-Language Medical Notes Generated Using
+  Artificial Intelligence Software: Pilot Mixed-Methods Study}.
+\newblock {\em JMIR Form Res}, 4(6):e16670.
+
+\bibitem[Bautista et~al., 2024]{nursesburnout2024}
+Bautista, C.~L., Bourassa, K.~A., Vasquez, N.~N., Desrochers, M., Bartek, N.,
+  and Madan, A. (2024).
+\newblock Nursing staff in a large hospital system underutilize insurance-based
+  mental health services.
+\newblock {\em Healthcare}, 12(12).
+
+\bibitem[Beveridge and Fox, 2006]{decisioncancer2006}
+Beveridge, M. and Fox, J. (2006).
+\newblock {Automatic generation of spoken dialogue from medical plans and
+  ontologies}.
+\newblock {\em Journal of Biomedical Informatics}, 39(5):482--499.
+\newblock Dialog Systems for Health Communications.
+
+\bibitem[Bibault et~al., 2019]{vik2019b}
+Bibault, J.-E., Chaix, B., Guillemass{\'e}, A., Cousin, S., Escande, A.,
+  Perrin, M., Pienkowski, A., Delamon, G., Nectoux, P., and Brouard, B. (2019).
+\newblock {A Chatbot Versus Physicians to Provide Information for Patients With
+  Breast Cancer: Blind, Randomized Controlled Noninferiority Trial}.
+\newblock {\em J Med Internet Res}, 21(11):e15787.
+
+\bibitem[Bickmore and Giorgino, 2006]{BickmoreGiorgino2006}
+Bickmore, T. and Giorgino, T. (2006).
+\newblock Health dialog systems for patients and consumers.
+\newblock {\em Journal of Biomedical Informatics}, 39(5):556--571.
+\newblock Dialog Systems for Health Communications.
+
+\bibitem[Bickmore et~al., 2010a]{schizophrenia2010}
+Bickmore, T., Puskar, K., Schlenk, E., Pfeifer, L., and Sereika, S. (2010a).
+\newblock {Maintaining Reality: Relational Agents for Antipsychotic Medication
+  Adherence}.
+\newblock {\em Interacting with Computers, special issue on Supportive
+  Interaction: Computer Interventions for Mental Health}, 22(4):276--288.
+
+\bibitem[Bickmore et~al., 2010b]{bickmoreetalrealtionalfordepression2010}
+Bickmore, T.~W., Mitchell, S.~E., Jack, B.~W., Paasche-Orlow, M.~K., Pfeifer,
+  L.~M., and Odonnell, J. (2010b).
+\newblock {Response to a Relational Agent by Hospital Patients with Depressive
+  Symptoms}.
+\newblock {\em Interact Comput}, 22(4):289--298.
+
+\bibitem[Bickmore and Picard, 2003]{FitTrack2003}
+Bickmore, T.~W. and Picard, R.~W. (2003).
+\newblock {Establishing and Maintaining Long-Term Human-Computer
+  Relationships}.
+\newblock {\em ACM Transactions on Computer-Human Interaction (TOCHI)},
+  10(2):99--130.
+
+\bibitem[Bickmore et~al., 2018]{safetyrisks2018}
+Bickmore, T.~W., Trinh, H., Olafsson, S., O'Leary, T.~K., Asadi, R., Rickles,
+  N.~M., and Cruz, R. (2018).
+\newblock {Patient and Consumer Safety Risks When Using Conversational
+  Assistants for Medical Information: An Observational Study of Siri, Alexa,
+  and Google Assistant}.
+\newblock {\em J Med Internet Res}, 20(9):e11510.
+
+\bibitem[Black et~al., 2005]{18thIEEESymposium2005}
+Black, L., McTear, M., Black, N., Harper, R., and Lemon, M. (2005).
+\newblock {Appraisal of a conversational artefact and its utility in remote
+  patient monitoring}.
+\newblock In {\em 18th IEEE Symposium on Computer-Based Medical Systems
+  (CBMS'05)}, pages 506--508.
+
+\bibitem[Black et~al., 2004]{17thIEEESymposium2004}
+Black, L.-A., Mctear, M., Black, N., and Harper, R. (2004).
+\newblock {Intelligent Computer Consultants - Interfacing the Future.}
+\newblock In {\em Proceedings of the IEEE Symposium on Computer-Based Medical
+  Systems}, volume~17, pages 446--451.
+
+\bibitem[Boyd and Wilson, 2018]{smokecessation2018}
+Boyd, M. and Wilson, N. (2018).
+\newblock Just ask {Siri}? a pilot study comparing smartphone digital
+  assistants and laptop {Google} searches for smoking cessation advice.
+\newblock {\em PLOS ONE}, 13(3):e0194811.
+
+\bibitem[Brixey et~al., 2017]{shihbot2017}
+Brixey, J., Hoegen, R., Lan, W., Rusow, J., Singla, K., Yin, X., Artstein, R.,
+  and Leuski, A. (2017).
+\newblock {SHIH}bot: A {F}acebook chatbot for sexual health information on
+  {HIV}/{AIDS}.
+\newblock In Jokinen, K., Stede, M., DeVault, D., and Louis, A., editors, {\em
+  Proceedings of the 18th Annual {SIG}dial Meeting on Discourse and Dialogue},
+  pages 370--373, Saarbr{\"u}cken, Germany. Association for Computational
+  Linguistics.
+
+\bibitem[Calvaresi et~al., 2019]{smokingcessation2019}
+Calvaresi, D., Calbimonte, J.-P., Dubosson, F., Najjar, A., and Schumacher, M.
+  (2019).
+\newblock {Social Network Chatbots for Smoking Cessation: Agent and Multi-Agent
+  Frameworks}.
+\newblock In {\em Proceedings of the IEEE/WIC/ACM International Conference on
+  Web Intelligence (WI '19)}, New York, NY, USA. ACM.
+
+\bibitem[Cassell, 2001]{cassell2001embodied}
+Cassell, J. (2001).
+\newblock Embodied conversational agents: representation and intelligence in
+  user interfaces.
+\newblock {\em AI magazine}, 22(4):67--67.
+
+\bibitem[Chaix et~al., 2019]{vik2019}
+Chaix, B., Bibault, J.-E., Pienkowski, A., Delamon, G., Guillemassé, A.,
+  Nectoux, P., and Brouard, B. (2019).
+\newblock {When Chatbots Meet Patients: One-Year Prospective Study of
+  Conversations between Patients with Breast Cancer and a Chatbot}.
+\newblock {\em JMIR Cancer}, 5:e12856.
+
+\bibitem[Chaix et~al., 2020]{vik2020}
+Chaix, B., Guillemassé, A., Nectoux, P., Delamon, G., and Brouard, B. (2020).
+\newblock {Vik: A Chatbot to Support Patients with Chronic Diseases}.
+\newblock {\em Health}, 12:804--810.
+
+\bibitem[Chan et~al., 2022]{Tessa2022}
+Chan, W.~W., Fitzsimmons-Craft, E.~E., Smith, A.~C., Firebaugh, M.-L., Fowler,
+  L.~A., DePietro, B., Topooco, N., Wilfley, D.~E., Taylor, C.~B., and
+  Jacobson, N.~C. (2022).
+\newblock The challenges in designing a prevention chatbot for eating
+  disorders: Observational study.
+\newblock {\em JMIR Form Res}, 6(1):e28003.
+
+\bibitem[Cheng et~al., 2018]{GoogleHomediabetes2018}
+Cheng, A., Raghavaraju, V., Kanugo, J., Handrianto, Y.~P., and Shang, Y.
+  (2018).
+\newblock {Development and evaluation of a healthy coping voice interface
+  application using the Google home for elderly patients with type 2 diabetes}.
+\newblock In {\em 2018 15th IEEE Annual Consumer Communications I\& Networking
+  Conference (CCNC)}, pages 1--5.
+
+\bibitem[{Commonwealth Scientific and Industrial Research Organisation
+  (CSIRO)}, nd]{csiro_chatbots}
+{Commonwealth Scientific and Industrial Research Organisation (CSIRO)} (n.d.).
+\newblock Chatbots apps for communication and social interaction for therapy.
+\newblock
+  \url{https://www.csiro.au/en/research/technology-space/ai/Chatbots-for-therapy}.
+\newblock Accessed: 2024-Sep-13.
+
+\bibitem[Crutzen et~al., 2011]{youngedu2011}
+Crutzen, R., Peters, G.-J.~Y., Portugal, S.~D., Fisser, E.~M., and Grolleman,
+  J.~J. (2011).
+\newblock An artificially intelligent chat agent that answers adolescents'
+  questions related to sex, drugs, and alcohol: an exploratory study.
+\newblock {\em Journal of Adolescent Health}, 48(5):514--519.
+
+\bibitem[de~Jesús and García, 2020]{dementiatherapy2020}
+de~Jesús, V. M.~M. and García, M. J.~S. (2020).
+\newblock {A Conversational Model for the Reminiscence Therapy of Patients with
+  Early Stage of Alzheimer}.
+\newblock {\em Research in Computing Science}, 149(4):57--67.
+
+\bibitem[DeAndrea, 2015]{onlinementalhealth2015}
+DeAndrea, D.~C. (2015).
+\newblock Testing the proclaimed affordances of online support groups in a
+  nationally representative sample of adults seeking mental health assistance.
+\newblock {\em Journal of Health Communication}, 20(2):147--156.
+
+\bibitem[Delbanco et~al., 2012]{patientsreaddocnotes2012}
+Delbanco, T., Walker, J., Bell, S.~K., Darer, J.~D., Elmore, J.~G., Farag, N.,
+  Feldman, H.~J., Mejilla, R., Ngo, L., Ralston, J.~D., Ross, S.~E., Trivedi,
+  N., Vodicka, E., and Leveille, S.~G. (2012).
+\newblock Inviting patients to read their doctors' notes: a quasi-experimental
+  study and a look ahead.
+\newblock {\em Annals of Internal Medicine}, 157(7):461--470.
+
+\bibitem[Delgadillo et~al., 2018]{delgadillo2018}
+Delgadillo, J., Saxon, D., and Barkham, M. (2018).
+\newblock Associations between therapists’ occupational burnout and their
+  patients’ depression and anxiety treatment outcomes.
+\newblock {\em Depression and Anxiety}, 35:844--850.
+
+\bibitem[Dubosson et~al., 2017]{smokingcessation2017}
+Dubosson, F., Schaer, R., Savioz, R., and Schumacher, M. (2017).
+\newblock Going beyond the relapse peak on social network smoking cessation
+  programmes: {ChatBot} opportunities.
+\newblock {\em Swiss Medical Informatics}, 33.
+
+\bibitem[Echeazarra et~al., 2021]{tensiobot2021}
+Echeazarra, L., Pereira, J., and Saracho, R. (2021).
+\newblock {TensioBot: a Chatbot Assistant for Self-Managed in-House Blood
+  Pressure Checking}.
+\newblock {\em Journal of Medical Systems}, 45(4):54.
+
+\bibitem[Elmasri and Maeder, 2016]{alcoholism2016}
+Elmasri, D. and Maeder, A. (2016).
+\newblock {A Conversational Agent for an Online Mental Health Intervention}.
+\newblock In Ascoli, G.~A., Hawrylycz, M., Ali, H., Khazanchi, D., and Shi, Y.,
+  editors, {\em {Brain Informatics and Health: International Conference, BIH
+  2016, Omaha, NE, USA, October 13-16, 2016 Proceedings}}, pages 243--251,
+  Cham. Springer.
+
+\bibitem[Es et~al., 2025]{ragas2025}
+Es, S., James, J., Espinosa-Anke, L., and Schockaert, S. (2025).
+\newblock Ragas: Automated evaluation of retrieval augmented generation.
+
+\bibitem[Fitzpatrick et~al., 2017]{woebot2017}
+Fitzpatrick, K.~K., Darcy, A., and Vierhile, M. (2017).
+\newblock {Delivering Cognitive Behavior Therapy to Young Adults With Symptoms
+  of Depression and Anxiety Using a Fully Automated Conversational Agent
+  (Woebot): A Randomized Controlled Trial}.
+\newblock {\em JMIR Ment Health}, 4(2):e19.
+
+\bibitem[Fred and Scheid, 2018]{physicianburnout2018}
+Fred, H.~L. and Scheid, M.~S. (2018).
+\newblock {Physician Burnout: Causes, Consequences, and (?) [sic] Cures}.
+\newblock {\em Texas Heart Institute Journal}, 45(4):198--202.
+
+\bibitem[Goh et~al., 2024]{DiagnosticReasoningLLM2024}
+Goh, E., Gallo, R., Hom, J., Strong, E., Weng, Y., Kerman, H., Cool, J.~A.,
+  Kanjee, Z., Parsons, A.~S., Ahuja, N., Horvitz, E., Yang, D., Milstein, A.,
+  Olson, A. P.~J., Rodman, A., and Chen, J.~H. (2024).
+\newblock Large language model influence on diagnostic reasoning: A randomized
+  clinical trial.
+\newblock {\em JAMA Network Open}, 7(10):e2440969--e2440969.
+
+\bibitem[Gold and McClung, 2006]{patienteducation2006}
+Gold, D.~T. and McClung, B. (2006).
+\newblock Approaches to patient education: emphasizing the long-term value of
+  compliance and persistence.
+\newblock {\em The American Journal of Medicine}, 119(4 Suppl 1):S32--S37.
+
+\bibitem[Gong et~al., 2020]{mydiabetescoach2020}
+Gong, E., Baptista, S., Russell, A., Scuffham, P., Riddell, M., Speight, J.,
+  Bird, D., Williams, E., Lotfaliany, M., and Oldenburg, B. (2020).
+\newblock {My Diabetes Coach, a Mobile App-Based Interactive Conversational
+  Agent to Support Type 2 Diabetes Self-Management: Randomized
+  Effectiveness-Implementation Trial}.
+\newblock {\em Journal of Medical Internet Research}, 22(11):e20322.
+
+\bibitem[{Guide to Protecting the Confidentiality of Personally Identifiable
+  Information (PII)}, 2010]{nist}
+{Guide to Protecting the Confidentiality of Personally Identifiable Information
+  (PII)} (2010).
+\newblock Recommendations of the National Institute of Standards and
+  Technology, Special Publication.
+
+\bibitem[Hauser-Ulrich et~al., 2020]{selma2020}
+Hauser-Ulrich, S., Künzli, H., Meier-Peterhans, D., and Kowatsch, T. (2020).
+\newblock A smartphone-based health care chatbot to promote self-management of
+  chronic pain {(SELMA)}: Pilot randomized controlled trial.
+\newblock {\em Journal of Medical Internet Research}, 8:e15806.
+
+\bibitem[Hoermann et~al., 2017]{reviewmental2017}
+Hoermann, S., McCabe, K.~L., Milne, D.~N., and Calvo, R.~A. (2017).
+\newblock {Application of Synchronous Text-Based Dialogue Systems in Mental
+  Health Interventions: Systematic Review}.
+\newblock {\em J Med Internet Res}, 19(8):e267.
+
+\bibitem[Huang et~al., 2015]{TeenChat2015}
+Huang, J., Li, Q., Xue, Y., Cheng, T., Xu, S., Jia, J., et~al. (2015).
+\newblock {Teenchat: A Chatterbot System for Sensing and Releasing
+  Adolescents’ Stress}.
+\newblock In {\em International Conference on Health Information Science},
+  volume 9559 of {\em Lecture Notes in Computer Science}, pages 133--145,
+  Queensland, Australia. Springer, Cham.
+
+\bibitem[Hudlicka, 2013]{hudlicka2013}
+Hudlicka, E. (2013).
+\newblock {Virtual Training and Coaching of Health Behavior: Example from
+  Mindfulness Meditation Training}.
+\newblock {\em Patient Education and Counseling}, 92(2):160--166.
+
+\bibitem[Ireland et~al., 2016]{harlie2016}
+Ireland, D., Atay, C., Liddle, J., Bradford, D., Lee, H., Rushin, O., Mullins,
+  T., Angus, D., Wiles, J., McBride, S., and Vogel, A. (2016).
+\newblock {Hello Harlie: Enabling Speech Monitoring Through Chat-Bot
+  Conversations}.
+\newblock In {\em Studies in Health Technology and Informatics}, volume 227,
+  pages 55--60. IOS Press.
+
+\bibitem[Jang et~al., 2021]{adhd2021}
+Jang, S., Kim, J.-J., Kim, S.-J., Hong, J., Kim, S., and Kim, E. (2021).
+\newblock {Mobile app-based chatbot to deliver cognitive behavioral therapy and
+  psychoeducation for adults with attention deficit: A development and
+  feasibility/usability study}.
+\newblock {\em International Journal of Medical Informatics}, 156:104440.
+
+\bibitem[Kannampallil et~al., 2023]{depressioncoach2023}
+Kannampallil, T., Ajilore, O.~A., Lv, N., et~al. (2023).
+\newblock Effects of a virtual voice-based coach delivering problem-solving
+  treatment on emotional distress and brain function: a pilot {RCT} in
+  depression and anxiety.
+\newblock {\em Translational Psychiatry}, 13:166.
+
+\bibitem[Katz et~al., 2021]{care4life2021}
+Katz, R.~J., Magee, M.~F., Nunlee-Bland, G., Johnson, P., Witkin, L., Nassar,
+  C., Bourges, C., Brown, K., Cohen, J., Cioletti, A., Getaneh, A., Young, H.,
+  Payne, D., Hopkins, A., and Mavritte, T. (2021).
+\newblock {Comparing Three Methods to Help Patients Manage Type 2 Diabetes}.
+\newblock Available from: \url{https://www.ncbi.nlm.nih.gov/books/NBK602704/}.
+
+\bibitem[Katz et~al., 2024]{gpt4israeli2024}
+Katz, U., Cohen, E., Shachar, E., Somer, J., Fink, A., Morse, E., et~al.
+  (2024).
+\newblock {GPT versus Resident Physicians — A Benchmark Based on Official
+  Board Scores}.
+\newblock {\em NEJM AI}.
+
+\bibitem[Kocaballi et~al., 2020]{healthprompts2020}
+Kocaballi, A.~B., Quiroz, J.~C., Rezazadegan, D., Berkovsky, S., Magrabi, F.,
+  Coiera, E., and Laranjo, L. (2020).
+\newblock {Responses of Conversational Agents to Health and Lifestyle Prompts:
+  Investigation of Appropriateness and Presentation Structures}.
+\newblock {\em J Med Internet Res}, 22(2):e15823.
+
+\bibitem[Korom, 2024]{korom2024}
+Korom, R. (2024).
+\newblock {Using Large Language Models as Clinical Decision Support Tools in a
+  Large Urgent Care Practice in Nairobi, Kenya}.
+\newblock NLP SUMMIT Healthcare,
+  https://www.nlpsummit.org/using-large-language-models-as-clinical-decision-support-tools-in-a-large-urgent-care-practice-in-nairobi-kenya/.
+
+\bibitem[Kowatsch et~al., 2017]{childhoodobesity2017}
+Kowatsch, T., Nißen, M., Shih, I.-Y., Rüegger, D., Volland, D., Filler, A.,
+  Künzler, F., Barata, F., Haug, S., Büchter, D., Brogle, B., Heldt, K.,
+  Gindrat, P., Farpour-Lambert, N., and l'Allemand, D. (2017).
+\newblock {Text-Based Healthcare Chatbots Supporting Patient and Health
+  Professional Teams: Preliminary Results of a Randomized Controlled Trial on
+  Childhood Obesity}.
+\newblock In {\em Persuasive Embodied Agents for Behavior Change (PEACH2017)
+  Workshop, co-located with the 17th International Conference on Intelligent
+  Virtual Agents (IVA 2017)}, Stockholm, Sweden.
+
+\bibitem[Kowatsch et~al., 2021]{max2021}
+Kowatsch, T., Schachner, T., Harperink, S., Barata, F., Dittler, U., Xiao, G.,
+  Stanger, C., von Wangenheim, F., Fleisch, E., Oswald, H., and M{\"o}ller, A.
+  (2021).
+\newblock {Conversational Agents as Mediating Social Actors in Chronic Disease
+  Management Involving Health Care Professionals, Patients, and Family Members:
+  Multisite Single-Arm Feasibility Study}.
+\newblock {\em Journal of Medical Internet Research}, 23(2):e25060.
+
+\bibitem[Kramer et~al., 2020]{walkingincentives2020}
+Kramer, J.-N., Künzler, F., Mishra, V., Smith, S.~N., Kotz, D., Scholz, U.,
+  Fleisch, E., and Kowatsch, T. (2020).
+\newblock {Which Components of a Smartphone Walking App Help Users to Reach
+  Personalized Step Goals? Results From an Optimization Trial}.
+\newblock {\em Annals of Behavioral Medicine}, 54(7):518--528.
+
+\bibitem[Kung et~al., 2023]{chaGPTpassesUSMLE2023}
+Kung, T.~H., Cheatham, M., Medenilla, A., Sillos, C., De~Leon, L., Elepa{\~n}o,
+  C., et~al. (2023).
+\newblock Performance of {ChatGPT} on {USMLE}: {Potential} for {AI}-assisted
+  medical education using large language models.
+\newblock {\em PLOS Digital Health}, 2(2):e0000198.
+
+\bibitem[Laranjo et~al., 2018]{CAhealthcarereview2018}
+Laranjo, L., Dunn, A.~G., Tong, H.~L., Kocaballi, A.~B., Chen, J., Bashir, R.,
+  Surian, D., Gallego, B., Magrabi, F., Lau, A. Y.~S., and Coiera, E. (2018).
+\newblock Conversational agents in healthcare: a systematic review.
+\newblock {\em Journal of the American Medical Informatics Association :
+  JAMIA}, 25(9):1248—1258.
+
+\bibitem[Lee and Strongwater, 2016]{nejm2016burnout}
+Lee, T. and Strongwater, S. (2016).
+\newblock Are {EMRs} to {Blame} for {Physician Burnout}?
+\newblock {\em Catalyst Carryover}, 2(5).
+
+\bibitem[Leo et~al., 2021]{burnoutcovid2021}
+Leo, C.~G., Sabina, S., Tumolo, M.~R., Bodini, A., Ponzini, G., Sabato, E., and
+  Mincarone, P. (2021).
+\newblock {Burnout Among Healthcare Workers in the COVID 19 Era: A Review of
+  the Existing Literature}.
+\newblock {\em Frontiers in Public Health}, 9.
+
+\bibitem[Levin and Levin, 2006]{painmonitoring2006}
+Levin, E. and Levin, A. (2006).
+\newblock Evaluation of spoken dialogue technology for real-time health data
+  collection.
+\newblock {\em Journal of Medical Internet Research}, 8(4):e30.
+
+\bibitem[Lewis et~al., 2021]{raglewisetal2021}
+Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N.,
+  Küttler, H., Lewis, M., tau Yih, W., Rocktäschel, T., Riedel, S., and
+  Kiela, D. (2021).
+\newblock {Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks}.
+\newblock {\em Annual Conference on Neural Information Processing Systems,
+  NeurIPS 2020}.
+
+\bibitem[Li et~al., 2020]{dietforAD2020}
+Li, J., Maharjan, B., Xie, B., and Tao, C. (2020).
+\newblock {A Personalized Voice-Based Diet Assistant for Caregivers of
+  Alzheimer Disease and Related Dementias: System Development and Validation}.
+\newblock {\em J Med Internet Res}, 22(9):e19897.
+
+\bibitem[Li et~al., 2023]{llmsmodernmedicine2023}
+Li, R., Kumar, A., and Chen, J.~H. (2023).
+\newblock {{How Chatbots and Large Language Model Artificial Intelligence
+  Systems Will Reshape Modern Medicine: Fountain of Creativity or Pandora’s
+  Box?}}
+\newblock {\em JAMA Internal Medicine}, 183(6):596--597.
+
+\bibitem[Lopez et~al., 2025]{clinicalentityIE2025}
+Lopez, I., Swaminathan, A., Vedula, K., et~al. (2025).
+\newblock Clinical entity augmented retrieval for clinical information
+  extraction.
+\newblock {\em npj Digital Medicine}, 8:45.
+
+\bibitem[Lucas et~al., 2014]{willingtodisclose2014}
+Lucas, G.~M., Gratch, J., King, A., and Morency, L.-P. (2014).
+\newblock It’s only a computer: Virtual humans increase willingness to
+  disclose.
+\newblock {\em Computers in Human Behavior}, 37:94--100.
+
+\bibitem[Lucas et~al., 2017]{mentalhealthbarriers2017}
+Lucas, G.~M., Rizzo, A., Gratch, J., et~al. (2017).
+\newblock {Reporting Mental Health Symptoms: Breaking Down Barriers to Care
+  with Virtual Human Interviewers}.
+\newblock {\em Frontiers in Robotics and AI}, 4:1--9.
+
+\bibitem[Marcus, 2014]{educatepatientsandfam2014}
+Marcus, C. (2014).
+\newblock Strategies for improving the quality of verbal patient and family
+  education: a review of the literature and creation of the {EDUCATE} model.
+\newblock {\em Health Psychology and Behavioral Medicine}, 2(1):482--495.
+
+\bibitem[Martínez-Miranda, 2017]{ecaforsuicide2017}
+Martínez-Miranda, J. (2017).
+\newblock {Embodied Conversational Agents for the Detection and Prevention of
+  Suicidal Behaviour: Current Applications and Open Challenges}.
+\newblock {\em Journal of Medical Systems}, 41(135).
+
+\bibitem[McGreevey et~al., 2020]{ethicallimitations_2020}
+McGreevey, John~D., I., Hanson, C.~William, I., and Koppel, R. (2020).
+\newblock {Clinical, Legal, and Ethical Aspects of Artificial
+  Intelligence–Assisted Conversational Agents in Health Care}.
+\newblock {\em JAMA}, 324(6):552--553.
+
+\bibitem[Meeker et~al., 2016]{SimCoach2016}
+Meeker, D., Cerully, J.~L., Johnson, M., Iyer, N., Kurz, J., and Scharf, D.~M.
+  (2016).
+\newblock {SimCoach Evaluation: A Virtual Human Intervention to Encourage
+  Service-Member Help-Seeking for Posttraumatic Stress Disorder and
+  Depression}.
+\newblock {\em Rand Health Quarterly}, 5(3):13.
+
+\bibitem[Melo et~al., 2024]{melo2024chatgpt}
+Melo, A., Silva, I., and Lopes, J. (2024).
+\newblock Chatgpt: A pilot study on a promising tool for mental health support
+  in psychiatric inpatient care.
+\newblock {\em International Journal of Psychiatric Trainees}.
+
+\bibitem[Mills et~al., 2024]{contraceptionreview2024}
+Mills, R., Mangone, E.~R., Lesh, N., Jayal, G., Mohan, D., and Baraitser, P.
+  (2024).
+\newblock {Chatbots That Deliver Contraceptive Support: Systematic Review}.
+\newblock {\em Journal of Medical Internet Research}, 26:e46758.
+
+\bibitem[Miner et~al., 2017]{machinesinmentalhealth2017}
+Miner, A.~S., Milstein, A., and Hancock, J.~T. (2017).
+\newblock {Talking to Machines About Personal Mental Health Problems}.
+\newblock {\em JAMA}, 318(13):1217--1218.
+
+\bibitem[Miner et~al., 2016]{mentalhealthandviolence2016}
+Miner, A.~S., Milstein, A., Schueller, S., Hegde, R., Mangurian, C., and Linos,
+  E. (2016).
+\newblock {Smartphone-Based Conversational Agents and Responses to Questions
+  About Mental Health, Interpersonal Violence, and Physical Health}.
+\newblock {\em JAMA Internal Medicine}, 176(5):619--625.
+
+\bibitem[Miner et~al., 2019]{aipsychotherapy2019}
+Miner, A.~S., Shah, N., Bullock, K.~D., Arnow, B.~A., Bailenson, J., and
+  Hancock, J. (2019).
+\newblock {Key Considerations for Incorporating Conversational AI in
+  Psychotherapy}.
+\newblock {\em Frontiers in Psychiatry}, 10.
+
+\bibitem[Montenegro et~al., 2019]{CAsinhealthsurvey2019}
+Montenegro, J. L.~Z., da~Costa, C.~A., and da~Rosa~Righi, R. (2019).
+\newblock Survey of conversational agents in health.
+\newblock {\em Expert Systems with Applications}, 129:56--67.
+
+\bibitem[Morris et~al., 2018]{artificialempathy2018}
+Morris, R.~R., Kouddous, K., Kshirsagar, R., and Schueller, S.~M. (2018).
+\newblock {Towards an Artificially Empathic Conversational Agent for Mental
+  Health Applications: System Design and User Perceptions}.
+\newblock {\em J Med Internet Res}, 20(6):e10148.
+
+\bibitem[{NAMI, National Alliance on Mental Illness},
+  nd]{nami_mental_health_numbers}
+{NAMI, National Alliance on Mental Illness} (n.d.).
+\newblock Mental health by the numbers.
+\newblock Accessed: 2024-Sep-12.
+
+\bibitem[Nobles et~al., 2020]{noblesetal2020addiction}
+Nobles, A.~L., Leas, E.~C., Caputi, T.~L., et~al. (2020).
+\newblock Responses to addiction help-seeking from {Alexa, Siri, Google
+  Assistant, Cortana, and Bixby} intelligent virtual assistants.
+\newblock {\em npj Digital Medicine}, 3:11.
+
+\bibitem[Obradovich et~al., 2024]{opportunitiesrisks2024}
+Obradovich, N., Khalsa, S.~S., Khan, W.~U., et~al. (2024).
+\newblock Opportunities and risks of large language models in psychiatry.
+\newblock {\em NPP—Digital Psychiatry Neuroscience}, 2:8.
+
+\bibitem[Oh et~al., 2020]{panicbot2020}
+Oh, J., Jang, S., Kim, H., and Kim, J.-J. (2020).
+\newblock Efficacy of mobile app-based interactive cognitive behavioral therapy
+  using a chatbot for panic disorder.
+\newblock {\em International Journal of Medical Informatics}, 140:104171.
+
+\bibitem[Palanica et~al., 2019]{mouth2019}
+Palanica, A., Thommandram, A., Lee, A., Li, M., and Fossat, Y. (2019).
+\newblock Do you understand the words that are comin outta my mouth? voice
+  assistant comprehension of medication names.
+\newblock {\em npj Digital Medicine}, 2:55.
+
+\bibitem[Perlis, 2023]{Perlis2023}
+Perlis, R.~H. (2023).
+\newblock {Research Letter: Application of GPT-4 to select next-step
+  antidepressant treatment in major depression}.
+\newblock {\em medRxiv}.
+
+\bibitem[Perlis et~al., 2024]{perlisetal2024}
+Perlis, R.~H., Goldberg, J.~F., Ostacher, M.~J., and Schneck, C.~D. (2024).
+\newblock Clinical decision support for bipolar depression using large language
+  models.
+\newblock {\em Neuropsychopharmacology}.
+
+\bibitem[Persell et~al., 2020]{rcthypertension2020}
+Persell, S.~D., Peprah, Y.~A., Lipiszko, D., Lee, J.~Y., Li, J.~J., Ciolino,
+  J.~D., Karmali, K.~N., and Sato, H. (2020).
+\newblock {Effect of Home Blood Pressure Monitoring via a Smartphone
+  Hypertension Coaching Application or Tracking Application on Adults With
+  Uncontrolled Hypertension: A Randomized Clinical Trial}.
+\newblock {\em JAMA Network Open}, 3(3):e200255.
+
+\bibitem[Peuters et~al., 2024]{healthylifestyleadolescents2024}
+Peuters, C., Maenhout, L., Cardon, G., De~Paepe, A., De~Smet, A., Lauwerier,
+  E., Leta, K., and Crombez, G. (2024).
+\newblock {A Mobile Healthy Lifestyle Intervention to Promote Mental Health in
+  Adolescence: A Mixed-Methods Evaluation}.
+\newblock {\em BMC Public Health}, 24(1):44.
+
+\bibitem[Philip et~al., 2014]{eds2014}
+Philip, P., Bioulac, S., Sauteraud, A., et~al. (2014).
+\newblock {Could a virtual human be used to explore excessive daytime
+  sleepiness in patients?}
+\newblock {\em Presence: Teleoperators and Virtual Environments},
+  23(4):369--376.
+
+\bibitem[Philip et~al., 2017]{mdddiagnosis2017}
+Philip, P., Micoulaud-Franchi, J.-A., Sagaspe, P., Sevin, E., Olive, J.,
+  Bioulac, S., and Sauteraud, A. (2017).
+\newblock Virtual human as a new diagnostic tool, a proof of concept study in
+  the field of major depressive disorders.
+\newblock {\em Scientific Reports}, 7:42656.
+
+\bibitem[Rhee et~al., 2014]{asthma2014}
+Rhee, H., Allen, J., Mammen, J., and Swift, M. (2014).
+\newblock Mobile phone-based asthma self-management aid for adolescents
+  {(mASMAA)}: a feasibility study.
+\newblock {\em Patient Preference and Adherence}, 8:63--72.
+
+\bibitem[Salberg et~al., 2019]{understandingnursing2019}
+Salberg, J., Bäckström, J., Röing, M., and Öster, C. (2019).
+\newblock {Ways of Understanding Nursing in Psychiatric Inpatient Care - A
+  Phenomenographic Study}.
+\newblock {\em Journal of Nursing Management}, 27(8):1826--1834.
+
+\bibitem[Shamekhi et~al., 2017]{stress2017}
+Shamekhi, A., Bickmore, T., Lestoquoy, A., and Gardiner, P. (2017).
+\newblock {Augmenting Group Medical Visits with Conversational Agents for
+  Stress Management Behavior Change}.
+\newblock {\em Lecture Notes in Computer Science}, pages 55--67.
+
+\bibitem[Shim et~al., 2021]{sleepcoach2021}
+Shim, H., Lowet, D., Luca, S., and Vanrumste, B. (2021).
+\newblock {Building blocks of a task-oriented dialogue system in the healthcare
+  domain}.
+\newblock In Shivade, C., Gangadharaiah, R., Gella, S., Konam, S., Yuan, S.,
+  Zhang, Y., Bhatia, P., and Wallace, B., editors, {\em Proceedings of the
+  Second Workshop on Natural Language Processing for Medical Conversations},
+  pages 47--57, Online. Association for Computational Linguistics.
+
+\bibitem[Siddals et~al., 2024]{siddals2024}
+Siddals, S., Torous, J., and Coxon, A. (2024).
+\newblock {``It happened to be the perfect thing'': experiences of generative
+  AI chatbots for mental health}.
+\newblock {\em npj Mental Health Research}, 3:48.
+
+\bibitem[Sillice et~al., 2018]{exerciseandsun2018}
+Sillice, M.~A., Morokoff, P.~J., Ferszt, G., Bickmore, T., Bock, B.~C.,
+  Lantini, R., and Velicer, W.~F. (2018).
+\newblock {Using Relational Agents to Promote Exercise and Sun Protection:
+  Assessment of Participants' Experiences With Two Interventions}.
+\newblock {\em J Med Internet Res}, 20(2):e48.
+
+\bibitem[Sinha et~al., 2023]{wysa2023}
+Sinha, C., Meheli, S., and Kadaba, M. (2023).
+\newblock {Understanding Digital Mental Health Needs and Usage With an
+  Artificial Intelligence-Led Mental Health App (Wysa) During the COVID-19
+  Pandemic: Retrospective Analysis}.
+\newblock {\em JMIR Formative Research}, 7:e41913.
+
+\bibitem[Sinsky et~al., 2016]{timeallocation2016}
+Sinsky, C., Colligan, L., Li, L., Prgomet, M., Reynolds, S., Goeders, L.,
+  Westbrook, J., Tutty, M., and Blike, G. (2016).
+\newblock Allocation of physician time in ambulatory practice: a time and
+  motion study in 4 specialties.
+\newblock {\em Annals of Internal Medicine}, 165(11):753--760.
+
+\bibitem[Somodevilla and de~Jesús, 2019]{dementiatherapy2019}
+Somodevilla, M.~J. and de~Jesús, V. M.~M. (2019).
+\newblock {Towards a Natural Language-based Dialog Model as an Assistant Tool
+  for Dementia Therapy}.
+\newblock {\em Research in Computing Science}, 148(3):195--203.
+
+\bibitem[Stade et~al., 2024a]{stade2024}
+Stade, E., Stirman, S.~W., Ungar, L.~H., et~al. (2024a).
+\newblock {Large Language Models Could Change the Future of Behavioral
+  Healthcare: A Proposal for Responsible Development and Evaluation}.
+\newblock {\em npj Mental Health Research}, 3:12.
+
+\bibitem[Stade et~al., 2024b]{READI2024}
+Stade, E.~C., Eichstaedt, j.~C., Kim, J.~P., and Stirman, S.~W. (2024b).
+\newblock {Readiness for AI Deployment and Implementation (READI): A Proposed
+  Framework for the Evaluation of AI-Mental Health Applications}.
+
+\bibitem[Tanaka et~al., 2017]{ecaforautism2017}
+Tanaka, H., Negoro, H., Iwasaka, H., and Nakamura, S. (2017).
+\newblock Embodied conversational agents for multimodal automated social skills
+  training in people with autism spectrum disorders.
+\newblock {\em PloS One}, 12(8):e0182151.
+
+\bibitem[Tu et~al., 2024]{AMIE2024}
+Tu, T., Palepu, A., Schaekermann, M., Saab, K., Freyberg, J., Tanno, R., Wang,
+  A., Li, B., Amin, M., Tomasev, N., Azizi, S., Singhal, K., Cheng, Y., Hou,
+  L., Webson, A., Kulkarni, K., Mahdavi, S.~S., Semturs, C., Gottweis, J.,
+  Barral, J., Chou, K., Corrado, G.~S., Matias, Y., Karthikesalingam, A., and
+  Natarajan, V. (2024).
+\newblock {Towards Conversational Diagnostic AI}.
+
+\bibitem[Weizenbaum, 1966]{eliza1966}
+Weizenbaum, J. (1966).
+\newblock {ELIZA}—a computer program for the study of natural language
+  communication between man and machine.
+\newblock {\em Communications of the ACM}, 9(1):36--45.
+
+\bibitem[Wolters et~al., 2009]{oldsocialstyle2009}
+Wolters, M., Georgila, K., Moore, J.~D., and MacPherson, S.~E. (2009).
+\newblock {Being Old Doesn’t Mean Acting Old: How Older Users Interact with
+  Spoken Dialog Systems}.
+\newblock {\em ACM Trans. Access. Comput.}, 2(1).
+
+\bibitem[Wu et~al., 2024]{aihesitancy2024}
+Wu, P.~F., Summers, C., Panesar, A., Kaura, A., and Zhang, L. (2024).
+\newblock {AI Hesitancy and Acceptability-Perceptions of AI Chatbots for
+  Chronic Health Management and Long COVID Support: Survey Study}.
+\newblock {\em JMIR Human Factors}, 11:e51086.
+
+\end{thebibliography}

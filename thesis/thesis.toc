@@ -1,0 +1,108 @@
+\thispagestyle {empty}
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{List of Figures}{\EnsureStandardFontEncoding {xi}}{chapter*.4}%
+\contentsline {chapter}{List of Tables}{\EnsureStandardFontEncoding {xiii}}{chapter*.5}%
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Background and Context}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Problem Statement and Research Gap}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Research Objectives and Questions}{2}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Significance of the Work}{2}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Structure of the Thesis}{2}{section.1.5}%
+\contentsline {chapter}{\numberline {2}Literature Review}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Overview of the Research Area}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Clinicians with burnout}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Automation through AI}{7}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Critical Analysis of Key Prior Studies}{8}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Challenges and mitigation strategies}{8}{subsection.2.2.1}%
+\contentsline {subsubsection}{Real-world healthcare data is unstructured}{8}{section*.7}%
+\contentsline {subsubsection}{Hallucinations from LLMs}{8}{section*.8}%
+\contentsline {subsubsection}{Privacy of data and patient confidentiality}{9}{section*.9}%
+\contentsline {subsubsection}{(Mis)trust in AI and `alert fatigue`}{11}{section*.10}%
+\contentsline {subsection}{\numberline {2.2.2}Conversational AI applications in healthcare}{11}{subsection.2.2.2}%
+\contentsline {subsubsection}{Informing patients about their condition and developing medical literacy}{12}{section*.12}%
+\contentsline {subsubsection}{Promoting public health and behavior change}{15}{section*.13}%
+\contentsline {subsubsection}{Checking personalized symptoms and offering a diagnosis}{17}{section*.14}%
+\contentsline {subsubsection}{Empowering medical students}{21}{section*.15}%
+\contentsline {subsubsection}{Monitoring post-treatment plans and supporting self-management for chronic diseases}{21}{section*.16}%
+\contentsline {subsubsection}{Managing mental health conditions and providing behavioral counseling}{26}{section*.17}%
+\contentsline {subsubsection}{Providing communication therapy}{32}{section*.18}%
+\contentsline {subsubsection}{Automating communication and documentation tasks for medical staff}{33}{section*.19}%
+\contentsline {subsubsection}{Limitations of conversational assistants in healthcare}{37}{section*.20}%
+\contentsline {section}{\numberline {2.3}Identification of Gaps or Unresolved Issues}{38}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Theoretical and Conceptual Framework}{39}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Positioning of the Present Research}{39}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Methodology}{41}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Methodology Overview}{41}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Data Sources and Collection Methods}{42}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Instruments, Tools, and Software}{44}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Step by Step Workflow}{45}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Justification of Methodological Choices}{45}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Limitations of the Chosen Approach}{46}{section.3.6}%
+\contentsline {chapter}{\numberline {4}Results and Discussion}{47}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Scenario-based Evaluation}{47}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Scenarios of multi-turn interactions in Greek}{48}{subsection.4.1.1}%
+\contentsline {subsubsection}{Happy Paths}{48}{section*.22}%
+\contentsline {subsubsection}{Scenario 1: Memory}{48}{section*.23}%
+\contentsline {subsubsection}{Scenario 2: Memory and reference resolution}{49}{section*.25}%
+\contentsline {subsubsection}{Scenario 3: Abbreviations and Acronyms}{50}{section*.27}%
+\contentsline {subsubsection}{Error Scenarios}{51}{section*.29}%
+\contentsline {subsubsection}{Scenario 4: Non-existent patient}{51}{section*.30}%
+\contentsline {subsubsection}{Scenario 5: Non-existent patient who shares the same last name with a known patient}{51}{section*.32}%
+\contentsline {subsubsection}{Scenario 6: Known patient with non-existent info}{51}{section*.34}%
+\contentsline {subsubsection}{Scenario 7: Doctor's name}{52}{section*.36}%
+\contentsline {subsubsection}{Disambiguation Scenarios}{53}{section*.38}%
+\contentsline {subsubsection}{Scenario 8: Disambiguation of identical patient name}{53}{section*.39}%
+\contentsline {subsubsection}{Scenario 9: Disambiguation of identical patient name and double intent}{54}{section*.41}%
+\contentsline {subsubsection}{Scenario 10: Free-form text}{55}{section*.43}%
+\contentsline {subsubsection}{Scenario 11: Free-form text}{56}{section*.45}%
+\contentsline {subsubsection}{Summarization Scenarios}{58}{section*.48}%
+\contentsline {subsubsection}{Scenario 12: Summary of a patient's record from structured text}{58}{section*.49}%
+\contentsline {subsubsection}{Scenario 13: Summary of a patient's record from free-form text}{59}{section*.51}%
+\contentsline {section}{\numberline {4.2}Presentation of Findings (organized by Experiments)}{60}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}First experiment with LLM: Gemma\_trained\_for\_Greek}{60}{subsection.4.2.1}%
+\contentsline {subsubsection}{One patient (MARIA.txt)}{60}{section*.53}%
+\contentsline {subsubsection}{Two patients (MARIA.txt, KOSTAS.txt)}{61}{section*.54}%
+\contentsline {subsection}{\numberline {4.2.2}Second experiment with LLM: KriKri}{62}{subsection.4.2.2}%
+\contentsline {subsubsection}{Eight patients}{63}{section*.56}%
+\contentsline {subsection}{\numberline {4.2.3}Third experiment: The Baseline System}{64}{subsection.4.2.3}%
+\contentsline {subsubsection}{Chunking}{64}{section*.58}%
+\contentsline {subsubsection}{Embedding Model}{64}{section*.59}%
+\contentsline {subsubsection}{Vectorstore}{65}{section*.60}%
+\contentsline {subsubsection}{LLM}{66}{section*.62}%
+\contentsline {subsubsection}{Memory}{66}{section*.63}%
+\contentsline {subsubsection}{Chain}{66}{section*.64}%
+\contentsline {subsection}{\numberline {4.2.4}Fourth experiment: System A}{69}{subsection.4.2.4}%
+\contentsline {subsubsection}{Chunking}{69}{section*.67}%
+\contentsline {subsubsection}{Embedding Model}{69}{section*.68}%
+\contentsline {subsubsection}{Vectorstore}{69}{section*.69}%
+\contentsline {subsubsection}{LLM}{70}{section*.71}%
+\contentsline {subsubsection}{Memory}{71}{section*.72}%
+\contentsline {subsubsection}{Tools}{71}{section*.73}%
+\contentsline {subsubsection}{Agent}{71}{section*.74}%
+\contentsline {subsection}{\numberline {4.2.5}Fifth experiment: System B}{75}{subsection.4.2.5}%
+\contentsline {section}{\numberline {4.3}Evaluation Results}{77}{section.4.3}%
+\contentsline {subsubsection}{A. Quantitative Analysis}{78}{section*.76}%
+\contentsline {subsubsection}{B. Qualitative Analysis}{79}{section*.77}%
+\contentsline {subsection}{\numberline {4.3.1}Quantitative Results from RAGAS}{79}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Explanation of low scores}{84}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Qualitative Results from Questionnaire}{86}{subsection.4.3.3}%
+\contentsline {subsubsection}{Naturalness}{86}{section*.93}%
+\contentsline {subsubsection}{Preference}{86}{section*.94}%
+\contentsline {section}{\numberline {4.4}Results Interpretation in Relation to the Research Questions}{88}{section.4.4}%
+\contentsline {subsubsection}{Interpretation of Results in Relation to RQ1}{88}{section*.96}%
+\contentsline {subsubsection}{Interpretation of Results in Relation to RQ2}{88}{section*.97}%
+\contentsline {subsubsection}{Interpretation of Results in Relation to RQ3}{89}{section*.98}%
+\contentsline {section}{\numberline {4.5}Comparison with Literature}{90}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Implications and Contributions}{90}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Limitations}{90}{section.4.7}%
+\contentsline {chapter}{\numberline {5}Conclusions}{93}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Summary of Key Findings}{93}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Contributions}{93}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Recommendations for Future Work}{94}{section.5.3}%
+\contentsline {chapter}{Bibliography}{95}{chapter*.103}%
+\contentsline {chapter}{Appendix \numberline {A}LLM Custom Prompts}{105}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}KriKri}{105}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Baseline System \bbl@greek@ampersand Sysytem A}{105}{section.1.A.2}%
+\contentsline {section}{\numberline {A.3}System B}{105}{section.1.A.3}%
+\contentsline {chapter}{Appendix \numberline {B}Questionnaire Results}{107}{appendix.1.B}%
+\contentsline {chapter}{Appendix \numberline {C}Interview Questions}{115}{appendix.1.C}%

@@ -13,29 +13,99 @@
 \fi
 
 \section{Methodology Overview}
-This chapter outlines the research design used to build and evaluate the conversational assistant. The project followed a three-month iterative cycle (November 2024 -- January 2025) that combined requirements elicitation, data curation, prototype implementation, and empirical evaluation. The assistant targets psychiatric nurses and supports natural language queries about patient profiles. The overarching methodological goal was to determine whether a retrieval-augmented conversational workflow could deliver timely, accurate information while aligning with clinical expectations.
+This chapter outlines the design, implementation, and preliminary testing of an AI–powered conversational assistant (CA) prototype, whose goal is to assist Greek psychiatric nurses in their day-to-day tasks. In particular, the assistant's role is to support nurses in performing the concrete task of accessing important pieces of information about a patient's profile (e.g. medications prescribed, etc.) accurately, on the spot, and in spoken natural language. The project followed a ten-month (November 2024 - August 2025) cycle that combined requirements elicitation, data curation, prototype implementation, and quantitative and qualitative evaluation. 
+
+The overarching methodological goal was to determine whether a retrieval-augmented conversational workflow could deliver timely, accurate information while aligning with clinical expectations.
+
+For this prototype, hypothetical data were used and protected health information (PHI) was not included.
+
+This work aims at answering the following research questions \label{RQs}:
+\begin{itemize}
+    \item RQ1) Is it feasible to develop a CA that helps nurses to extract information about a patients' profiles on demand?
+    \item RQ2) If so, how effective is the CA in terms of faithfulness, answer relevancy and answer correctness, context precision and context recall ?
+    \item RQ3) Is it effective? Does the CA improve the daily experience and satisfaction for the job of the nurse?
+\end{itemize}
+
 
 \section{Data Sources and Collection Methods}
-Requirements gathering relied on qualitative interviews with three psychiatric nurses who each participated in a two-hour remote session. The interviews surfaced the daily responsibilities of nurses, critical pain points, and essential data elements required for safe care. Key needs included continuous patient observation, medication administration, collaboration with multidisciplinary teams, and rapid access to the handwritten ``Patient Record'' that constitutes the single, authoritative source of information in the clinic. Participants emphasised that nurses share responsibility for all patients, making the recall of detailed social, medical, and behavioural information challenging without technological support.
+Typically, the design and development of dialog systems begins with the collection and analysis of sample dialogs between real people (e.g. between health providers and patients) \cite{BickmoreGiorgino2006}. The recordings are then transcribed and analyzed carefully to understand the range of topics, concepts, terms, and general structure typically used in patient–physician communication. However, for the particular project -- as well as for most industry-led ones -- there were no real template-dialogs to be followed, due to GDPR regulations, and the ethical principle of medical confidentiality, both of which prohibit the dissemination of medical conversations and data. The requirements gathering phase was implemented through interviews with professional psychiatric nurses.
 
-Because protected health information was inaccessible, the conversational assistant was evaluated using synthetic but realistic data. Fifty patient records were crafted based on interview insights: the first ten were manually written to mirror authentic documentation styles, while the remainder were generated in \textit{ChatGPT} following the same structure. The dataset mixes structured lists and free-form narratives to represent the variability of clinical notes. No personally identifiable or protected health information was included, ensuring compliance with privacy requirements.
+The design process, from project start to completion of the user studies, lasted three months (November 2024 to January 2025). During this period, I interviewed three nurses who worked in psychiatric clinics. Their experience and insights helped me learn about the stakeholders and the basic workflow requirements of the system. The interview material can be found in Appendix~\ref{sec:interview}.
+
+Three psychiatric nurses were interviewed for 2 hours each, over Zoom during the month of November, 2024. The interviewed nurses gave information voluntarily about what psychiatric care in Greek psychiatric clinics involves. They explained the different psychiatric facilities, the daily tasks of a nurse during a typical shift, what a nurse should pay attention to when dealing with patients, and how they collaborate with the rest of the medical team, i.e. doctors, psychologists, and social workers. From the discussions, certain ``pain points`` emerged. 
+
+First, the daily job of a psychiatric nurse is critical and very demanding, since nurses are responsible for the following tasks:
+\begin{enumerate}
+    \item observe the patients at all times, so they do not harm themselves or others
+    \item make sure the patients do not flee the clinic
+    \item get to know the patients well, mainly in order to understand who can pose a threat to themselves or others
+    \item administer medication and make sure the patients actually swallow it
+    \item convince the patients to follow their medication treatment, and set goals about their health 
+    \item monitor the patients and change their medication or their doses
+    \item liaise with other medical specialists (e.g. cardiologist, ophthalmologist, etc.) on behalf of the patients, and accompany them during visits
+\end{enumerate}
+Notably, there is no specific patient assigned to each nurse; rather, all nurses are responsible for all patients, and any nurse can observe and treat any patient.
+
+Second, there are no comprehensive electronic patient records.  A full record for each patient exists as hand-written notes from the relevant medical professionals, called ``Patient Record``, and includes information on the patient's demographic status (sex, age, etc.), social life (if they have a family, a social network, a job, etc.), medical history (their symptoms and diagnosis, hospitalization dates, other medical conditions, etc.), and psychological profile (their desires, dislikes, fears, etc.). Interestingly, there exists only one record for each patient (without extra copies), and it is updated manually in the event of a patient's readmission. There are, however, a few pieces of information that can also be retrieved electronically via the patient's Social Security Number (AMKA), that is the patient's medication regimen (i.e. dosage, schedule, duration pf treatment), the doctor who prescribed it, and their admission and discharge dates. 
+
+All three nurses expressed their excitement for a phone application that would aid them in their job. As a suggestion, they offered the following: having an assistant that knows pieces of information about each patient, which are personal to each nurse and customized by her/him. This customized patient record would help nurses in accessing important data about a specific patient on the spot, without the need to refer to the unique copy of the official, hand-written Patient Record, or rely on memory. 
+
+The resulting requirements and expectations were the following:
+\begin{enumerate}
+\item The assistant will not take the initiative to speak, but will answer questions asked by the nurse fast and reliably, in both voice and text format
+\item Voice-enabled for fast note recording and for hearing brief pieces of information on demand (e.g. - ``Who prescribed medication A? ``, -  ``Doctor X``)
+\item Text-enabled for reading longer notes (e.g. a summary of the medical history) and committing to memory
+\item Data that would be helpful are:
+\begin{itemize}
+    \item Medical Record Number (AMKA)
+    \item Cellphone of patient or of a contact
+    \item Diagnosis (name and date)
+    \item Admission and discharge dates, if any
+    \item Prescribed treatment plan (doses and schedule)
+    \item Past side-effects of drugs
+    \item Last injection and next injection
+    \item Past blood tests and next blood tests
+    \item Evaluation of patient's adherence to the medical plan
+    \item Evaluation of patient's mental and physical health
+    \item Brief social profile
+    \item Important advice or warning from the doctor
+\end{itemize}       
+Symptoms are well-known to the nurses, so they are not included in the data.
+\end{enumerate}
+
+In terms of data sources, actual, proprietary data from a real-world clinic were not made available for this project due to privacy concerns. This is why mock -- yet realistic -- data were used instead. Fifty patient records were created based on the insights from the three interviews. The first ten patient records were manually written to mirror authentic documentation styles, while the rest were generated by \textit{ChatGPT} following the same structure. The dataset features structured lists and free-form narratives to represent the variability of clinical notes. No personally identifiable or protected health information was included, ensuring compliance with privacy requirements. The dataset can be found and downloaded frrely from Kaggle here: \url{https://www.kaggle.com/datasets/anastasiakarakitsou/mockpatientdata/settings}.
 
 \section{Instruments, Tools, and Software}
-Development and experimentation were conducted in Kaggle notebooks equipped with dual Tesla T4 GPUs (15~GB each). The retrieval component employed FAISS for vector search, coupled with the multilingual sentence-transformer \texttt{paraphrase-multilingual-MiniLM-L12-v2} to embed both queries and patient note chunks. Two large language models (LLMs) were explored: the 2~billion parameter ``Gemma\_trained\_for\_Greek'' model and the 8~billion parameter \texttt{ilsp/Llama-Krikri-8B-Instruct}. LangChain provided orchestration utilities, including \texttt{ConversationalRetrievalChain} and \texttt{ConversationBufferMemory}, to inject retrieved context and maintain dialog state. Custom helper functions were introduced to resolve patient names and pronouns when native memory capabilities were insufficient.
+Development and experimentation were conducted in Kaggle notebooks equipped with dual Tesla T4 GPUs (15~GB each). I will describe five experiments overall: two early experiments, and then the three latest systems: the Baseline, System A, and System B. 
 
-\section{Procedures}
+The retrieval component I expereimented with FAISS and Chroma for vector search, coupled with the multilingual sentence-transformer \texttt{paraphrase-multilingual- MiniLM-L12-v2} to embed both queries and patient note chunks. 
+
+Three large language models (LLMs) were explored: the 2~billion parameter ``Gemma\_trained\_for\_Greek'' model, the 8~billion parameter \texttt{ilsp/Llama-Krikri-8B-Instruct}, and Gemini 2.5 Flash. 
+
+\textit{LangChain} provided orchestration utilities, including \texttt{ConversationalRetrievalChain} and \texttt{Conversa
+tionBufferMemory}, to inject retrieved context and maintain dialog state. 
+
+Custom functions were introduced to resolve patient names and pronouns when native memory capabilities were insufficient.
+
+\section{Step by Step Workflow}
 The methodological workflow progressed through the following stages:
 \begin{enumerate}
-    \item \textbf{Requirement elicitation}: synthesising interview findings into functional expectations, such as voice and text interaction, rapid retrieval, and personalisable patient snapshots.
-    \item \textbf{Data curation}: transforming interview themes into structured templates, generating synthetic clinical notes, and performing quality checks to ensure coverage of diagnoses, treatments, laboratory schedules, and social histories.
-    \item \textbf{Prototype implementation}: configuring the RAG pipeline, designing prompt templates that emphasise factual responses, and integrating memory mechanisms for follow-up queries.
-    \item \textbf{Evaluation design}: defining multi-turn scenarios in Greek that reflect daily nurse interactions. The scenarios encompassed happy paths (e.g. medication recall), error handling (unknown patients or missing information), disambiguation cases, free-form summaries, and full-record overviews. Golden responses were authored for each scenario to benchmark faithfulness, relevance, and correctness.
-    \item \textbf{Iterative refinement}: analysing system outputs, adjusting chunking strategies to improve patient-specific retrieval, and updating prompt constraints or memory handling when hallucinations appeared.
+    \item \textbf{Requirement elicitation}: synthesized interview findings into functional expectations, such as voice and text interaction, and rapid and accurate retrieval.
+    \item \textbf{Data curation}: transformed interview themes into realistic mock patient data, covering  daignoses, treatments, exam schedules, and social histories.
+    \item \textbf{Prototype implementation}: configured the RAG pipeline, and integrated an agent with memory and tool calling for follow-up queries.
+    \item \textbf{Evaluation design}: defined multi-turn scenarios in Greek that reflect daily nurse interactions. The scenarios included happy paths (e.g. medication recall), error handling (unknown patients or missing information), disambiguation cases, free-form summaries, and full-record overviews. Golden responses were added for each scenario to mark faithfulness, relevance, and correctness.
+    \item \textbf{Iterative refinement}: analyzed system outputs, adjusted chunking strategies to improve patient-specific retrieval, and updated prompt instructions or memory handling when hallucinations appeared.
 \end{enumerate}
 
 \section{Justification of Methodological Choices}
-Retrieval-augmented generation (RAG) was selected because it combines the generative flexibility of LLMs with traceable, document-grounded responses, mitigating the hallucination risks associated with standalone language models in healthcare \cite{raglewisetal2021}. Agentic orchestration through LangChain enabled tool switching and context management, supporting more natural multi-turn conversations \cite{clinicalentityIE2025}. Synthetic data allowed controlled experimentation without breaching confidentiality, while interviews ensured that mock records reflected the linguistic and informational nuances of Greek psychiatric practice. Evaluating through scenario-based testing provided a transparent link between user needs and observed system behaviour.
+For my experiments, I chose to use the RAG approach, a hybrid technique of combining an external and up-to-date database for information retrieval, and an LLM for the answer generation part. The RAG technique was selected as it is suitable for knowledge-intensive tasks (tasks that humans cannot be expected to execute without accessing an external knowledge source), and it is also well-known for the control and interpretability it offers during answer generation \cite{raglewisetal2021}. More importantly, RAG architecture offers traceability and transparency, as it can surface the answers' sources, while also mitigating the notorious LLM hallucinations (see Section \ref{hallucsLLM}). Additionally, I chose to apply an agent as a dialog orchestrator, as it enabled tool switching and chat history management, thus supporting more natural multi-turn conversations. In terms of the synthetic data, they allowed controlled experimentation without breaching confidentiality, while interviews ensured that the mock patient records reflected the linguistic and informational patterns of Greek psychiatric practice. Lastly, evaluating through scenario-based testing provided a transparent link between user needs and the system's behavior. Below follows a simple image depicting the RAG functionality: \footnote{Healthcare NLP Summit 2025, John Snow Labs.\url{https://app.swapcard.com/event/healthcare-nlp-summit-2025/planning/UGxhbm5pbmdfMjU3Njg5Ng==}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{images/Screenshot 2025-04-02 214315.png}
+    \caption{Productizing Healthcare ChatBots with John Snow Labs' Medical LLM-as-a-Judge}
+    \label{fig:RAG}
+\end{figure}
 
 \section{Limitations of the Chosen Approach}
-The reliance on synthetic records limits external validity until the assistant is trialled with real patient data under clinical supervision. GPU memory ceilings on Kaggle constrained the length of conversations and the size of models that could be deployed, occasionally causing inference crashes after multiple queries. Custom memory solutions depended on accurate pronoun resolution and therefore struggled when multiple patients were referenced in quick succession. Finally, the absence of practicing nurses in the initial evaluation means that perceived usefulness and workflow fit must be validated in future in-clinic studies.
-
+Relying on synthetic patient records limits external validity until the assistant is used with real patient data under clinical supervision. GPU memory ceilings on Kaggle constrained the length of conversations and the size of models that could be deployed, occasionally causing inference crashes after multiple queries. Custom memory solutions depended on accurate pronoun resolution, and therefore struggled when multiple patients were referenced in quick succession. Finally, the absence of practicing nurses in the initial evaluation means that perceived usefulness and workflow fit must be validated in future in-clinic studies.

@@ -13,11 +13,13 @@
 \fi
 
 \section{Scenario-based Evaluation}
-The assistant was evaluated across thirteen multi-turn scenarios designed to mirror the workflows uncovered during requirements elicitation. Each scenario compared the assistant's responses against golden references to assess faithfulness, relevance, and correctness. The evaluation covered medication recall, reference resolution, abbreviation expansion, error handling, disambiguation, free-form reasoning, and patient summarisation tasks in Greek.
+The assistant was evaluated across thirteen multi-turn scenarios designed to represent the workflows uncovered during requirements elicitation. Each scenario compared the assistant's responses against golden references to assess faithfulness, relevance, and correctness. The evaluation covered medication recall, reference resolution, abbreviation expansion, error handling, disambiguation, free-form reasoning, and patient summarization tasks, all in Greek language.
 
 \subsection{Scenarios of multi-turn interactions in Greek}
 \subsubsection{Happy Paths}
-\paragraph{Scenario 1: Memory}
+
+\subsubsection{Scenario 1: Memory}
+
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.5} 
@@ -39,7 +41,7 @@ System - actual & \textgreek{Στα έγγραφα της Μαρίας Παπα�
 \caption{Scenario 1 (audios 1, 2): Memory - MARIA}
 \end{table}
 
-\paragraph{Scenario 2: Memory and reference resolution}
+\subsubsection{Scenario 2: Memory and reference resolution}
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.5} 
@@ -67,7 +69,7 @@ System - actual & \textgreek{Οι τρέχουσες ιατρικές συστά
 \caption{Scenario 2 (audios 3, 4, 5): Memory and reference resolution - KOSTAS}
 \end{table}
 
-\paragraph{Scenario 3: Abbreviations and Acronyms}
+\subsubsection{Scenario 3: Abbreviations and Acronyms}
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.5} 
@@ -106,7 +108,7 @@ System - actual & \textgreek{Ο Γιώργος Μακρής έχει διαγν�
 
  
 \subsubsection{Error Scenarios}
-\paragraph{Scenario 4: Non-existent patient}
+\subsubsection{Scenario 4: Non-existent patient}
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.5} 
@@ -122,7 +124,7 @@ System - actual & \textgreek{Δεν βρέθηκαν πληροφορίες σχ
 \caption{Scenario 4 (audio 10): Non-existent patient}
 \end{table}
 
-\paragraph{Scenario 5: Non-existent patient who shares the same last name with a known patient}
+\subsubsection{Scenario 5: Non-existent patient who shares the same last name with a known patient}
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.5} 
@@ -138,7 +140,7 @@ System - actual & \textgreek{Δεν βρέθηκαν πληροφορίες γι
 \caption{Scenario 5 (audio 11): Non-existent patient who shares the same last name with a known patient}
 \end{table}
 
-\paragraph{Scenario 6: Known patient with non-existent info}
+\subsubsection{Scenario 6: Known patient with non-existent info}
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.5} 
@@ -154,7 +156,7 @@ System - actual & \textgreek{Ο Κώστας Καράς δεν έχει ενέσ
 \caption{Scenario 6 (audio 12): Known patient with non-existent info - KOSTAS}
 \end{table}
 
-\paragraph{Scenario 7: Doctor's name}
+\subsubsection{Scenario 7: Doctor's name}
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.5} 
@@ -171,7 +173,7 @@ System - actual & \textgreek{Δεν βρέθηκαν δεδομένα για τ�
 \end{table}
 
 \subsubsection{Disambiguation Scenarios}
-\paragraph{Scenario 8: Disambiguation of identical patient name}
+\subsubsection{Scenario 8: Disambiguation of identical patient name}
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.5} 
@@ -206,7 +208,7 @@ System - actual & \textgreek{OK. Το κοινωνικό ιστορικό της
 \caption{Scenario 8 (audio 14, 15): Disambiguation of identical patient name - PATIENT 13 and PATIENT 15}
 \end{table}
 
-\paragraph{Scenario 9: Disambiguation of identical patient name and double intent}
+\subsubsection{Scenario 9: Disambiguation of identical patient name and double intent}
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.5} 
@@ -226,7 +228,7 @@ System - actual & \textgreek{Η Δήμητρα Μακρή, 32 ετών (ΑΜΚΑ
 \caption{Scenario 9 (audio 16, 17): Disambiguation of identical patient name and double intent - PATIENT 10 and PATIENT 16}
 \end{table}
 
-\paragraph{Scenario 10: Free-form text}
+\subsubsection{Scenario 10: Free-form text}
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.5} 
@@ -250,7 +252,7 @@ System - actual & \textgreek{Ναι, υπάρχουν κάποιες συστά�
 \caption{Scenario 10 (audio 18, 19): Free-form text - PATIENT 40}
 \end{table}
 
-\paragraph{Scenario 11: Free-form text}
+\subsubsection{Scenario 11: Free-form text}
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.5} 
@@ -294,7 +296,7 @@ System - actual & \textgreek{Με βάση τα έγγραφα του ασθεν
 \end{table}
 
 \subsubsection{Summarization Scenarios}
-\paragraph{Scenario 12: Summary of a patient's record from structured text}
+\subsubsection{Scenario 12: Summary of a patient's record from structured text}
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.5} 
@@ -314,7 +316,7 @@ System - actual & \textgreek{Η γενική εικόνα για τον Θανά
 \caption{Scenario 12 (audio 24): Summary of a patient's record from structured text - PATIENT 29}
 \end{table}
 
-\paragraph{Scenario 13: Summary of a patient's record from free-form text}
+\subsubsection{Scenario 13: Summary of a patient's record from free-form text}
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.5} 
@@ -346,11 +348,658 @@ System - actual & \textgreek{Εδώ είναι μερικά σημαντικά �
 \caption{Scenario 13 (audio 25): Summary of a patient's record from free-form text - PATIENT 41}
 \end{table}
 
+\section{Presentation of Findings (organized by Experiments)}
+\subsection{First experiment with LLM: Gemma\_trained\_for\_Greek}
+I first started experimenting with “Gemma\_trained\_for\_Greek” of 2 B parameters, which I downloaded from Kaggle \footnote{Gemma\_trained\_for\_Greek, Accessed May 2025. \url{https://www.kaggle.com/models/soloupis/gemma\_trained\_for\_greek}}, the sentence transformer embedding model "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2", as it is multilingual and includes Greek, and the FAISS vector database. 
+
+To add a memory component during inference, I used two custom functions: one to extract the current patient’s name from the query, and the second to resolve personal pronouns such as \textgreek{του, της, αυτήν}, etc. and replace the pronoun with the latest patient’s name. Memory updates were fully manual and did not hold any conversational steps (i.e. past question-answer pairs). Only later did I learn that \textit{LangChain} had a built-in memory module, so I used it in my next experiment (see Section \ref{krikri}).
+
+The constraints of this approach were not unimportant: first, the query had to have a pronoun in order for the custom memory to work, and second, the system crashed after 3 queries due to the available Kaggle GPU (VRAM) memory threshold of 30 GB. I experimented with one (1), and then with two (2) patients. As it is obvious from the examples below, the results with one patient were mostly fine, but with two patients they were disappointing, as the answers were either incorrect or mixed-up, or contained English words.
+
+\subsubsection{One patient (MARIA.txt)}
+
+Experimental Query 1: \textgreek{Η Μαρία Παπαδοπούλου τι αγωγή παίρνει στην παρούσα φάση?} \\
+System - golden: \textgreek{Η Μαρία Παπαδοπούλου παίρνει αλπραζολάμη για τις κρίσεις πανικού με δοσολογία 0,5 mg και πρόγραμμα 2 φορές την ημέρα.} \\
+System - actual: \textgreek{Η Μαρία Παπαδοπούλου παίρνει αλπραζολάμη με δοσολογία (0.5 m}g) \textgreek{και πρόγραμμα 2 φορές την ημέρα.} \\
+\\
+Experimental Query 2: \textgreek{Και σε ποια δραστική ουσία έχει παρενέργειες αυτή?} \\
+Resolved Query 2: \textgreek{Και σε ποια δραστική ουσία έχει παρενέργειες Μαρία Παπαδοπούλου?}
+System - golden: \textgreek{Στο λίθιο.} \\
+System - actual: \textgreek{Η Μαρία Παπαδοπούλου έχει παρενέργειες από το λίθιο.}\\
+\\
+Experimental Query 3: \textgreek{Πότε είναι οι επόμενες αιματολογικές της εξετάσεις?} \\
+Resolved Query 3: \textgreek{Πότε είναι οι επόμενες αιματολογικές Μαρία Παπαδοπούλου εξετάσεις?} \\
+System - golden: \textgreek{Στις 15 Μαΐου 2025.} \\
+System - actual: \textgreek{Οι επόμενες αιματολογικές εξετάσεις της Μαρίας Παπαδοπούλου είναι στις 15 Μαΐου 2025.}\\
+\\
+Experimental Query 4: \textgreek{Πες μου την αγωγή του Κώστα Καρά.} \\
+Resolved Query 4: \textgreek{Πες μου Κώστα Καρά αγωγή Κώστα Καρά Κώστα Καρά.} \\
+System - golden: \textgreek{Παίρνει σερτραλίνη των 50} mg, 1 \textgreek{φορά το πρωί και ραμιπρίλη των 5} mg 1 \textgreek{φορά το πρωί.} \\
+System - actual: \textgreek{Δεν έχω αρκετές πληροφορίες για να απαντήσω στην ερώτηση.Θα μπορούσατε να παρέχετε περισσότερα πλαίσια ή πληροφορίες για να μπορέσω να απαντήσω στην ερώτηση?}\\
+
+\subsubsection{Two patients (MARIA.txt, KOSTAS.txt)}
+
+Experimental Query 1: \textgreek{Η Μαρία Παπαδοπούλου τι αγωγή παίρνει στην παρούσα φάση?} \\
+System - golden: \textgreek{Η Μαρία Παπαδοπούλου παίρνει αλπραζολάμη για τις κρίσεις πανικού με δοσολογία 0,5 mg και πρόγραμμα 2 φορές την ημέρα.} \\
+System - actual: \textgreek{Δεδομένων των απαντημένων πληροφοριών, δεν είναι γνωστό ποια φάρμακα παίρνει η Μαρία Παπαδοπούλου. Θα μπορούσατε να παρέχετε περισσότερα στοιχεία ή πληροφορίες για να μπορέσετε να απαντήσετε στην ερώτηση?} \\
+\\
+Experimental Query 2: \textgreek{Και σε ποια δραστική ουσία έχει παρενέργειες αυτή?} \\
+Resolved Query 2: \textgreek{Και σε ποια δραστική ουσία έχει παρενέργειες Μαρία Παπαδοπούλου?}
+System - golden: \textgreek{Στο λίθιο.} \\
+System - actual: \textgreek{Η Μαρία Παπαδοπούλου έχει παρενέργειες από τη δραστική ουσία ολανζαπίνη.}\\
+\\
+Experimental Query 3: \textgreek{Πότε είναι οι επόμενες αιματολογικές της εξετάσεις?} \\
+Resolved Query 3: \textgreek{Πότε είναι οι επόμενες αιματολογικές Μαρία Παπαδοπούλου εξετάσεις?} \\
+System - golden: \textgreek{Στις 15 Μαΐου 2025.} \\
+System - actual: \textgreek{Οι επόμενες αιματολογικές εξετάσεις της Μαρίας Παπαδοπούλου είναι} scheduled \textgreek{για την 15/5/2025}\\
+\\
+Experimental Query 4: \textgreek{Πες μου την αγωγή του Κώστα Καρά.} \\
+Resolved Query 4: \textgreek{Πες μου Κώστα Καρά αγωγή Κώστα Καρά Κώστα Καρά.} \\
+System - golden: \textgreek{Παίρνει σερτραλίνη των 50} mg, 1 \textgreek{φορά το πρωί και ραμιπρίλη των 5} mg 1 \textgreek{φορά το πρωί.} \\
+System - actual: \textgreek{Δεν υπάρχουν αρκετές πληροφορίες για να καθοριστεί η αγωγή για τον Κώστα Καρά. Θα μπορούσατε να παρέχετε περισσότερα δεδομένα ή συγκεκριμένες παραγγελίες για να μπορέσετε να καθορίσετε την αγωγή του Κώστα Καρά?}\\
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{Chapter4/png2pdf-1.pdf} 
+  \caption{\textbf{Memory:} Custom memory. Stores current patient’s name. Replaces pronouns like ``της``,``αυτό``,``η ασθενής`` with the stored patient’s name. \textbf{Encoder:} The embedding model paraphrase-multilingual-MiniLM-L12-v2 encodes the question. \textbf{Retriever:} Finds relevant context passages from patient documents using the embedding model. \textbf{LLM:} At the chain’s core lies the Gemma LLM with its default prompt.}
+  \label{fig:Gemma}
+\end{figure}
+
+
+\subsection{Second experiment with LLM: KriKri} \label{krikri}
+Then, I experimented with the quantized version of the LLM "ilsp/Llama-Krikri-8B-Instruct", because it was one of the newest models at that time (in May 2025) promising advanced language capabilities in both Greek and English - my two languages of interest - and an expanded context window of 128k tokens \footnote{Llama-Krikri-8B, 9 Feb 2025, \url{https://www.ilsp.gr/en/news/krikri/}} . For this instruction-focused LLM I added a custom prompt to minimize hallucinations, which can be found in Appendix~\ref{sec:prompts}. Αs an improvement from the previous custom memory, I added LangChain’s ``ConversationBufferWindowMemory``. I also used LangChain’s``ConversationalRetrievalChain`` to connect the memory to the LLM’s prompt as ``chat history`` together with the query and the context from the FAISS database. The system is outlined in Figure~\ref{fig:KriKri}. 
+
+Despite the memory boost, due to the available Kaggle GPU (VRAM) memory threshold of 30 GB, the system was still crashing after the third query, as the LLM model occupied almost half of the available memory (16 GB). I started experimenting with 2 patients reaching up to 8 patients, past which the results deteriorated, and the answers were mixed-up or plainly wrong, e.g.:
+
+\subsubsection{Eight patients}
+
+Experimental Query 1: \textgreek{Η Μαρία Παπαδοπούλου τι αγωγή παίρνει στην παρούσα φάση?}\\
+System - golden: \textgreek{Η Μαρία Παπαδοπούλου παίρνει αλπραζολάμη για τις κρίσεις πανικού με δοσολογία 0,5 mg και πρόγραμμα 2 φορές την ημέρα.} \\
+System - actual: \textgreek{Η πληροφορία που παρέχεται δεν περιέχει δεδομένα για ασθενή με όνομα Μαρία Παπαδοπούλου. Οι περιπτώσεις αφορούν τις ασθενείς Γεωργία Αναστασιάδη, Γεωργία Μαντά και Κώστα Καρά.} \\
+\\
+Resolved Query 2: \textgreek{Και σε ποια δραστική ουσία έχει παρενέργειες Μαρία Παπαδοπούλου?}
+System - golden: \textgreek{Στο λίθιο.} \\
+System - actual: \textgreek{Η δραστική ουσία που προκαλεί παρενέργειες στην παρούσα φάση για τη Γεωργία Αναστασιάδη είναι η βουπροπιόνη, με αναφερόμενες παρενέργειες την ταχυκαρδία και την αϋπνία.}\\
+\\
+Experimental Query 3: \textgreek{Πότε είναι οι επόμενες αιματολογικές της εξετάσεις?} \\
+System - golden: \textgreek{Στις 15 Μαΐου 2025.} \\
+System - actual: \textgreek{Δεν υπάρχουν πληροφορίες για ασθενή με όνομα Μαρία Παπαδοπούλου στο παρεχόμενο ιατρικό ιστορικό.}\\
+\\
+Experimental Query 4: \textgreek{Πες μου την αγωγή του Κώστα Καρά.} \\
+System - golden: \textgreek{Παίρνει σερτραλίνη των 50} mg, 1 \textgreek{φορά το πρωί και ραμιπρίλη των 5} mg 1 \textgreek{φορά το πρωί.} \\
+System - actual: \textgreek{Δεν υπάρχουν πληροφορίες για ασθενή με όνομα Κώστας Καρά στο παρεχόμενο ιατρικό ιστορικό.}\\
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{Chapter4/png2pdf-3.pdf} 
+  \caption{\textbf{Memory:} Retrieves the last 3 exchanges and passes these as chat history to the prompt. \textbf{Encoder:} The embedding model paraphrase-multilingual-MiniLM-L12-v2 encodes the question. \textbf{Retriever:} Finds relevant context passages from patient documents using the embedding model. \textbf{Chain:} At the chain’s core lies the Llama-Krikri-8B-Instruct LLM. In its prompt it receives the retrieved context, the chat history, the nurse’s original question, and custom instructions on how to answer it.}
+  \label{fig:KriKri}
+\end{figure}
+
+\subsection{Third experiment: The Baseline System}
+After experimenting with the two LLMs described above, I built ypon both of them onto a less memory-intensive solution using Gemini Flash 2.0 via an API call, as it allowed for more sequential queries. This evolved into my baseline system.
+
+\subsubsection{Chunking}
+In the baseline system, each patient’s text file was first loaded and then annotated with the patient’s name as helpful metadata to enable filtered, and more accurate, retrieved results. The documents were then segmented into smaller, overlapping chunks using the ``Recursive Character Text Splitter``. This splitter was chosen as it maintains semantic coherence while respecting character boundaries and hierarchical structures (i.e. first sentences, then paragraphs, and then words) within a document \footnote{"How to Use RecursiveCharacterTextSplitter in LangChain". Gary Svenson. Medium (blog), Last accessed July 6, 2025.  \url{https://medium.com/towards-agi/how-to-use-recursivecharactertextsplitter-in-langchain-23bcb0448fca}}. Each chunk was limited to 800 characters with an overlap of 100 characters, ensuring continuity of context between adjacent segments while avoiding excessive fragmentation. 
+
+\subsubsection{Embedding Model}
+The chunks were then converted into numerical representations. The embedding model that was used was the multilingual ``sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`` because Greek language was included in its training data and because of its suitability in semantic search \footnote{HuggingFace, ModelCard for sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2, Accessed July 5, 2025. \url{https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2}}. 
+
+\subsubsection{Vectorstore}
+The resulting embeddings of the chunks, enriched with attached metadata including the patient's name, were later stored in a \textit{FAISS} vector index for filtered similarity-based retrieval. For retrieval, the system was configured with k = 3, meaning that the three most semantically similar chunks were returned for each query. This relatively small value of k was chosen to reduce noise and ensure that only the most relevant context was passed to the LLM, thereby improving answer precision.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{Chapter4/png2pdf-5.pdf} 
+  \caption{\textbf{Metadata Annotation:}  Each patient file is labelled with the patient's name. \textbf{Chunking:} ``Recursive Character Text Splitter`` splits the text into chunks of 800 characters with 100-character overlap. \textbf{Embedding model:} The embedding model ``paraphrase-multilingual-MiniLM-L12-v2`` encodes each chunk and stores it into the FAISS vector database, together with the patient's name annotation as its metadata.}
+  \label{fig:BaselineChunkingEmbeddingFaiss}
+\end{figure}
+
+
+\subsubsection{LLM}
+The baseline system was based on Google's LLM ``gemini-2.0-flash`` model, which was integrated through the \textit{LangChain} framework. This model was chosen because of its very good performance and instruction-following capability, support of the Greek language, and generally better results than other Gemini models, even ``gemini-2.5-flash`` \footnote{Google Cloud (blog). Gemini 2.0 Flash. Accessed on July 5, 2025. \url{https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-0-flash}}. The model was configured with a low temperature (set to 0.2) for consistent and deterministic responses, which is especially important in the clinical domain. A customized system prompt written in Greek defined the model's behavior, which can be found in Appendix~\ref{sec:prompts}. In addition, a structured RAG prompt template was added to inject the necessary context into each query. This template incorporated the conversation history, the retrieved document chunks, and the user’s query, ensuring that the model grounded its responses in the available patient data rather than hallucinating unsupported information.
+
+\subsubsection{Memory}
+To support conversational continuity, the system employed ``ConversationBufferWindowMemory`` from \textit{LangChain}. This component maintained a history of the most recent dialogue turns, storing both user inputs and model outputs. The window size was set to 3, as the expected interactions by the nurses are supposed to be brief and straightforward. In this way, the memory preserved the three latest conversations without overwhelming the LLM model with the entire dialogue history. This enabled the system to correctly interpret follow-up questions, resolve references to previous queries, and sustain natural multi-turn interactions.
+
+\subsubsection{Chain}
+The language model, the retriever, the custom prompt, and the memory component were integrated into a ``ConversationalRetrievalChain``. At each query, the chain retrieved the most relevant document chunks from the vector store, combined them with the current conversation history stored in memory, and passed them into the custom RAG prompt template. The Gemini 2.0 Flash model, then, generated a response conditioned on both the retrieved knowledge and the conversational flow. The chain was further configured to return the source documents used in each response, ensuring transparency and enabling later evaluation of grounding accuracy.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{Chapter4/png2pdf-4.pdf} 
+  \caption{\textbf{Memory:} Retrieves the last 3 exchanges and passes these as chat history to the prompt. \textbf{Encoder:} The embedding model paraphrase-multilingual-MiniLM-L12-v2 encodes the question. \textbf{Retriever:} Finds relevant context passages from patient documents using the embedding model. \textbf{Chain:} At the chain’s core lies the Gemini Flash 2.0 LLM. In its prompt it receives the retrieved context, the chat history, the nurse’s original question, and custom instructions on how to answer it.}
+  \label{fig:Baseline}
+\end{figure}
+
+Below follows a table with the features of my first three experiments:
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.2} 
+\large % increases font size
+\begin{tabular}{|p{2.5cm}|p{4cm}|p{4cm}|p{4cm}|}
+\hline
+\textbf{Feature} & \textbf{Gemini} & \textbf{Krikri} & \textbf{Gemma} \\
+\hline
+\textbf{LLM} &
+Gemini-2.0-Flash (Google) &
+Llama-Krikri-8B-Instruct (HuggingFace) &
+Gemma (Local) \\
+\hline
+\textbf{Framework} &
+Full LangChain RAG pipeline &
+Full LangChain RAG pipeline &
+Manual FAISS + SentenceTransformer pipeline \\
+\hline
+\textbf{Memory} &
+ConversationBuffer-WindowMemory (window = 3) &
+ConversationBuffer-WindowMemory (window = 3) &
+Custom dict-based patient memory (coreference only) \\
+\hline
+\textbf{Embedding Implementation} &
+HuggingFace-Embeddings (LangChain) &
+HuggingFace-Embeddings (LangChain) &
+SentenceTransform-er.encode() (manual) \\
+\hline
+\textbf{Embedding Model Used} &
+paraphrase-multilingual-MiniLM-L12-v2 &
+paraphrase-multilingual-MiniLM-L12-v2 &
+paraphrase-multilingual-MiniLM-L12-v2 \\
+\hline
+\textbf{Vector Store} &
+FAISS (LangChain-managed) &
+FAISS (LangChain-managed) &
+FAISS (manually constructed) \\
+\hline
+\textbf{Distinctive Feature} &
+Long context window (1M tokens) and Google GenAI integration &
+Greek medical specialization and system prompt tuning &
+Lightweight Greek-trained LLM with custom memory \\
+\hline
+\end{tabular}
+\caption{Comparison of the three RAG-based nurse assistant systems}
+\normalsize
+\end{table}
+
+
+\subsection{Fourth experiment: System A}
+
+For System A I restructured the Baseline's architecture replacing the retreival chain with a reasoning agent and two helpful functions (tools). I used the \textit{LangChain} open-source framework to connect the four components (data source, LLM, tool calling, and agent) into a chatbot application. All components will be analyzed below.
+
+\subsubsection{Chunking}
+The data documents were split based on 550-character chunks with a 50-character overlap via the ``RecursiveCharacterTextSplitter``. Since all patient data contain similar information, it was originally difficult for the retriever to pinpoint the chunk for the correct patient, as mentioned above. Experimentation showed that prefixing each chunk with the patient name and their Social Security Number (AMKA), both of which were extracted from each patient document, was crucial for the retriever to identify the correct chunk.
+
+Moreover, appending the patient name as metadata, as done in the Baseline before, created the basis for tool calling at a later stage, which further ensured accurate retrievals.
+
+\subsubsection{Embedding Model}
+The chunks were then converted into numerical representations. The embedding model that was used was the multilingual ``sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`` as described above. Also, this model was preferred over others in general due to its better performance in semantic similarity scoring compared to others, even Greek Bert models \footnote{HuggingFace, Model Card for nlpaueb/bert-base-greek-uncased-v1 \url{https://huggingface.co/nlpaueb/bert-base-greek-uncased-v1} and Model Card for https://huggingface.co/nlpaueb/legal-bert-base-uncased \url{nlpaueb/legal-bert-base-uncased}, Accessed July 5, 2025.}.
+
+\subsubsection{Vectorstore}
+After gathering the embeddings of all the split chunks, these were put into the vector database \textit{Chroma}. \textit{Chroma} was ultimately selected over \textit{Faiss} because of its native support of metadata. This means that the former can filter by a piece of metadata -- in this project, the patient's name -- during its retrieval, whereas the latter cannot.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{Chapter4/png2pdf-6.pdf} 
+  \caption{\textbf{Metadata Annotation:}  Each patient file is labelled with the patient's name. \textbf{Chunking:} ``Recursive Character Text Splitter`` splits the text into chunks of 550 characters with 50-character overlap. \textbf{Chunk Prefixing:} The patient's name and AMKA is appended to each chunk in order to make it identifiable and improve retrieval accuracy. \textbf{Embedding model:} The embedding model ``paraphrase-multilingual-MiniLM-L12-v2`` encodes each chunk and stores it into the Chroma vector database, together with the patient's name annotation as its metadata.}
+  \label{fig:SystemAChunkingEmbeddingChroma}
+\end{figure}
+
+\subsubsection{LLM}
+The LLM used was again ``gemini-2.0-flash`` for the reasons described in the Baseline system above, as well as because of its suitability for function (tool) calling, and its use with agents. Especially important was the model's ample context window of 1 million tokens, since the length of patient notes together with the memory (chat history) can easily surpass an LLM’s context window. The model was configured with a very low temperature (set to 0.2) for consistent and deterministic responses, which is especially important in the clinical domain. I kept the same customized system prompt as described in the Baseline system above to define the model's behavior as a friendly assistant for Greek-speaking psychiatric nurses. The prompt ensured the responses are always in Greek, are patient-specific, and grounded strictly in the provided data as well as the chat history. Also, the prompt encouraged tool use and enforced responsible handling of ambiguous queries, such as those involving duplicate patient names.
+
+\subsubsection{Memory}
+To maintain conversational continuity and  help the assistant disambiguate patient references across multiple queries, a window-less memory component was added via ``LangChain's ConversationBufferMemory``. This component preserves the full dialogue history throughout the interaction, allowing the agent to reference any of the earlier parts of the conversation when handling responses. This functionality is particularly important in a clinical environment where users often ask follow-up questions based on earlier responses.
+
+\subsubsection{Tools} \label{tools}
+To enhance the agent's reasoning capabilities and modularity, the system incorporated a tool-based architecture using LangChain’s ``@tool`` decorator. Tools are basically callable functions that the language model can invoke when specific types of reasoning or external data access is required. Two custom tools were implemented: one to extract the patient name, and the other to get the relevant patient documents. 
+The first tool is responsible for identifying the patient’s full name in Greek, either directly from the current user query or from the conversation history. This disambiguation step is critical for keeping document retrieval patient-specific, especially when users omit or reference names indirectly (e.g. by using personal pronouns). 
+The second tool, performs a filtered retrieval from the \textit{Chroma} vector store using the patient's name as a metadata piece, returning only relevant chunks. This filtered retrieval ensures that only pertinent information is passed to the LLM.
+
+\subsubsection{Agent}
+Recently, AI agents (or ``agentic AI``) have become more and more popular, with a focus on logistics support, and assistive roles in long-term care \footnote{``AI Use-Case Compass — Healthcare: Intelligent Care, Delivered``, Adnan Masood, PhD., Medium (blog), Accessed June 28, 2025. \url{https://medium.com/@adnanmasood/ai-use-case-compass-healthcare-intelligent-care-delivered-ab27d8f8f610}}. Agents can achieve specific goals autonomously, by interpreting information, making decisions, and taking actions without needing step-by-step human instruction, but by leveraging certain tools at its disposal (see Section \ref{tools}). They are designed to handle more complex problems that require planning, adaptation, and coordination across different types of data and tasks \footnote{``The age of AI agents - Reasoning, autonomy, workflows, and LEGO blocks?``, Dr Josh Au Yeung, LinkedIn (blog), Accessed July 10, 2025. \url{https://www.linkedin.com/pulse/age-ai-agents-reasoning-autonomy-workflows-lego-blocks-au-yeung-qm3ke/}}.
+
+The dialog management was managed by a \textit{LangChain} agent, which served as the orchestrator among the language model, the tools, and the memory. The agent was initialized using an architecture that was designed to enable the model to reason step-by-step about which tool to invoke based on the conversation. This agent type (``AgentType.STRUCTURED\_CHAT\_ZERO\_SHOT\_REACT\_DESCRIPTION``) is particularly effective in scenarios that require interpretable decision-making, as it encourages the model to ``think aloud`` and choose actions in a structured manner. The agent was configured with access to custom tools and long-term memory, allowing it to retrieve patient-specific data and handle follow-up questions spanning multiple conversational turns. The extra parameter ``handle\_parsing\_errors=True`` ensured well formatted LLM outputs, while ``return\_intermediate\_steps=True`` allowed access to the retrieved documents and also helped in debugging of the reasoning process.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{Chapter4/png2pdf-7.pdf} 
+  \caption{\textbf{Agent:} The agent is initialized with the tools, the memory, and the LLM. The agent decides what and when to use for each query. \textbf{Memory:} Holds the entire conversation history and passes it as chat history to the agent. It is updated automatically by the agent after each turn. \textbf{Tools:} Two custom tool functions are used to extract the patient name and then call the retriever filtering by that name.}
+  \label{fig:SystemA}
+\end{figure}
 
 
 
-\section{Interpretation in Relation to the Research Questions}
-The results demonstrate the feasibility of deploying a retrieval-augmented conversational assistant for psychiatric nurses (RQ1). Across the happy-path scenarios, the assistant reproduced medication plans, laboratory schedules, and clinician recommendations with high fidelity, even when disambiguation or reference resolution was required. Performance on the error scenarios indicates that the system can decline to answer when information is missing, reducing the risk of unsupported claims. The detailed free-form and summarisation tasks show that the assistant can synthesise longer passages while remaining grounded in the retrieved notes, supporting positive answers to RQ2. RQ3 remains partially answered: while users reported enthusiasm during interviews, full validation of experience and satisfaction requires real-world deployments with practicing nurses.
+The Baseline System and System A are visually compared in the table below:
+
+\renewcommand{\arraystretch}{1.3}
+
+\begin{longtable}{|p{3cm}|p{6.5cm}|p{6.5cm}|}
+\caption{Comparison between the Baseline System and System A} \\
+\hline
+\textbf{Feature} & \textbf{Baseline System} & \textbf{System A} \\
+\hline
+\endfirsthead
+\multicolumn{3}{c}{{\tablename\ \thetable{} -- continued from previous page}} \\
+\hline
+\textbf{Feature} & \textbf{Baseline System} & \textbf{System A} \\
+\hline
+\endhead
+\hline \multicolumn{3}{r}{{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+
+\textbf{Overall Architecture} &
+Classical RAG pipeline implemented via \textit{LangChain}, integrating an LLM, retriever, custom RAG prompt, and short-term memory into a \texttt{ConversationalRetrievalChain}. &
+Extended RAG architecture including an LLM, retriever, memory, two callable tools, and a reasoning agent orchestrating all components within the \textit{LangChain} framework. \\
+\hline
+
+\textbf{Chunking} &
+Documents split into 800-character chunks with 100-character overlap using \textit{RecursiveCharacterTextSplitter}.  
+Each file annotated with patient name as metadata for filtered retrieval. &
+Documents split into smaller 550-character chunks with 50-character overlap.  
+Each chunk prefixed with patient name and AMKA (Social Security Number) for improved disambiguation, and patient name added as metadata for tool-based filtering. \\
+\hline
+
+\textbf{Embedding Model} &
+\texttt{sentence-transformers/
+paraphrase-multilingual-MiniLM
+-L12-v2} embedding model used to encode text chunks.  
+Chosen for multilingual (including Greek) coverage and reliable semantic search performance. &
+Same embedding model used (\texttt{paraphrase-multilingual-
+MiniLM-L12-v2}).  
+Explicitly preferred over Greek BERT alternatives for higher similarity accuracy and multilingual robustness. \\
+\hline
+
+\textbf{Vector Store} &
+\textit{FAISS} used for semantic retrieval, storing embeddings and metadata (patient name).  
+Retriever set to \texttt{k=3} to return the top three most relevant chunks per query. &
+Switched to \textit{Chroma} vector database for native metadata filtering (e.g., by patient name).  
+Chosen over FAISS due to direct support for structured queries during retrieval. \\
+\hline
+
+\textbf{LLM Model and Configuration} &
+\texttt{Gemini-2.0-Flash} integrated via \textit{LangChain}.  
+Low temperature (0.2) for deterministic and safe outputs.  
+Custom Greek system prompt defining assistant persona and grounding in retrieved data and chat history. &
+Same \texttt{Gemini-2.0-Flash} model retained.  
+Also configured with low temperature (0.2).  
+Prompt extended to encourage tool use, handle ambiguous queries, and maintain clinical responsibility.  
+Supports agent-based reasoning and function calling. \\
+\hline
+
+\textbf{Memory Component} &
+\texttt{ConversationBufferWindowMemory} (window size = 3).  
+Stores three most recent dialogue turns to preserve short-term conversational flow and handle follow-ups. &
+Same memory concept, implemented as \texttt{ConversationBufferMemory}.  
+Used by the agent to disambiguate references and maintain context across multiple reasoning steps. \\
+\hline
+
+\textbf{Chain or Agentic Framework} &
+Integrated through \texttt{ConversationalRetrievalChain}, which manages retrieval + context injection + LLM query execution.  
+No explicit reasoning agent or tool use. &
+Replaced the simple chain with a reasoning \textit{LangChain Agent} of type \texttt{STRUCTURED\_CHAT\_ZERO\_SHOT\_
+REACT\_DESCRIPTION}, coordinating tool usage and dialogue management.  
+Enabled structured reasoning (“think aloud”) and interpretable decision-making. \\
+\hline
+
+\textbf{Tools} &
+No tool-based reasoning. All retrieval handled by standard retriever via metadata filtering. &
+Introduced two custom tools:  
+(1) Extract patient name (from query or conversation).  
+(2) Retrieve patient-specific documents from \textit{Chroma}.  
+Tools invoked automatically by the agent to improve accuracy and modularity. \\
+\hline
+
+\textbf{Agent Component} &
+Not applicable (no agent used). &
+Agent orchestrates the interaction between LLM, tools, and memory.  
+Handles step-by-step reasoning and tool invocation, with parameters \texttt{return\_intermediate\_steps=True} and \texttt{handle\_parsing\_errors=True} for robust operation. \\
+\hline
+
+\textbf{Distinctive Features / Improvements} &
+Strong baseline RAG with reliable retrieval, short-term memory, and grounded Greek-language responses. &
+Adds agentic reasoning, tool-based modularity, and metadata-driven retrieval for higher interpretability, adaptability, and precision in patient-specific dialogues. \\
+\hline
+
+\end{longtable}
+
+
+
+\subsection{Fifth experiment: System B}
+For my last experiment, I did some LLM hyperparameter tuning and edited the prompt slightly to improve the naturalness of the system’s answers. To improve the scores from RAGAS evaluation, I made some changes as well. System B is identical to System A, except for the LLM tuning, and the text to speech component.
+
+Regarding hyperparamter tuning, I tried to make the dialog more natural, but still safe and accurate. Temperature was raised to 0.6 from 0.2 in System 1 for reducing the ``robotic`` feel, and for adding a bit of variability and ``naturalness`` in the responses, but still avoiding hallucinations. Then, top\_p was set to 0.9 in comparison to the default 1 value of System 1 for a little more coherent text and less diverse (fewer rare words) wording \footnote{`How to generate text: using different decoding methods for language generation with Transformers`. Edited July 2023. Accessed on September 14 2025. \url{https://huggingface.co/blog/how-to-generate}}. Moreover, I added the following instruction to the prompt: ``\textgreek{Να απαντάς με φυσικό και καθησυχαστικό τόνο, σαν να μιλάς σε συνάδελφο.}`` to enhance text naturalness. All custom prompts can be found in Appendix~\ref{sec:prompts}.
+
+Regarding the speech component, I decided ton Coqui's TTS, as the best choice among the rest few free-of-charge TTS systems for Greek (e.g. Meta's MMS-TTS Greek model \footnote{facebook/mms-tts-ell. \url{"facebook/mms-tts-ell"}}). The Greek model `tts\_models/el/cv/vits` was selected, in combination with a dates normalization and miligram function for a more natural Greek pronunciation.
+
+
+
+System A and B are visually described below:
+
+\renewcommand{\arraystretch}{1.3}
+
+\begin{longtable}{|p{3cm}|p{6.5cm}|p{6.5cm}|}
+\caption{Comparison between System A and System B} \\
+\hline
+\textbf{Feature} & \textbf{System A} & \textbf{System B} \\
+\hline
+\endfirsthead
+\multicolumn{3}{c}{{\tablename\ \thetable{} -- continued from previous page}} \\
+\hline
+\textbf{Feature} & \textbf{System A} & \textbf{System B} \\
+\hline
+\endhead
+\hline \multicolumn{3}{r}{{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+
+\textbf{Overall Architecture} &
+RAG pipeline implemented with \textit{LangChain}, integrating an LLM, memory, two tools, and a reasoning agent. &
+Same core architecture as System A, maintaining the RAG + tool + agent setup, but with tuned LLM parameters and an enhanced text-to-speech component. \\
+\hline
+
+\textbf{Chunking} &
+Documents split using \textit{RecursiveCharacterTextSplitter} into 550-character chunks with 50-character overlap. Each chunk prefixed with patient name and AMKA; metadata added for tool filtering. &
+Identical chunking configuration as System A. \\
+\hline
+
+\textbf{Embedding Model} &
+\texttt{sentence-transformers/
+paraphrase-multilingual-MiniLM
+-L12-v2}. Multilingual and high semantic performance. &
+Same embedding model and vectorization procedure. \\
+\hline
+
+\textbf{Vector Store} &
+\textit{Chroma} vector database, chosen for native metadata filtering (e.g., patient name). &
+Same \textit{Chroma} vector store used for retrieval. \\
+\hline
+
+\textbf{LLM Model and Configuration} &
+\texttt{Gemini-2.0-Flash}, context window = 1M tokens, temperature = 0.2 for deterministic, safe responses. Greek clinical assistant prompt used. &
+Same LLM, but tuned for more natural tone: temperature = 0.6, top\_p = 0.9, and extra Greek instruction for friendly tone. \\
+\hline
+
+\textbf{Memory Component} &
+\texttt{ConversationBufferMemory} used to preserve dialogue context and patient continuity. &
+Identical conversational memory setup retained. \\
+\hline
+
+\textbf{Tools} &
+Two tools: (1) Extract patient name, (2) Retrieve patient documents via metadata filtering from \textit{Chroma}. &
+Same two tools reused for reasoning and retrieval. \\
+\hline
+
+\textbf{Agent} &
+\texttt{STRUCTURED\_CHAT\_ZERO\_SHOT\_
+REACT\_DESCRIPTION} agent type, orchestrating reasoning between LLM, tools, and memory. &
+Identical agent configuration retained. \\
+\hline
+
+\textbf{Text-to-Speech (TTS)} &
+Text output only, optional \texttt{gTTS} for testing. &
+Replaced with \texttt{Coqui TTS}, Greek model \texttt{tts\_models/el/cv/vits}, with normalization for more natural pronunciation. \\
+\hline
+
+\textbf{Distinctive Features / Improvements} &
+Tool-based reasoning and metadata-driven retrieval through agentic RAG. &
+Enhanced naturalness via LLM tuning and high-quality Greek TTS. \\
+\hline
+
+\end{longtable}
+
+Based on these differences between the two main systems, I have renamed them henceforth to ``Nurse Agent Standard`` (ex-System A), and ``Nurse Agent Natural`` (ex-System B).
+
+\section{Evaluation Results}
+Evaluation is essential to verify the benefits and effectiveness of this question-answering assistant. Evaluating LLMs presents certain challenges due to their generative nature and lack of precise ground truth data. Traditional evaluation metrics used for discriminative models are often insufficient for assessing the quality, coherence, diversity, and usefulness of LLM-generated text. Below are the traditional evaluation metrics: WER (how many insertions, deletions, and substitutions required to transform the candidate into the reference string), Exact Match (measures accuracy), BLEU (how many n-grams in the generated text appear in the reference text), ROUGE (measures recall). Other metrics relevant to LLMs include precision (correctness), recall (completeness, i.e. reliability) of patient progress notes, and inference time (latency). However, these cannot evaluate semantics and context, as they are only focusing on word counts. Evaluating RAG systems is not straightforward either. As explained by \citeauthor{ragas2025} (2025), the RAGAs framework inventors, ``While the usefulness of retrieval-augmented strategies is clear, their implementation requires a significant amount of tuning, as the overall performance will be affected by the retrieval model, the considered corpus, the LM, or the prompt formulation, among others.`` It becomes obvious that all the above factors need to be measured and evaluated. 
+
+The following two sections below describe my full evaluation framework comprising both quantitative and qualitative methods.
+
+This thesis utilized a variety of simulated patients for the specialty of psychiatry. For its evaluation both quantitative and qualitative methods were used. First, the evaluation results from the RAGAs framework will be presented, and second the results from the questionnaire.
+
+\subsubsection{A. Quantitative Analysis}
+The RAGAs (Retrieval-Augmented Generation Assessment) framework is very popular for evaluating RAG applications. RAGAs uses LLMs under the hood to conduct the evaluation under various metrics. 
+The metrics that were used in this project were the following \footnote{rag-langchain-ragas (git repository), Accessed July 8, 2025.\url{https://github.com/benitomartin/rag-langchain-ragas}}:
+
+\begin{enumerate}
+\item Faithfulness (context Vs answer) \footnote{Ragas (website). Accessed July 1, 2025. \url{https://docs.ragas.io/en/latest/howtos/integrations/langchain/##evaluate}}: It measures generated hallucinations by assessing whether all claims in the generated answer can be inferred directly from the provided context. It is calculated from the answer and the retrieved context. The answer is scaled to a (0,1) range, and the higher score is the better. It answers to the question: ``Is the generated answer grounded to the context? ``
+\item Answer Relevancy (question Vs answer): It evaluates answer quality by assessing how relevant the generated answer is to the question. A lower score is assigned to answers that are incomplete or contain redundant information. This metric is computed using the question and the answer, with values ranging between 0 and 1, where higher scores indicate better relevancy. It answers to the question: ``Is the generated answer appropriate to the question? ``
+\item Answer Correctness (ground truth Vs answer): Assesses the accuracy of the generated answer when compared to the ground truth. This evaluation relies on the ground truth and the answer, with scores ranging from 0 to 1. A higher score indicates a closer alignment between the generated answer and the ground truth, signifying better correctness. It answers to the question: ``How close is the generated answer to the ground truth? ``
+\item Context Precision (retrieved context Vs question): It checks if the retriever gave relevant, i.e. non-redundant, content by assessing whether all golden chunks that are present in the retrieved contexts are ranked high, as they should ideally. This metric is computed using the question and the contexts, with values ranging between 0 and 1, with higher scores indicating better precision. It answers to the question: ``How useful the retrieved context is to answering the question? ``
+\item Context Recall (retrieved context Vs ground truth): It checks if all golden facts were present by measuring the extent to which the retrieved context aligns with the golden answer. It is computed based on the ground truth and the retrieved context, and the values range between 0 and 1, with higher values indicating better performance. It answers to the question: ``Did the retriever retrieve all the golden chunks?``
+\end{enumerate}
+
+
+
+\subsubsection{B. Qualitative Analysis}
+User feedback is essential to understand how real-world users will react to the assistant, as well as identify shortcomings and areas of improvement. Unfortunately, getting direct user feedback from psychiatric nurses was not possible for this project.
+
+
+%---------------------------------------------------
+
+\subsection{Quantitative Results from RAGAS}
+
+\subsection*{1.3.1.1 Results from RAGAs framework for Baseline}
+\subsection*{Summary Table - Average Metrics}
+The following table provides a high-level summary of how well the Baseline system performs in general.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l c}
+\toprule
+\textbf{Evaluation Metric} & \textbf{Average Score} \\
+\midrule
+Faithfulness          & 0.802 \\
+Answer Relevancy      & 0.347 \\
+Answer Correctness    & 0.316 \\
+Context Precision     & 0.548 \\
+Context Recall        & 0.399 \\
+\bottomrule
+\end{tabular}
+\caption{Baseline - Average scores for RAGAs metrics}
+\label{tab:ragas_avg_metrics_baseline}
+\end{table}
+
+\subsection*{Summary Plot}
+The following is a bar plot that compares the average score for each metric across the 25 queries.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{Chapter2/ragas_avg_plot-baseline.pdf}
+  \caption{Average scores for RAGAs metrics across 25 queries}
+  \label{fig:ragas_avg_metrics} 
+\end{figure}
+
+The metric of \textit{faithfulness} showed a high average score (0.802), indicating that the model’s responses were very close to the retrieved content, without hallucinations of extra facts.
+
+The metric of \textit{answer relevancy} is quite low (0.35), which indicates that many answers are not directly aligned with the user query. The reason may be that the retriever returned chunks that are related but not very specific, hence the generated answers were incomplete or contain redundant information.
+
+\textit{Answer correctness} has the lowest score (0.32), meaning that the actual information in the responses does not match the ground truth. This indicates that either the context coming from the retriever is not the right one or that the LLM does not choose the right facts from the retrieved chunks to generate its answer.
+
+\textit{Context precision} is almost random at 0.55, indicating that only about half of the retrieved context is really relevant to the query. This means that the other half is redundant information, which can explain the low scores for \textit{answer relevancy} and \textit{answer correctness} described above.
+
+Finally, the metric of \textit{context recall} is quite low (0.39), indicating that the retriever frequently fails to capture all of the necessary context. This score, like the score for \textit{context precision},  can also explain low \textit{answer relevancy} and \textit{answer correctness}.
+
+The overall picture is that the baseline system is faithful (0.80), i.e. it does not hallucinate much, which shows that the system prompt and LLM choice manage to constrain the model to retrieved context. The problem, though, lies in the retrieval quality, because the retriever mostly misses relevant passages (context recall = 0.39) and adds irrelevant information (context precision = 0.55). This is why for System 1 I focused in improving the chunking process, changed the vector database from \textit{Faiss} to \textit{Chroma}, and added the tools and the agent.
+
+
+\subsection*{1.3.1.2 Results from RAGAs framework for Nurse Agent Standard}
+\subsection*{Summary Table - Average Metrics}
+The following table provides a high-level summary of how well System A performs in general.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l c}
+\toprule
+\textbf{Evaluation Metric} & \textbf{Average Score} \\
+\midrule
+Faithfulness          & 0.739 \\
+Answer Relevancy      & 0.520 \\
+Answer Correctness    & 0.634 \\
+Context Precision     & 0.740 \\
+Context Recall        & 0.781 \\
+\bottomrule
+\end{tabular}
+\caption{System 1 - Average scores for RAGAs metrics}
+\label{tab:ragas_avg_metrics_system1}
+\end{table}
+
+\subsection*{Summary Plot}
+The following is a bar plot that compares the average score for each metric across the 25 queries.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{Chapter2/ragas_avg_plot-1.pdf}
+  \caption{System 1: Average scores for RAGAs metrics across 25 queries}
+  \label{fig:sys1_ragas_avg_metrics} 
+\end{figure}
+
+The metric of \textit{faithfulness} showed a relatively high average score (0.739), indicating that the model’s responses were generally consistent with the retrieved content.
+
+\textit{Context recall} (0.781) and \textit{context precision} (0.740) were aslo both relatively high, showing that the retrieval component of the assistant effectively selected relevant passages, and that the LLM component has used them efficiently when generating responses. 
+
+\textit{Answer correctness} scored 0.634, showing that there still is room for improvement for the LLM model to produce accurate answers consistently. This low score may be attributed to the fact that the golden answers were in some cases more or less detailed than the generated response, even though both were correct. Notably, \textit{answer relevancy} was the lowest among the metrics (0.520), which implies that while answers were often correct and grounded to the patient data, they did not always fully address the user’s intent or align closely with the query focus.
+
+Overall, the system shows a solid performance in faithfulness and context handling, but would benefit from further enhancements in answer generation.
+
+
+
+\subsection*{1.3.1.3 Results from RAGAs framework for Nurse Agent Natural}
+\subsection*{Summary Table - Average Metrics}
+The following table provides a high-level summary of how well System B performs in general.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l c}
+\toprule
+\textbf{Evaluation Metric} & \textbf{Average Score} \\
+\midrule
+Faithfulness          & 0.768 \\
+Answer Relevancy      & 0.690 \\
+Answer Correctness    & 0.700 \\
+Context Precision     & 0.840 \\
+Context Recall        & 0.790 \\
+\bottomrule
+\end{tabular}
+\caption{System 1 - Average scores for RAGAs metrics}
+\label{tab:ragas_avg_metrics_system1}
+\end{table}
+
+
+\subsection*{Summary Plot}
+The following is a bar plot that compares the average score for each metric across the 25 queries.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{Chapter2/SYS2ragas_avg_plot-2.pdf}
+  \caption{System 2: Average scores for RAGAs metrics across 25 queries}
+  \label{fig:sys2_ragas_avg_metrics} 
+\end{figure}
+
+\subsection{Explanation of low scores}
+After reviewing the results carefully, it was strikingly apparent that certain test cases had erratic metrics. 
+
+For example, the metric of \textit{faithfulness} was mostly near 1, but in some cases extremely low, or 0 (zero) or even non existent (NaN), because of retrieval gaps in the agent's workflow. The reason is that the agent avoided retrieving the same context twice for follow-up questions of a previous patient name. This resulted in the generated answer being considered as ``unfaithful``.
+
+Linked to retrieval's success or fail are the metrics of \textit{context precision and recall}, whose scores are very high (1) or very low (Nan/0). This extreme scoring exaggerates the gap between partial and complete retrieval failures.
+
+\textit{Answer relevancy} sometimes has NaN value because the LLM judge used by RAGAS judged the answer as failed or as a default (fallback) answer, even though for this case it was not. For example, all answers that correctly state that no information has been found in the retrieved documents or ask for patient disambiguation, got a NaN or a zero value.
+
+About \textit{answer correctness}, this metric has low values because even though the ground truth is precise (exact date, diagnosis, etc.), the response is somewhat vague, incomplete, or a little different (e.g. missing a date or a diagnosis). For example, the generated answer \textgreek{Δεν βρέθηκαν δεδομένα για την Κωνσταντίνα Λυμπερίου} judged against the reference \textgreek{Δεν υπάρχει αυτή η ασθενής} gets a score of only 0.456 in System 2, because the wording is different. Also, even though all rows have their golden answers, RAGAS sometimes doesn’t assign scores (NaN) when the system output is too indirect for a meaningful comparison.
+
+RAGAS's metrics are, of course, designed to be strict and highlight weaknesses in retrieval and generation, like in the systems described above. The relatively low and inconsistent RAGAS scores are partly explained by retrieval gaps in the two systems, but also partly by the strictness of the metrics themselves. The strictness leads to low and erratic scores, which do not always reflect the practical usefulness of the system in a clinical workplace. The NaN and zero values show that RAGAS sometimes totally refuses to evaluate an answer, rather than give a score for the correct part of it. This shows that RAGAS penalizes clinically useful yet incomplete answers much more harshly than a human evaluator would. It can be argued that RAGAS systematically underestimates the systems' performance in a clinical setting, where partial, or approximate answers can still be informative and useful. In short, while the low metrics highlight areas for technical improvement, they should be interpreted with caution and supplemented with human-centered evaluation to better capture the true effectiveness of the voicebot in clinical practice.
+
+
+\clearpage
+
+
+\subsection{Qualitative Results from Questionnaire}
+\subsubsection{Naturalness}
+Both Nurse Agent Standard and Nurse Agent Natural received very similar average ratings:
+
+Nurse Agent Standard: $2.34  (\sigma = 0.96)$
+
+Nurse Agent Natural: $2.34  (\sigma = 1.09)$
+
+The mode was 2 for both systems, meaning that the score “2” was the most commonly given naturalness score indicating that overall perceived naturalness was fairly low to moderate.
+
+Scores spanned the full 1–5 range. Distribution is very wide, with some strong positive ratings (up to 5), but most clustered around the lower end.
+
+There is no clear winner in naturalness, as average scores are nearly the same, implying that participants didn’t strongly perceive one system as more natural in isolation.
+
+\subsubsection{Preference}
+When asked to choose between the two systems, Nurse Agent Standard received the majority of the preference vote. Specifically:
+
+64\% preferred Nurse Agent Standard with 160 votes, with human\_9 preferring Nurse Agent Standard 80\% of the times
+
+36\% preferred Nurse Agent Natural with 90 votes, with human\_4 preferring Nurse Agent Natural 52\% of the times. 
+
+This suggests that although the naturalness ratings were almost identical, participants clearly preferred Nurse Agent Standard when making an explicit choice.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}llrr@{}}
+\toprule
+\textbf{humanEvaluator} & \textbf{Προτίμηση} & \textbf{Count} & \textbf{Percentage (\%)} \\
+\hline
+human\_1  & A & 16 & 64.0 \\
+          & B &  9 & 36.0 \\
+human\_10 & A & 13 & 52.0 \\
+          & B & 12 & 48.0 \\
+human\_2  & A & 14 & 56.0 \\
+          & B & 11 & 44.0 \\
+human\_3  & A & 18 & 72.0 \\
+          & B &  7 & 28.0 \\
+human\_4  & A & 12 & 48.0 \\
+          & B & 13 & 52.0 \\
+human\_5  & A & 17 & 68.0 \\
+          & B &  8 & 32.0 \\
+human\_6  & A & 17 & 68.0 \\
+          & B &  8 & 32.0 \\
+human\_7  & A & 18 & 72.0 \\
+          & B &  7 & 28.0 \\
+human\_8  & A & 15 & 60.0 \\
+          & B & 10 & 40.0 \\
+human\_9  & A & 20 & 80.0 \\
+          & B &  5 & 20.0 \\
+\hline
+\textbf{Total} & A & 160 & 64.0 \\
+               & B &  60 & 36.0 \\
+\bottomrule
+\end{tabular}
+\caption{Preferences (Προτίμηση) for each human evaluator between Nurse Agent Standard (A) and Nurse Agent Standard (B), reported as counts and percentages.}
+\label{tab:preferences}
+\end{table}
+ 
+Preference noticeably stands out compared to the ratings. The preference question ``forced`` a choice, and revealed a bias toward Nurse Agent Standard, even if its naturalness rating was not higher than Nurse Agent Natural.
+
+
+\section{Results Interpretation in Relation to the Research Questions}
+
+\subsubsection{Interpretation of Results in Relation to RQ1}
+\textbf{Is it feasible to develop a CA that helps nurses to extract information about a patients’ profiles on demand?}
+The results show the feasibility of deploying a retrieval-augmented conversational assistant for psychiatric nurses, answering RQ1. Across the happy-path scenarios, the assistant reproduced medication plans, laboratory exam schedules, and clinician recommendations with high fidelity, even when memory and coreference resolution was required. Also, performance on the error scenarios shows that the system can decline to answer when information is missing, thus reducing the risk of misinformation. The detailed free-form and summarization tasks show that the assistant can synthesize longer passages while remaining grounded in the retrieved notes.
+
+
+\subsubsection{Interpretation of Results in Relation to RQ2}
+\textbf{If so, how effective is the conversational agent in terms of faithfulness, answer relevancy, answer correctness, context precision, and context recall?}
+The evaluation using the RAGAS framework provides an informative quantitative perspective on the retrieval-augmented reasoning performance of the two systems. For the \textit{Nurse Agent Standard} (System~A), average scores were highest for \textit{faithfulness} (0.739) and the context-related metrics—\textit{context precision} (0.740) and \textit{context recall} (0.781)—indicating that the system generally succeeded in grounding its responses in the retrieved documents and in selecting relevant patient information. These results suggest that the retrieval pipeline was functioning robustly and that the Gemini 2.0 Flash model effectively utilized contextual information once it was provided. However, \textit{answer correctness} (0.634) and especially \textit{answer relevancy} (0.520) highlight the need for improvement in aligning the generated responses more precisely with user intent. While answers were usually faithful to the underlying data, they did not always fully address the specific focus of the query, sometimes offering partial or overly general information.  
+
+In contrast, the \textit{Nurse Agent Natural} (System~B) achieved consistently higher performance across all metrics, particularly in \textit{answer relevancy} (0.690), \textit{answer correctness} (0.700), and \textit{context precision} (0.840). These improvements can be attributed to the tuning of LLM hyperparameters (temperature increased to 0.6 and top\_p reduced to 0.9), which enhanced the model’s naturalness, variability, and coherence without compromising factuality. The slightly higher \textit{faithfulness} score (0.768) further indicates that the second system maintained or even improved its grounding in retrieved context while producing more fluent and contextually appropriate responses.
+
+Nevertheless, both systems displayed irregularities in certain test cases. The appearance of extreme or missing (NaN) values across some metrics—especially for \textit{faithfulness} and \textit{context recall}—reflects specific retrieval gaps in the agent’s reasoning loop, where previously retrieved contexts were not re-fetched for follow-up queries. Furthermore, RAGAS’s strict scoring approach penalized otherwise clinically acceptable outputs that were partially correct, phrased differently, or expressed uncertainty when data were unavailable. In practice, such responses would still be useful to a nurse seeking fast, indicative information at the bedside.
+
+Overall, these findings indicate that both systems are effective within their designed scope: they retrieve relevant clinical data, maintain factual consistency, and provide contextually grounded answers. However, their performance varies depending on the linguistic precision and structure of each query. The quantitative results should thus be interpreted in conjunction with qualitative user feedback and human evaluation, as strict automatic metrics like RAGAS may underestimate the practical utility of the systems in real clinical workflows.
+
+\subsubsection{Interpretation of Results in Relation to RQ3}
+\textbf{Is the conversational agent effective in improving nurses’ daily experience and satisfaction in their work?}
+Quantitative metrics, such as RAGAS, do provide insight into technical performance, however the perceived usefulness and effectiveness of the two systems must be interpreted from a user-centered perspective. This is why RQ3 remains partially answered: while users reported enthusiasm during interviews, full validation of experience and satisfaction requires real-world observations from pilot interactions with practising nurses in real-world clinical environments (with real patient data, background noise, etc.). Preliminary evidence supports the feasibility and potential of agentic RAG systems such as \textit{Nurse Agent Standard} and \textit{Nurse Agent Natural} to improve nurses’ daily workflow, provided that further refinements ensure accuracy, reliability, and ethical safety in real-world use.
+
+
 
 \section{Comparison with Literature}
 The observed results align with the literature on RAG-enabled healthcare assistants that emphasise improved information extraction and transparency \cite{clinicalentityIE2025}. The assistant's ability to ground responses in curated notes addresses concerns about hallucinations raised in Section~\ref{hallucsLLM}, while the accurate handling of disambiguation mirrors best practices found in prior chronic disease and mental health agents \cite{max2021, schizophrenia2010}. Unlike general-purpose assistants that struggle with medical terminology \cite{healthprompts2020, mouth2019}, the domain-specific retrieval and prompt engineering strategies yielded consistent terminology expansion and context tracking.
@@ -359,5 +1008,36 @@ The observed results align with the literature on RAG-enabled healthcare assista
 Practically, the evaluation suggests that nurses could rely on the assistant to retrieve patient-specific information rapidly, potentially reducing time spent consulting handwritten records. Theoretical contributions include an applied demonstration of agentic RAG workflows for Greek-language clinical content, expanding on existing literature that has largely focused on English-speaking contexts. The results also highlight the value of combining structured and free-form notes within a single retrieval corpus, illustrating a pathway for future nurse-facing tools.
 
 \section{Limitations}
-While the assistant performed reliably on synthetic data, the absence of real patient records and clinical deployment means that generalisability is not yet proven. Certain free-form answers remained more verbose than the golden references, indicating the need for tighter prompt constraints to ensure succinctness. Additionally, automated metrics such as RAGAS were only moderately strong, underscoring the importance of human evaluation alongside quantitative scores. These limitations echo the responsible AI considerations discussed in Chapter~\ref{chap:methodology} and will guide future iterations of the system.
+
+It should be emphasized that this project was conducted under quality and resource constraints, which necessarily influenced the scope and reliability of the results.
+
+Regarding the two agentic systems developed, although the reasoning capabilities and relative autonomy of agentic AI appear highly promising for future clinical applications, such systems cannot yet operate safely without a ``human-in-the-loop''. Both agents demonstrated consistent performance on the synthetic dataset; however, the absence of real patient records and any form of live clinical deployment prevents conclusions about their generalizability or robustness in real-world conditions. Furthermore, the agents' reasoning reliability depends heavily on the quality, completeness, and structure of the underlying data as well as on prompt design.
+
+\subsection*{Patient Disambiguation}
+An important observed limitation involved the system's difficulty in disambiguating patients who shared the same name. For example, in query~17 (``\textgreek{Δε θυμάμαι το ΑΜΚΑ της. Πες μου για την πιο μικρή.}''), the generated answer was:
+\textgreek{``Δυστυχώς, δεν έχω πληροφορίες για την ηλικία των ασθενών για να προσδιορίσω ποια είναι η πιο μικρή. Παρακαλώ, διευκρινίστε για ποια Δήμητρα Μακρή ενδιαφέρεστε αναφέροντας το ΑΜΚΑ της: 44350232398 ή 41661927592.''}
+
+However, the golden answer is actually the most recent hospitalization date and treatment of the youngest ``Δήμητρα Μακρή``. The assistant could have retrieved the ages
+of both patients from the patient data and could have continued the conversation, but failed to do so. This is why most RAGAS metrics for this query were close to zero.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{Chapter2/metrics_plot_17.pdf}
+    \caption{Plot for query nr. 17. The assistant failed to disambiguate between two patients with the same name.}
+    \label{fig:sys1_ragas_17_metrics}
+\end{figure}
+
+This limitation highlights a fundamental challenge in multi-entity retrieval scenarios: when metadata such as names are not unique, the retrieval process may require multi-step reasoning (e.g., combining demographic items) that current prompting and tool structures do not yet support. Future work should explore entity-resolution pipelines or embedding augmentation strategies to address this limitation.
+
+\subsection*{Response Quality and Evaluation Metrics}
+Some generated free-form responses were more verbose than their corresponding gold references, indicating the need for tighter prompt constraints or explicit brevity instructions to improve precision and focus. Although the automatic evaluation metrics (RAGAS) achieved moderate scores overall, these results underscore the importance of complementary human evaluation, particularly in sensitive clinical contexts where linguistic tone, empathy, and factual grounding are equally critical.
+
+\subsection*{Model and Data Constraints}
+Finally, both systems were trained and tested using synthetic, anonymized patient data. While this approach was necessary for ethical and privacy reasons, it inevitably limits validity. Furthermore, model behavior may vary with real-world clinical data distributions, Greek dialectal variation, or more complex patient narratives. The LLM’s reasoning consistency also remains dependent on external API stability, rate limits, and the evolving behavior of proprietary models such as \textit{Gemini 2.0 Flash}.
+
+
+
+ 
+
+
 

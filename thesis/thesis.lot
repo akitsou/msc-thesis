@@ -1,0 +1,37 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Functionalities of voice assistants in healthcare}}{13}{table.caption.11}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Scenario 1 (audios 1, 2): Memory - MARIA}}{48}{table.caption.24}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Scenario 2 (audios 3, 4, 5): Memory and reference resolution - KOSTAS}}{49}{table.caption.26}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Scenario 3 (audios 6, 7, 8, 9): Abbreviations and Acronyms - PATIENT 01 and PATIENT 03 and PATIENT 04 and PATIENT 05}}{50}{table.caption.28}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Scenario 4 (audio 10): Non-existent patient}}{51}{table.caption.31}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Scenario 5 (audio 11): Non-existent patient who shares the same last name with a known patient}}{51}{table.caption.33}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Scenario 6 (audio 12): Known patient with non-existent info - KOSTAS}}{51}{table.caption.35}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Scenario 7 (audio 13): Doctor's name - GEORGIA M}}{52}{table.caption.37}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Scenario 8 (audio 14, 15): Disambiguation of identical patient name - PATIENT 13 and PATIENT 15}}{53}{table.caption.40}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces Scenario 9 (audio 16, 17): Disambiguation of identical patient name and double intent - PATIENT 10 and PATIENT 16}}{54}{table.caption.42}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces Scenario 10 (audio 18, 19): Free-form text - PATIENT 40}}{55}{table.caption.44}%
+\contentsline {table}{\numberline {4.11}{\ignorespaces Scenario 11 (audio 20, 21): Free-form text - PATIENT 38}}{56}{table.caption.46}%
+\contentsline {table}{\numberline {4.12}{\ignorespaces Scenario 11 (audio 22, 23): Free-form text - PATIENT 38}}{57}{table.caption.47}%
+\contentsline {table}{\numberline {4.13}{\ignorespaces Scenario 12 (audio 24): Summary of a patient's record from structured text - PATIENT 29}}{58}{table.caption.50}%
+\contentsline {table}{\numberline {4.14}{\ignorespaces Scenario 13 (audio 25): Summary of a patient's record from free-form text - PATIENT 41}}{59}{table.caption.52}%
+\contentsline {table}{\numberline {4.15}{\ignorespaces Comparison of the three RAG-based nurse assistant systems}}{68}{table.caption.66}%
+\contentsline {table}{\numberline {4.16}{\ignorespaces Comparison between the Baseline System and System A}}{73}{table.4.16}%
+\contentsline {table}{\numberline {4.17}{\ignorespaces Comparison between System A and System B}}{76}{table.4.17}%
+\contentsline {table}{\numberline {4.18}{\ignorespaces Baseline - Average scores for RAGAs metrics}}{80}{table.caption.80}%
+\contentsline {table}{\numberline {4.19}{\ignorespaces System 1 - Average scores for RAGAs metrics}}{82}{table.caption.85}%
+\contentsline {table}{\numberline {4.20}{\ignorespaces System 1 - Average scores for RAGAs metrics}}{83}{table.caption.90}%
+\contentsline {table}{\numberline {4.21}{\ignorespaces Preferences (Προτίμηση) for each human evaluator between Nurse Agent Standard (A) and Nurse Agent Standard (B), reported as counts and percentages.}}{87}{table.caption.95}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {B.1}{\ignorespaces Mapping of question numbers to their questions.}}{108}{table.caption.104}%
+\contentsline {table}{\numberline {B.2}{\ignorespaces Comparison of naturalness scores (Φυσικότητα) and preferences (Προτίμηση) for human\_1 and human\_2}}{109}{table.caption.105}%
+\contentsline {table}{\numberline {B.3}{\ignorespaces Comparison of naturalness scores (Φυσικότητα) and preferences (Προτίμηση) for human\_3 and human\_4.}}{110}{table.caption.106}%
+\contentsline {table}{\numberline {B.4}{\ignorespaces Comparison of naturalness scores (Φυσικότητα) and preferences (Προτίμηση) for human\_5 and human\_6.}}{111}{table.caption.107}%
+\contentsline {table}{\numberline {B.5}{\ignorespaces Comparison of naturalness scores (Φυσικότητα) and preferences (Προτίμηση) for human\_7 and human\_8.}}{112}{table.caption.108}%
+\contentsline {table}{\numberline {B.6}{\ignorespaces Comparison of naturalness scores (Φυσικότητα) and preferences (Προτίμηση) for human\_9 and human\_10.}}{113}{table.caption.109}%
+\addvspace {10\p@ }
